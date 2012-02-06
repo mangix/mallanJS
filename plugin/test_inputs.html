@@ -1,0 +1,32 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Untitled Document</title>
+    </head>
+    <body>
+        <input type="text" /><input type="text" />
+        <textarea>
+        </textarea>
+        <script type="text/javascript" src="../Mallan.js">
+        </script>
+        <script type="text/javascript" src="../core/Selector.js">
+        </script>
+     <script type="text/javascript" src="../core/mallan.js">
+        </script>
+        <script type="text/javascript" src="../event/KeyCode.js">
+        </script>
+        <script type="text/javascript" src="../event/Event.js">
+        </script>
+        <script type="text/javascript" src="../event/EventBind.js">
+        </script>
+        <script type="text/javascript" src="../plugin/inputs.js">
+        </script>
+        <script type="text/javascript">
+            var i = new $.plugin.Inputs("input", {
+                defaultValue: "请输入，仅限数字",
+                allow:"0123456789"
+            });
+        </script>
+    </body>
+</html>

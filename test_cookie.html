@@ -1,0 +1,20 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="Mallan.js"></script>
+		<script type="text/javascript" src="util/Cookie.js"></script>
+		<script type="text/javascript">
+			$("cookie").get("mycookie");
+			$("cookie").set("mycookie","123");
+			console.log(document.cookie);
+			console.log($("cookie").get("mycookie"));
+			$("cookie").set("mycookie","567");
+			console.log(document.cookie);
+			console.log($("cookie").get("mycookie"));
+		</script>
+	</body>
+</html>

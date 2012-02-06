@@ -1,0 +1,42 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+		<title>Untitled Document</title>
+	</head>
+	<body>
+		<script type="text/javascript" src="../Mallan.js"></script>
+		<script type="text/javascript" src="Loader.js"></script>
+		<script type="text/javascript">
+			$.util.Loader({
+				url : "test_loader_target.php",
+				param : {
+					a : '1',
+					b : '2'
+				},
+				callback : function() {
+					console.log('cb')
+				},
+				timeout : 5000,
+				onTimeout : function() {
+					console.log('timeout');
+				}
+			});
+			$.util.Loader({
+				url : "test_loader_target.php",
+				param : {
+					a : '1',
+					b : '2'
+				},
+				callback : function() {
+					console.log('cb2')
+				},
+				timeout : 5000,
+				onTimeout : function() {
+					alert('timeout');
+				}
+			});
+
+		</script>
+	</body>
+</html>

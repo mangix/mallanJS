@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Untitled Document</title>
+    </head>
+    <body>
+        <script type="text/javascript" src="../Mallan.js">
+        </script>
+		<script type="text/javascript" src="ListItem.js">
+        </script>
+        <script type="text/javascript" src="LinkList.js">
+        </script>
+        <script type="text/javascript">
+            var LinkList = Mallan.util.LinkList;
+            var ListItem = Mallan.util.ListItem;
+			var list = new LinkList();
+			var item = new ListItem("香蕉");
+			var item2 = new ListItem("苹果");
+			list.add(item);
+			list.add(item2,0);
+			var arr = list.toArray();
+        </script>
+    </body>
+</html>
