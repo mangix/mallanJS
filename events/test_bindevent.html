@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <title>Untitled Document</title>
+    </head>
+    <body>
+        <div id="a">
+            <div id="b">
+                <input type="text" id="c"/>
+            </div>
+        </div>
+        <script type="text/javascript" src="../Mallan.js">
+        </script>
+        <script type="text/javascript" src="../core/Selector.js">
+        </script>
+        <script type="text/javascript" src="../core/mallan.js">
+        </script>
+        <script type="text/javascript" src="../event/Event.js">
+        </script>
+        <script type="text/javascript" src="../event/EventBind.js">
+        </script>
+        <script type="text/javascript">
+            $(document).bind("click", function(e){
+                e.stop();
+                alert(1)
+            });
+            $(document).call("click");
+            //            $("input").bind("click", function(e){
+            //				e.stop()
+            //                alert(e.target.nodeName);
+            //            });
+            //			$("#a").bind("click",function(e){
+            //				e.stop()
+            //				alert(e.currentTarget.id);
+            //			})
+            //			document.getElementById("a").onclick = function(){
+            //				alert(1)
+            //			};
+            //			document.addEventListener("contextmenu",function(e){
+            //				e.stop()
+            //				alert(e.button);
+            //			},false);
+        </script>
+    </body>
+</html>
