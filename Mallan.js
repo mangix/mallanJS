@@ -91,6 +91,7 @@
 		},
 		typeOf : function(obj) {
 			var type = typeof obj, o;
+			type = type.toLowerCase();
 			if(obj.mallantype) {
 				return obj.mallantype;
 			}

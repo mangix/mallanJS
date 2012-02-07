@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="util/|plugin/|dom/element/|events/|dom/|lang/|animation/" kind="src" path=""/>
+	<classpathentry kind="src" path="animation"/>
+	<classpathentry excluding="element/" kind="src" path="dom"/>
+	<classpathentry kind="src" path="dom/element"/>
+	<classpathentry kind="src" path="events"/>
+	<classpathentry kind="src" path="lang"/>
+	<classpathentry kind="src" path="plugin"/>
+	<classpathentry kind="src" path="util"/>
+	<classpathentry kind="con" path="org.eclipse.wst.jsdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="output" path=""/>
+</classpath>

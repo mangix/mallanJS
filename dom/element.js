@@ -80,7 +80,7 @@
 		}
 		if( typeof selector === "string") {
 			//use Selector
-			if(!$.dom.Selector) {
+			if(!$.dom.selector) {
 				return;
 			}
 			var selectorResult = $.select(selector, context);
