@@ -1,10 +1,12 @@
 /**
  * @author allanma
+ * @mail maqh1988@gmail.com
+ * slideup.js
  */
 
 //@require Mallan.js
-//@require Mallan.dom.mallan.js
-//@require Mallan.dom.mallan.Style.js
+//@require Mallan.dom.element.js
+//@require Mallan.dom.element.style.js
 
 (function($, undefined) {
 
