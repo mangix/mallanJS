@@ -12,10 +12,13 @@
     var slide = {
         slideup : function(time) {
             this.each(function() {
-                var el = $(this);
+                var self = this, el = $(this);
+                if (el.css('display') !== "none") {
+                    self._origin_height = el.css('height');
+                }
                 var ani = this._animate_cache = this._animate_cache || new $.animation.animate(this, {});
                 ani.stop();
-                ani.events.onComplete.bindOnce(function(){
+                ani.events.onComplete.bindOnce(function() {
                     el.hide();
                 });
                 ani.start('height', '0px', time || defaultTime);
@@ -24,18 +27,18 @@
         },
         slidedown : function(time) {
             this.each(function() {
-                var el = $(this), oHeight;
-                el.show();
-                oHeight = el.css('height');
-                el.css('height', '0px');
-                var ani = this._animate_cache = this._animate_cache || new animate(this, {});
-                ani.stop();
-                ani.events.onComplete.bindOnce(function(){
+                var self = this, el = $(this), oHeight;
+                if (this._origin_height) {
+                    oHeight = self._origin_height;
                     el.show();
-                });
-                ani.start('height', oHeight, time || defaultTime, function() {
-                    $(this).show();
-                });
+                } else {
+                    el.show();
+                    oHeight = el.css('height');
+                    el.css('height', '0px');
+                }
+                var ani = this._animate_cache = this._animate_cache || new $.animation.animate(this, {});
+                ani.stop();
+                ani.start('height', oHeight, time || defaultTime);
             });
             return this;
         }

@@ -44,17 +44,17 @@
                 var ok = true;
                 complete[i] = true;
                 $('array').each(complete, function() {
-                    if(!this){
+                    if (!this) {
                         ok = false;
                         return false;
                     }
                 });
-                if(ok){
+                if (ok) {
                     self.events.onComplete.fire();
                 }
             }
             $('array').each(keys, function(i) {
-                var key, value, speed, cur, pos, px, len;
+                var key, value, speed, cur, pos, px, len, per = 1, count;
                 key = keys[i];
                 value = parseInt(values[i]);
                 cur = parseInt(el.css(key));
@@ -62,15 +62,21 @@
                     return;
                 }
                 px = values[i].indexOf('px') ? 'px' : '';
-                len = Math.abs(value - cur);
+                count = len = Math.abs(value - cur);
                 pos = len / (value - cur);
                 speed = time / len;
+                if (speed < 2) {
+                    speed = 2;
+                    count = parseInt(time / speed);
+                    per = parseInt(len / count);
+                }
+
                 self.timer[i] = setInterval(function() {
                     var _cur = parseInt(el.css(key));
-                    if (len-- >= 0) {
-                        el.css(key, _cur + pos + px);
+                    if (count-- >= 0) {
+                        el.css(key, _cur + pos * per + px);
                     } else {
-                        el.css(key, value);
+                        el.css(key, values[i]);
                         keyComplete(i);
                         clearInterval(self.timer[i]);
                     }
