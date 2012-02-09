@@ -111,7 +111,7 @@
 			root : $,
 			pack : function(location, obj) {
 				if( typeof location !== "string") {
-					throw "first param of NameSpace.pack must be a string";
+					throw "first param of $.nameSpace.pack must be a string";
 				}
 				var path = location.split('.'), i, l, cPath = $, item;
 				if(path[0] !== "Mallan") {
@@ -122,6 +122,9 @@
 					cPath = cPath[item] = (cPath[item] ? cPath[item] : {});
 				}
 				cPath[path[l]] = obj;
+				this.moduleLoaded[location] = {
+					time:(new Date()).toUTCString()
+				};
 			}
 		},
 		singleton : function(init) {
@@ -135,7 +138,21 @@
 				}
 			}
 		},
+		requireQueue:[],
+		require:function(module,callback){
+			//check if the module is loaded
+			if(this.moduleLoaded && callback){
+				callback();
+				return ;
+			}
+			//TODO
+		},
+		moduleLoaded:{},
+		hasLoaded:function(module){
+			return !!this.moduleLoaded[module];
+		},
 		tools : tools
+		
 	});
 
 })(window);
