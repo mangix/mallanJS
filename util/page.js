@@ -4,7 +4,6 @@
  * @page.js
  */
  
- //@require Mallan.js
 (function($, undefined) {
 	var page = $.singleton(function() {
 		var doc = document, win = window;

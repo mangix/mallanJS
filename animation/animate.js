@@ -1,13 +1,12 @@
 /**
  * @author allanma
- * @mail maqh1988@gmail.com animate.js
+ * @mail maqh1988@gmail.com 
+ * animate.js
  */
 
-// @require Mallan.js
-// @require Mallan.dom.element.js
-// @require Mallan.dom.element.Style.js
-// @require Mallan.events.customevent.js
-// @require Mallan.lang.array.js
+// @require dom.element.style
+// @require events.customevent
+// @require lang.array
 (function($, undefined) {
     var ce = $.events.customEvent;
     var animate = function(element, opt) {

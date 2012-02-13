@@ -4,11 +4,10 @@
  * treeview.js
  */
 
-//@require Mallan.js
-//@require Mallan.dom.selector.js
-//@require Mallan.dom.element.js
-//@require Mallan.util.loader.js
-//@require Mallan.lang.array.js
+//@require dom.selector
+//@require dom.element
+//@require util.loader
+//@require lang.array
 
 /**
  * json format:

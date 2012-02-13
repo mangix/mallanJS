@@ -2,11 +2,10 @@
  * @author allanma
  * @mail maqh1988@gmail.com
  */
-//@require Mallan.js
-//@require Mallan.dom.element.js
-//@require Mallan.events.keyCode.js
-//@require Mallan.events.event.js
-//@require Mallan.events.eventbind.js
+//@require dom.element
+//@require events.keycode
+//@require events.event
+//@require events.eventbind
 (function($, undefined){
     var allow = function(str, el){
         el.keypress(function(e){

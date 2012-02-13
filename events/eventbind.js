@@ -3,9 +3,8 @@
  * @mail maqh1988@gmail.com
  * eventbind.js
  */
-//@require Mallan.js
-//@require Mallan.dom.element.js
-//@require Mallan.events.event.js
+//@require dom.element
+//@require events.event
 (function($, undefined) {
 	var addEvent = dltEvent = function() {
 	}, events = ["abort", "blur", "change", "click", "contextmenu", "dbclick", "error", "focus", "keydown", "keypress", "keyup", "load", "mousedown", "mousemove", "mouseout", "mouseover", "mouseup", "reset", "resize", "select", "submit", "unload"], setFns = function(el, type, wrapFn, fn) {

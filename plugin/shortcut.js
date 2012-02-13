@@ -3,12 +3,10 @@
  * @mail maqh1988@gmail.com
  * shortcut.js
  */
-//@require Mallan.js
-//@require Mallan.dom.selector.js
-//@require Mallan.dom.element.js
-//@require Mallan.events.keycode.js
-//@require Mallan.events.event.js
-//@require Mallan.events.eventbind.js
+//@require dom.element
+//@require events.keycode
+//@require events.event
+//@require events.eventbind
 (function($, undefined){
     // Class Shortcut
     // keyboard shortcuts

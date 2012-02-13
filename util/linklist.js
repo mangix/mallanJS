@@ -3,8 +3,7 @@
  * @mail maqh1988@gmail.com
  * linklist.js
  */
-//@require Mallan
-//@require Mallan.util.listItem
+//@require util.listitem
 (function($, undefined){
     var LinkList = function(){
         this._length = 0;

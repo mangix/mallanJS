@@ -2,7 +2,6 @@
  * @author allanma
  * @mail maqh1988@gmail.com getscript.js
  */
-//@require Mallan.js
 (function($, undefined) {
     var getScript = function(url, callback) {
         var script = document.createElement('script');

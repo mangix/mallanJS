@@ -3,8 +3,7 @@
  * @mail maqh1988@gmail.com
  * attribute.js
  */
-//@reqiure Mallan.js
-//@require Mallan.dom.element.js
+//@require dom.element
 
 (function($, undefined) {
 	if(!$.dom.element) {

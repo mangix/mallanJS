@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * loader.js
  */
-//@require Mallan.js
 (function($, undefined) {
 	var index = 0, pre = "Mallan.util.loader.cb_", Loader ;
 	Loader = function(opt) {

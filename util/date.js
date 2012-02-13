@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * date.js
  */
-//@require Mallan.js
 
 (function($, undefined){
     var date = $.single(function(){

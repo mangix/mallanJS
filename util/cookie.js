@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * cookie.js
  */
-//@require Mallan
 (function($, undefined){
     var init = function(){
         return {

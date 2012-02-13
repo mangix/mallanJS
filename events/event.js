@@ -3,8 +3,7 @@
  * @mail maqh1988@gmail.com
  * event.js
  */
-//@require Mallan.js
-//@require Mallan.events.keycode.js
+//@require events.keycode
 (function($, undefined){
     function Event(e){
         var e = this.originalEvent = e || {};

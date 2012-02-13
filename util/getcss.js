@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * getcss.js
  */
-//@require Mallan.js
 (function($, undefined){
     var getCss = function(url){
         var style = document.createElement('link');

@@ -2,8 +2,7 @@
  * @author allanma
  * @mail maqh1988@gmail.com style.js
  */
-//@require Mallan.js
-//@require Mallan.dom.element.js
+//@require dom.element
 (function($, undefined) {
     if (!$.dom.element) {
         return;

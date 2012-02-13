@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * interface.js
  */
-//@require Mallan
 (function($, undefined){
     //Class Interface
     //<param>name String</param>

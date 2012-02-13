@@ -3,10 +3,9 @@
  * @mail maqh1988@gmail.com slide.js
  */
 
-//@require Mallan.js
-//@require Mallan.dom.element.js
-//@require Mallan.dom.element.style.js
-//@require Mallan.animate.js
+//@require dom.element
+//@require dom.element.style
+//@require animation.animate
 (function($, undefined) {
     var defaultTime = 20;
     var slide = {

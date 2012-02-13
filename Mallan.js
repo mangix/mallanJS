@@ -120,7 +120,7 @@
                     cPath = cPath[item] = (cPath[item] ? cPath[item] : {});
                 }
                 cPath[path[l]] = obj;
-                this.moduleLoaded[location] = {
+                this.moduleLoaded[location.replace('Mallan.','')] = {
                     time : (new Date()).toUTCString()
                 };
             }

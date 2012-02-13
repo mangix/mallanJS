@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * keycode.js
  */
-//@require Mallan.js
 (function($){
     var keyCode = $.singleton(function(){
         return {

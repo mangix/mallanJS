@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * browser.js
  */
-//@require Mallan
 (function($, undefined){
     var init = function(){
         var userAgent = window.navigator.userAgent, result = {}, browsers = ["Opera", "Chrome", "Safari", "Firefox", "MSIE"], browser;

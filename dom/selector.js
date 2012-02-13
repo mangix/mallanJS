@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * selector.js
  */
-//@require Mallan.js
 (function($, undefined) {
 	var support = {
 		querySelector : !!document.querySelectorAll,

@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com
  * customevent.js
  */
-//@require Mallan.js
 (function($, undefined) {
 	var CustomEvent = function(name, options) {
 		//<param>name String</param>

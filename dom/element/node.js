@@ -4,8 +4,7 @@
  * node.js
  */
 
-//@require Mallan.js
-//@require Mallan.dom.element.js
+//@require dom.element
 
 (function($, undefined) {
 	var fixAttr = function(target, clone) {

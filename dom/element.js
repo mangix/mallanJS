@@ -3,15 +3,14 @@
  * @mail maqh1988@gmail.com
  * element.js
  */
-//@require Mallan
-//@require Mallan.dom.selector
+//@require dom.selector
 (function($, undefined) {
 	//Class element
 	//pack the result of a selector to the element object
 	//and the element object provides couple of usefull method to operate the DOM
 	var support = (function() {
 		var testee = document.createElement('div'), id = '_jui_' + (new Date()).getTime(), testee_a;
-		testee.innerHTML = '   <link/><table></table><a name="' + id + '" class="€ b" href="/a" style="color:red;float:left;opacity:.5;">a</a><select><option>text</option></select>';
+		testee.innerHTML = '   <link/><table></table><a name="' + id + '" class=" b" href="/a" style="color:red;float:left;opacity:.5;">a</a><select><option>text</option></select>';
 		//support.opacity = (typeof testee.style.opacity) !== 'undefined' ? 1 : ((typeof
 		// testee.filters === 'object') || (typeof testee.filter === 'string')) ? 2 : 0;
 		// do not support any other old browsers
