@@ -74,6 +74,93 @@
             }
         }
     };
+
+    //output by server side begin
+    var _modules = {
+        'Mallan' : {
+            rely : []
+        },
+        'animation.animate' : {
+            rely : [ 'dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array' ]
+        },
+        'animation.slide' : {
+            rely : [ 'dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array', 'animation.animate' ]
+        },
+        'lang.interface' : {
+            rely : []
+        },
+        'lang.array' : {
+            rely : []
+        },
+        'plugin.treeview' : {
+            rely : [ 'dom.selector', 'dom.element', 'util.loader', 'lang.array' ]
+        },
+        'plugin.shortcut' : {
+            rely : [ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ]
+        },
+        'plugin.inputs' : {
+            rely : [ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ]
+        },
+        'util.cookie' : {
+            rely : []
+        },
+        'util.querystring' : {
+            rely : []
+        },
+        'util.listitem' : {
+            rely : []
+        },
+        'util.getcss' : {
+            rely : []
+        },
+        'util.browser' : {
+            rely : []
+        },
+        'util.linklist' : {
+            rely : [ 'util.listitem' ]
+        },
+        'util.loader' : {
+            rely : []
+        },
+        'util.page' : {
+            rely : []
+        },
+        'util.getscript' : {
+            rely : []
+        },
+        'util.date' : {
+            rely : []
+        },
+        'events.keycode' : {
+            rely : []
+        },
+        'events.customevent' : {
+            rely : []
+        },
+        'events.eventbind' : {
+            rely : [ 'dom.selector', 'dom.element', 'events.keycode', 'events.event' ]
+        },
+        'events.event' : {
+            rely : [ 'events.keycode' ]
+        },
+        'dom.element' : {
+            rely : [ 'dom.selector' ]
+        },
+        'dom.selector' : {
+            rely : []
+        },
+        'dom.element.style' : {
+            rely : [ 'dom.selector', 'dom.element' ]
+        },
+        'dom.element.attribute' : {
+            rely : [ 'dom.selector', 'dom.element' ]
+        },
+        'dom.element.node' : {
+            rely : [ 'dom.selector', 'dom.element' ]
+        }
+    }, requireUrl = "http://127.0.0.1:8000/require";
+    //output end
+
     //basic properties of Mallan
     Mallan.extend({
         "custom" : customs,
@@ -120,9 +207,11 @@
                     cPath = cPath[item] = (cPath[item] ? cPath[item] : {});
                 }
                 cPath[path[l]] = obj;
-                this.moduleLoaded[location.replace('Mallan.','')] = {
-                    time : (new Date()).toUTCString()
-                };
+                var module = _modules[location.replace('Mallan.', '')];
+                if (module) {
+                    module.loaded = true;
+                    module.time = +new Date();
+                }
             }
         },
         singleton : function(init) {
@@ -153,58 +242,110 @@
                 }
             }
         },
-        requireQueue : [],
-        callbackQueue : [],
-        onRequire : "",
-        require : function(module, callback) {
-            var rq = this.requireQueue, cq = this.callbackQueue, self = this;
+        tools : tools
+    });
+
+    //require module
+    (function() {
+        var requireQueue, callbackQueue, onRequire, require;
+        requireQueue = [];
+        callbackQueue = [];
+        onRequire = null;
+
+        require = function(modules, callback) {
+            var modules = modules.split(','), self = this, module, i, l, j, len, requestModules = [], rely, relyModule;
             callback = callback || function() {
             };
-            if (self.moduleLoaded) {
-                //check if the module is loaded
+            for (i = 0, l = modules.length; i < l; i++) {
+                //put the rely modules into requestModules array
+                module = modules[i];
+                if (!_modules[module]) {
+                    throw "unknow module " + module;
+                } else if (_modules[module].loaded || $.tools.contain(requestModules, module)) {
+                    continue;
+                } else {
+                    rely = _modules[module].rely;
+                    for (j = 0, len = rely.length; j < len; j++) {
+                        relyModule = rely[j];
+                        if (!_modules[relyModule].loaded && !$.tools.contain(requestModules, relyModule)) {
+                            requestModules.push(rely[j]);
+                        }
+                    }
+                    requestModules.push(module);
+                }
+            }
+            if (requestModules.length == 0) {
+                //all the require modules are loaded
                 callback();
                 return;
-            } else if (self.onRequire && module !== self.onRequire) {
-                //some module is onRequire but different ,put the request in put the requireQueue
-                rq.push({
-                    request : module,
-                    callback : callback
-                });
-                return;
-            } else if (self.onRequire && module === self.onRequire) {
-                //the same module is onRequire,put the callback in to the callbackQueue if exists
-                cq.push(callback);
+            } else if (onRequire) {
+                //some modules are onRequire 
+                //check these required modules are all in the onRequire array
+                for (i = 0, l = requestModules.length; i < l; i++) {
+                    var thisIn = false;
+                    for (j = 0, len = onRequire.length; j < len; j++) {
+                        if (requestModules[i] === onRequire[j]) {
+                            thisIn = true;
+                            break;
+                        }
+                    }
+                    if (!thisIn) {
+                        requireQueue.push({
+                            request : requestModules,
+                            callback : callback
+                        });
+                        return;
+                    }
+                }
+                callbackQueue.push(callback);
             } else {
                 //no module onRequire, send the request
-                var targetUrl = "http://", param = [], o;
-                self.onRequire = module;
-                for (o in self.moduleLoaded) {
-                    param.push(o);
-                }
-                param = encodeURIComponent(param.join(','));
-                cq.push(callback);
-                self.getScript(targetUrl + "?require=" + module + "&loaded=" + param, function() {
-                    var i, l, next;
+                onRequire = requestModules;
+                callbackQueue.push(callback);
+                $.getScript(requireUrl + "?request=" + encodeURIComponent(requestModules.join(',')), function() {
+                    var i, l, next = [], nextcbs = [];
                     //callback, call all the methods in the callbackQueue
-                    for (i = 0, l = cq.length; i < l; i++) {
-                        cq[i]();
+                    for (i = 0, l = callbackQueue.length; i < l; i++) {
+                        callbackQueue[i]();
                     }
                     //clear the callbackQueue and onRequest
-                    cq = [];
-                    self.onRequire = "";
+                    callbackQueue = [];
+                    onRequire = null;
                     //if there's requests in requireQueue, require next
-                    if (next = rq.shift()) {
-                        self.require(next.request, next.callback);
+                    if (requireQueue.length) {
+                        for (i = 0, l = requireQueue.length; i < l; i++) {
+                            next.push(requireQueue[i].request.join(','));
+                            nextcbs.push(requireQueue[i].callback);
+                        }
+                        requireQueue = [];
+                        require(next.join(','), function() {
+                            for ( var i = 0, l = nextcbs.length; i < l; i++) {
+                                nextcbs[i]();
+                            }
+                        });
                     }
                 });
             }
-        },
-        moduleLoaded : {},
-        hasLoaded : function(module) {
-            return !!this.moduleLoaded[module];
-        },
-        tools : tools
+        };
 
-    });
+        Mallan.extend({
+            require : require,
+            getLoadedModule : function() {
+                var loaded = [], o;
+                for ( var o in _modules) {
+                    if (_modules[o].loaded) {
+                        loaded.push({
+                            module : o,
+                            time : _modules[o].time
+                        });
+                    }
+                }
+                loaded.sort(function(a, b) {
+                    return (a.time - b.time);
+                });
+                return loaded;
+            }
+        });
+    })();
 
 })(window);

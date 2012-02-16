@@ -203,5 +203,5 @@
         };
     });
     
-    $.nameSpace.pack("Mallan.events.keyCode", keyCode);
+    $.nameSpace.pack("Mallan.events.keycode", keyCode);
 })(Mallan);

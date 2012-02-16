@@ -1,6 +1,7 @@
 /**
  * @author allanma
  * @mail maqh1988@gmail.com style.js
+ * dom.element.style.js
  */
 //@require dom.element
 (function($, undefined) {
