@@ -32,6 +32,13 @@
 			});
 			return parents;
 		},
+		children:function(){
+			var children = new element();
+			this.each(function() {
+				children.join(this.childNodes);
+			});
+			return children;
+		},
 		clone : function(cloneChildren) {
 			var clones = new element();
 			cloneChildren = !!cloneChildren;

@@ -3,7 +3,6 @@
  * @mail maqh1988@gmail.com slide.js
  */
 
-//@require dom.element
 //@require dom.element.style
 //@require animation.animate
 (function($, undefined) {
@@ -17,8 +16,10 @@
                 }
                 var ani = this._animate_cache = this._animate_cache || new $.animation.animate(this, {});
                 ani.stop();
+                el.css('overflow','hidden')
                 ani.events.onComplete.bindOnce(function() {
                     el.hide();
+                    el.css('overflow','')
                 });
                 ani.start('height', '0px', time || defaultTime);
             });
@@ -44,5 +45,5 @@
     };
 
     $.dom.element.extend(slide);
-    $.nameSpace.pack("Mallan.animate.slide", slide);
+    $.nameSpace.pack("Mallan.animation.slide", slide);
 })(Mallan);

@@ -18,17 +18,21 @@
 			}
 		</style>
 		<script type="text/javascript" src="../Mallan.js"></script>
-		<script type="text/javascript" src="../lang/array.js"></script>
-		<script type="text/javascript" src="../dom/selector.js"></script>
-		<script type="text/javascript" src="../dom/element.js"></script>
-		<script type="text/javascript" src="../dom/element/style.js"></script>
-		<script type="text/javascript" src="../events/customevent.js"></script>
-		<script type="text/javascript" src="../animation/animate.js"></script>
-		<script type="text/javascript" src="../animation/slide.js"></script>
 	</head>
 	<body>
 		<div>打发打发打发东莞市分公司的公司股份未感染股份公司打发发给施工方撒旦法ads发噶撒旦法阿萨德gas</div>
-		<input type="button" onclick="$('div').slideup()" value="slideup" />
-		<input type="button" onclick="$('div').slidedown()" value="slidedown" />
+		<input type="button"  value="slideup" />
+		<input type="button"  value="slidedown" />
 	</body>
+	<script type="text/javascript">
+		$.require('animation.slide',function(){
+			document.getElementsByTagName('input')[0].onclick = function(){
+				$('div').slideup();
+			}
+			document.getElementsByTagName('input')[1].onclick = function(){
+				$('div').slidedown();
+			}
+		});
+		
+	</script>
 </html>

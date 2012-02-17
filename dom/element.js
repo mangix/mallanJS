@@ -94,12 +94,12 @@
 			if($.tools.isArray(domElements) || (domElements.length && domElements.item) ) {
 				for(var i = 0, l = domElements.length; i < l; i++) {
 					var item = domElements[i];
-					if(item && item.nodeType) {
+					if(item && item.nodeType && item.nodeType==1) {
 						this[this.length++] = item;
 					}
 				}
 			}
-			else if(domElements.nodeType) {
+			else if(domElements.nodeType && domElements.nodeType==1 ) {
 				this[this.length++] = domElements;
 			}
 		},
@@ -118,6 +118,22 @@
 				}
 			}
 			return -1;
+		},
+		query:function(selectStr){
+			if(this[0]){
+				return new element($.select(selectStr,this[0]));
+			}
+			else{
+				return new element();
+			}
+		},
+		exist:function(fn){
+			if(this.length!=0){
+				if(fn){
+					fn.call(this);
+				}
+			}
+			return this;
 		}
 	};
 	element.extend = function(obj) {

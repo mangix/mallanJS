@@ -60,18 +60,18 @@
                 if (value === cur) {
                     return;
                 }
-                px = values[i].indexOf('px') ? 'px' : '';
+                px = values[i].indexOf('px')!==-1 ? 'px' : '';
                 count = len = Math.abs(value - cur);
                 pos = len / (value - cur);
                 speed = time / len;
                 if (speed < 2) {
                     speed = 2;
                     count = parseInt(time / speed);
-                    per = parseInt(len / count);
+                    per = parseFloat(len / count);
                 }
 
                 self.timer[i] = setInterval(function() {
-                    var _cur = parseInt(el.css(key));
+                    var _cur = parseFloat(el.css(key));
                     if (count-- >= 0) {
                         el.css(key, _cur + pos * per + px);
                     } else {
@@ -110,7 +110,7 @@
                 var ani = this._animate_cache = this._animate_cache || new animate(this, {});
                 ani.stop();
                 if (onComplete) {
-                    ani.onComplete.bindOnce(function() {
+                    ani.events.onComplete.bindOnce(function() {
                         complete(i);
                     });
                 }

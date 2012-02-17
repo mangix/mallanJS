@@ -13,7 +13,12 @@
     }, getComputedStyle = (function() {
         if (doc.defaultView && doc.defaultView.getComputedStyle) {
             return function(el, key) {
-                return doc.defaultView.getComputedStyle(el, null)[$.tools.toCamel(key)];
+            	var  res =  doc.defaultView.getComputedStyle(el, null)[$.tools.toCamel(key)];
+            	if(key==='opacity'){
+            		return res*100;
+            	}else{
+            		return res;
+            	}
             };
         } else {
             var div = doc.createElement("div");
@@ -70,10 +75,11 @@
                     this.each(function() {
                         for ( var o in key) {
                             if (o === 'opacity') {
-                                $.dom.element.support.opacity ? this.style[o] = key[o] : this.style.filter = ('alpha(opacity=' + key[o] * 100);
+                                $.dom.element.support.opacity ? this.style[o] = key[o]/100 : this.style.filter = ('alpha(opacity=' + key[o]+')');
+                            }else{
+                            	o = styleExcept[o] ? styleExcept[o] : o;
+                           		this.style[$.tools.toCamel(o)] = key[o];
                             }
-                            o = styleExcept[o] ? styleExcept[o] : o;
-                            this.style[o] = key[o];
                         }
                     });
                 }
@@ -81,7 +87,7 @@
                 //set style
                 this.each(function() {
                     if (key === 'opacity') {
-                        $.dom.element.support.opacity ? this.style[key] = value : this.style.filter = ('alpha(opacity=' + value * 100);
+                        $.dom.element.support.opacity ? this.style[key] = value/100 : this.style.filter = ('alpha(opacity=' + value+')');
                     } else {
                         key = styleExcept[key] ? styleExcept[key] : key;
                         this.style[$.tools.toCamel(key)] = value;
@@ -112,7 +118,9 @@
         },
         show : function() {
             this.each(function() {
-                this.style.display = this._display_cache || '';
+            	if(getComputedStyle(this,'display')==='none'){
+            		this.style.display = this._display_cache || '';
+            	}
             });
             return this;
         },
