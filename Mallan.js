@@ -4,9 +4,7 @@
  */
 (function(window, undefined) {
     var customs = {}, //custom object { cookie:
-    // {cls:mallan.Cookie,constructType:"new" or "fn" or "obj"}}
     stardard$ = null, //stardard $ selector
-    domCache = [], //dom cache
     tools = {
         trim : function(str) {
             return str.replace(/^\s+|\s+$/g, '');
@@ -178,7 +176,6 @@
             return type;
         },
         nameSpace : {
-            root : $,
             pack : function(location, obj) {
                 if (typeof location !== "string") {
                     throw "first param of $.nameSpace.pack must be a string";
