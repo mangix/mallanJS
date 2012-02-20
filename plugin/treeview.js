@@ -7,6 +7,7 @@
 //@require dom.selector
 //@require dom.element
 //@require events.eventbind
+//@require events.customevent
 //@require util.loader
 //@require lang.array
 
