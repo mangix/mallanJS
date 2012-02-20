@@ -143,9 +143,11 @@
    { rely: 
       [ 'dom.selector',
         'dom.element',
+        'dom.element.style',
         'events.keycode',
         'events.event',
         'events.eventbind',
+         'events.customevent',
         'util.loader',
         'lang.array' ] },
   'lang.array': { rely: [] },

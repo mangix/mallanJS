@@ -107,10 +107,12 @@
 		expand : function() {
 			$(this.childrenTree).show();
 			this.expanded = true;
+			$(this.dom).removeClass('close').addClass('open');
 		},
 		unexpand : function() {
 			$(this.childrenTree).hide();
 			this.expanded = false;
+			$(this.dom).removeClass('open').addClass('close');
 		},
 		toggleExpand:function(){
 			if(this.expanded){
