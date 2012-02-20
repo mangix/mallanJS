@@ -58,6 +58,7 @@
                 value = parseInt(values[i]);
                 cur = parseInt(el.css(key));
                 if (value === cur) {
+                    keyComplete(i);
                     return;
                 }
                 px = values[i].indexOf('px')!==-1 ? 'px' : '';

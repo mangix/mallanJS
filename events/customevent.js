@@ -43,7 +43,7 @@
 		bindOnce:function(fn,referToThis,el){
 			var self = this,newFn;
 			newFn = function(){
-				fn.apply(referToThis|| self,[].slice.call(arguments,0));
+				fn.apply((referToThis|| self),[].slice.call(arguments,0));
 				self.removeListener(newFn,el);
 			}
 			self.addListener(newFn,referToThis,el);

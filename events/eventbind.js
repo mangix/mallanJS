@@ -117,6 +117,7 @@
 			}
 		})(i);
 	}
+	$.dom.element.extend(eventBind);
 	$.dom.element.extend(obj);
 	$.nameSpace.pack("Mallan.events.eventBind",eventBind);
 
