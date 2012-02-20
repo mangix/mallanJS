@@ -6,6 +6,7 @@
 
 //@require dom.selector
 //@require dom.element
+//@require events.eventbind
 //@require util.loader
 //@require lang.array
 

@@ -20,7 +20,7 @@
                 <div class="menu_title linear_bg">
                     API
                 </div>
-                <div class="menu_list">
+                <div class="menu_list" id="menu_list">
                 <ul>
                     <li>
                         <a href="javascript:void(0);">Mallan.js</a>
@@ -246,5 +246,89 @@
             </p>
         </footer>
         <script type="text/javascript" src="../Mallan.js"></script>
+        <script type="text/javascript">
+			$.require('plugin.treeview', function() {
+				new $.plugin.treeView("menu_list", {
+					data : {
+						name : "mallanJS",
+						children : [{
+							name : "Mallan.js"
+						}, {
+							name : "animation",
+							children : [{
+								name : "animate.js"
+							}, {
+								name : "fade.js"
+							}, {
+								name : "slide.js"
+							}]
+						}, {
+							name : "dom",
+							children : [{
+								name : 'element',
+								children : [{
+									name : "attribute.js"
+								}, {
+									name : "node.js"
+								}, {
+									name : "style.js"
+								}]
+							}, {
+								name : "element.js"
+							}, {
+								name : "selector.js"
+							}]
+						}, {
+							name : "events",
+							children : [{
+								name : "customevent.js"
+							}, {
+								name : "event.js"
+							}, {
+								name : "eventbind.js"
+							}, {
+								name : "keycode.js"
+							}]
+						}, {
+							name : "lang",
+							children : [{
+								name : "array.js"
+							}, {
+								name : "interface.js"
+							}]
+						}, {
+							name : "plugin",
+							children : [{
+								name : "inputs.js"
+							}, {
+								name : "photoslide.js"
+							}, {
+								name : "shortcut.js"
+							}]
+						}, {
+							name : "util",
+							children : [{
+								name : "browser.js"
+							}, {
+								name : "cookie.js"
+							}, {
+								name : "getcss.js"
+							}, {
+								name : "linklist.js"
+							}, {
+								name : "listitem.js"
+							}, {
+								name : "loader.js"
+							}, {
+								name : "page.js"
+							}, {
+								name : "querystring.js"
+							}]
+						}]
+					}
+				});
+			});
+
+        </script>
     </body>
 </html>
