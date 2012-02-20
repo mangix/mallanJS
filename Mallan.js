@@ -189,7 +189,7 @@
                     cPath = cPath[item] = (cPath[item] ? cPath[item] : {});
                 }
                 cPath[path[l]] = obj;
-                var module = _modules[location.replace('Mallan.', '')];
+                var module = _modules[location.replace('Mallan.', '').toLowerCase()];
                 if (module) {
                     module.loaded = true;
                     module.time = +new Date();
@@ -235,7 +235,7 @@
         onRequire = null;
 
         require = function(modules, callback) {
-            var modules = modules.split(','), self = this, module, i, l, j, len, requestModules = [], rely, relyModule;
+            var modules = modules.toLowerCase().split(','), self = this, module, i, l, j, len, requestModules = [], rely, relyModule;
             callback = callback || function() {
             };
             for (i = 0, l = modules.length; i < l; i++) {
