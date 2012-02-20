@@ -36,12 +36,13 @@ header,footer{height:50px; -webkit-box-shadow:0px 4px 5px #CACACA;-moz-box-shado
 .container .menu{width:200px; margin-top:20px; overflow:auto; color:#4183C4; font-size:14px; }
 .container .menu .menu_title ,.container .menu .menu_list{border: 1px solid #CACACA;}
 .container .menu .menu_title{height:40px;  line-height:40px; font-size: 20px; font-weight:bold; text-align:center;}
-.container .menu .menu_list ul{margin-left:10px;}
+.container .menu .menu_list ul {margin-left:10px;}
+.container .menu .menu_list li>ul{margin-left:30px;}
 .container .menu .menu_list ul li{line-height:25px;}
-.container .menu .menu_list ul li.open:before{content:"- ";}
-.container .menu .menu_list ul li.open>a{background:url(folder_open.jpg) no-repeat 0 3px #fff;padding-left:20px;}
-.container .menu .menu_list ul li.close:before{content:"+ ";}
-.container .menu .menu_list ul li.close>a{background:url(folder_close.jpg) no-repeat 0 3px #fff;padding-left:20px;}
+.container .menu .menu_list ul li.open.hasChild:before{content:"-- ";}
+.container .menu .menu_list ul li.open.hasChild>a{background:url(folder_open.jpg) no-repeat 0 3px #fff;padding-left:20px;}
+.container .menu .menu_list ul li.close.hasChild:before{content:"+ ";}
+.container .menu .menu_list ul li.close.hasChild>a{background:url(folder_close.jpg) no-repeat 0 3px #fff;padding-left:20px;}
 
 .container .content{width:750px; min-height:500px; margin:20px 0 0 10px;}
 .container .content section h3{height:30px;line-height: 30px; font-size:16px; font-weight:bold;color:#FF69B4; padding-left:50px;margin-bottom:10px;}

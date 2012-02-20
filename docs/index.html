@@ -21,7 +21,7 @@
                     API
                 </div>
                 <div class="menu_list" id="menu_list">
-                <ul>
+            <!--    <ul>
                     <li>
                         <a href="javascript:void(0);">Mallan.js</a>
                     </li>
@@ -50,7 +50,7 @@
                             </li>
                         </ul>
                     </li>
-                </ul>
+             </ul>-->
                 </div>
             </aside>
             <div class="content fl border">
@@ -324,8 +324,12 @@
 						}]
 					}]
 				});
+				tree.unexpandAll();
+				tree.onNodeClick.on(function(node){
+					node.toggleExpand()
+				});
 			});
-
+			
         </script>
     </body>
 </html>

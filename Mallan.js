@@ -158,7 +158,7 @@
   'dom.element.node': { rely: [ 'dom.selector', 'dom.element' ] },
   'dom.element.attribute': { rely: [ 'dom.selector', 'dom.element' ] } }
 
-, requireUrl = "http://192.168.133.138:8000/require";
+, requireUrl = "http://192.168.133.139:8000/require";
 	//output end
 
 	//basic properties of Mallan
