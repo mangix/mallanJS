@@ -6,6 +6,7 @@
 
 //@require dom.selector
 //@require dom.element
+//@require dom.element.style
 //@require events.eventbind
 //@require events.customevent
 //@require util.loader
@@ -43,6 +44,7 @@
 	}
 	node.prototype = {
 		addChild : function(child) {
+			$(this.dom).addClass("hasChild open");
 			if(this.hasChild()) {
 				this.childrenTree.appendChild(child.dom);
 			}
@@ -112,6 +114,18 @@
 			this.expanded = false;
 			$(this.dom).removeClass('open').addClass('close');
 		},
+		expandAll:function(){
+			this.expand();
+			for(var i=0,l=this.children.length;i<l;i++){
+				this.children[i].expandAll();
+			}
+		},
+		unexpandAll:function(){
+			this.unexpand();
+			for(var i=0,l=this.children.length;i<l;i++){
+				this.children[i].unexpandAll();
+			}
+		},
 		toggleExpand:function(){
 			if(this.expanded){
 				this.unexpand();
@@ -179,6 +193,14 @@
 				if(data.children) {
 					this.createSubTree(_node, data.children);
 				}
+			}
+		},
+		expandAll:function(){
+			this.root.expandAll();
+		},
+		unexpandAll:function(){
+			for(var i=0,l=this.root.children.length;i<l;i++){
+				this.root.children[i].unexpandAll();
 			}
 		}
 	};

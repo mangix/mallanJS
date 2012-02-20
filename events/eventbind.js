@@ -43,7 +43,7 @@
 				}
 				else {
 					var wrapFn = function(e) {
-						var event = new $.event.Event(e || window.event);
+						var event = new $.events.event(e || window.event);
 						return fn.call(el, event, i);
 					};
 					addEvent(el, type, wrapFn);
@@ -81,7 +81,7 @@
 			this.each(function(i) {
 				var el = this;
 				var wrapFn = function(e) {
-					var event = new $.event.Event(e || window.event);
+					var event = new $.events.event(e || window.event);
 					fn.call(el, event, i);
 					$(el).unbind(type, fn);
 				};
@@ -100,7 +100,7 @@
 					var fns = this["$mallan" + type], i, l;
 					if(fns) {
 						for( i = 0, l = fns.length; i < l; i++) {
-							fns[i].call(el, new $.event.Event());
+							fns[i].call(el, new $.events.event());
 						}
 					}
 				}
@@ -113,7 +113,7 @@
 		var _event = events[i];
 		obj[_event] = (function(i) {
 			return function(fn) {
-				return this.bind.call(this, _event, fn);
+				return this.bind.call(this, events[i], fn);
 			}
 		})(i);
 	}
