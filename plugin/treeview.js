@@ -130,10 +130,10 @@
 		};
 		this.options = $.tools.merge(_options, options);
 		this.init();
-		this.onReady = new $.event.CustomEvent('ready');
-		this.onCheck = new $.event.CustomEvent('check');
-		this.onUnCheck = new $.event.CustomEvent('uncheck');
-		this.onNodeClick = new $.event.CustomEvent('nodeclick');
+		this.onReady = new $.events.customEvent('ready');
+		this.onCheck = new $.events.customEvent('check');
+		this.onUnCheck = new $.events.customEvent('uncheck');
+		this.onNodeClick = new $.events.customEvent('nodeclick');
 	};
 	treeView.prototype = {
 		constructor : treeView,
