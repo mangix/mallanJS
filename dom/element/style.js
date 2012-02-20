@@ -5,28 +5,31 @@
  */
 //@require dom.element
 (function($, undefined) {
-    if (!$.dom.element) {
+    if(!$.dom.element) {
         return;
     }
     var doc = document, styleExcept = {
-        'float' : $.dom.element.support.cssFloat ? 'cssFloat' : 'styleFloat',
+        'float' : $.dom.element.support.cssFloat ? 'cssFloat' : 'styleFloat'
     }, getComputedStyle = (function() {
-        if (doc.defaultView && doc.defaultView.getComputedStyle) {
+        if(doc.defaultView && doc.defaultView.getComputedStyle) {
             return function(el, key) {
-            	var  res =  doc.defaultView.getComputedStyle(el, null)[$.tools.toCamel(key)];
-            	if(key==='opacity'){
-            		return res*100;
-            	}else{
-            		return res;
-            	}
+                var res = doc.defaultView.getComputedStyle(el, null)[$.tools.toCamel(key)];
+                if(key === 'opacity') {
+                    return res * 100;
+                }
+                else {
+                    return res;
+                }
             };
-        } else {
+        }
+        else {
             var div = doc.createElement("div");
-            if (div.currentStyle) {
+            if(div.currentStyle) {
                 return function(el, key) {
                     return el.currentStyle[$.tools.toCamel(key)];
                 };
-            } else {
+            }
+            else {
                 return function(el, key) {
                     return '';
                 };
@@ -41,7 +44,7 @@
     var style = {
         hasClass : function(clsName) {
             //check if the first element has the class
-            if (this.length > 0) {
+            if(this.length > 0) {
                 return contain(this[0].className, clsName);
             }
             return false;
@@ -50,7 +53,7 @@
             clsName = $.tools.trim(clsName);
             this.each(function() {
                 var currentCls = $.tools.trim(this.className);
-                if (!contain(currentCls, clsName)) {
+                if(!contain(currentCls, clsName)) {
                     this.className = currentCls + " " + clsName;
                 }
             });
@@ -63,32 +66,36 @@
             return this;
         },
         css : function(key, value) {
-            if (arguments.length == 1) {
-                if ($.typeOf(key) === "string") {
+            if(arguments.length == 1) {
+                if($.typeOf(key) === "string") {
                     //get style(first one)
-                    if (this[0]) {
+                    if(this[0]) {
                         return getComputedStyle(this[0], key);
                     }
                     return '';
-                } else if ($.typeOf(key) === 'object') {
+                }
+                else if($.typeOf(key) === 'object') {
                     //set
                     this.each(function() {
-                        for ( var o in key) {
-                            if (o === 'opacity') {
-                                $.dom.element.support.opacity ? this.style[o] = key[o]/100 : this.style.filter = ('alpha(opacity=' + key[o]+')');
-                            }else{
-                            	o = styleExcept[o] ? styleExcept[o] : o;
-                           		this.style[$.tools.toCamel(o)] = key[o];
+                        for(var o in key) {
+                            if(o === 'opacity') {
+                                $.dom.element.support.opacity ? this.style[o] = key[o] / 100 : this.style.filter = ('alpha(opacity=' + key[o] + ')');
+                            }
+                            else {
+                                o = styleExcept[o] ? styleExcept[o] : o;
+                                this.style[$.tools.toCamel(o)] = key[o];
                             }
                         }
                     });
                 }
-            } else if (arguments.length == 2) {
+            }
+            else if(arguments.length == 2) {
                 //set style
                 this.each(function() {
-                    if (key === 'opacity') {
-                        $.dom.element.support.opacity ? this.style[key] = value/100 : this.style.filter = ('alpha(opacity=' + value+')');
-                    } else {
+                    if(key === 'opacity') {
+                        $.dom.element.support.opacity ? this.style[key] = value / 100 : this.style.filter = ('alpha(opacity=' + value + ')');
+                    }
+                    else {
                         key = styleExcept[key] ? styleExcept[key] : key;
                         this.style[$.tools.toCamel(key)] = value;
                     }
@@ -118,9 +125,9 @@
         },
         show : function() {
             this.each(function() {
-            	if(getComputedStyle(this,'display')==='none'){
-            		this.style.display = this._display_cache || '';
-            	}
+                if(getComputedStyle(this, 'display') === 'none') {
+                    this.style.display = this._display_cache || '';
+                }
             });
             return this;
         },
