@@ -6,6 +6,9 @@
 
 //@require dom.selector
 //@require dom.element
+//@require dom.element.style
+//@require events.eventbind
+//@require events.customevent
 //@require util.loader
 //@require lang.array
 
@@ -41,6 +44,7 @@
 	}
 	node.prototype = {
 		addChild : function(child) {
+			$(this.dom).addClass("hasChild open");
 			if(this.hasChild()) {
 				this.childrenTree.appendChild(child.dom);
 			}
@@ -103,10 +107,24 @@
 		expand : function() {
 			$(this.childrenTree).show();
 			this.expanded = true;
+			$(this.dom).removeClass('close').addClass('open');
 		},
 		unexpand : function() {
 			$(this.childrenTree).hide();
 			this.expanded = false;
+			$(this.dom).removeClass('open').addClass('close');
+		},
+		expandAll:function(){
+			this.expand();
+			for(var i=0,l=this.children.length;i<l;i++){
+				this.children[i].expandAll();
+			}
+		},
+		unexpandAll:function(){
+			this.unexpand();
+			for(var i=0,l=this.children.length;i<l;i++){
+				this.children[i].unexpandAll();
+			}
 		},
 		toggleExpand:function(){
 			if(this.expanded){
@@ -129,10 +147,10 @@
 		};
 		this.options = $.tools.merge(_options, options);
 		this.init();
-		this.onReady = new $.event.CustomEvent('ready');
-		this.onCheck = new $.event.CustomEvent('check');
-		this.onUnCheck = new $.event.CustomEvent('uncheck');
-		this.onNodeClick = new $.event.CustomEvent('nodeclick');
+		this.onReady = new $.events.customEvent('ready');
+		this.onCheck = new $.events.customEvent('check');
+		this.onUnCheck = new $.events.customEvent('uncheck');
+		this.onNodeClick = new $.events.customEvent('nodeclick');
 	};
 	treeView.prototype = {
 		constructor : treeView,
@@ -175,6 +193,14 @@
 				if(data.children) {
 					this.createSubTree(_node, data.children);
 				}
+			}
+		},
+		expandAll:function(){
+			this.root.expandAll();
+		},
+		unexpandAll:function(){
+			for(var i=0,l=this.root.children.length;i<l;i++){
+				this.root.children[i].unexpandAll();
 			}
 		}
 	};

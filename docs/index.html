@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <title>mallanJS</title>
+        <link type="text/css" rel="stylesheet" href="images/index.css">
+    </head>
+    <body>
+        <header class="linear_bg">
+            <div class="head">
+                <h1><a href="index.html">mallanJS</a></h1>
+                <h2>--by allanma mail:maqh1988@gmail.com</h2>
+                <div class="search fr">
+                    <input type="text" />
+                </div>
+            </div>
+        </header>
+        <div class="container cf">
+            <aside class="menu fl border">
+                <div class="menu_title linear_bg">
+                    API
+                </div>
+                <div class="menu_list" id="menu_list">
+                <ul>
+                    <li>
+                        <a href="javascript:void(0);">Mallan.js</a>
+                    </li>
+                    <li class="hasChild open">
+                        <a href="javascript:void(0);">dom</a>
+                        <ul>
+                            <li>
+                                <a href="javascript:void(0);">selector.js</a>
+                            </li>
+                            <li>
+                                <a href="javascript:void(0);">element.js</a>
+                            </li>
+                            <li class="hasChild open">
+                                <a href="javascript:void(0);">element</a>
+                                <ul>
+                                    <li>
+                                        <a href="javascript:void(0);">attribute.js</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">node.js</a>
+                                    </li>
+                                    <li>
+                                        <a href="javascript:void(0);">style.js</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                </div>
+            </aside>
+            <div class="content fl border">
+                <section>
+                    <h3 class="linear_bg">Mallan.js</h3>
+                    <div class="api">
+                        <p>mallanJS核心库</p>
+                        <p>在window下注册命名空间Mallan和$,两者等价,提供部分常用工具函数，以及mallanJS核心模块</p>
+                        <div class="child_api close">
+                            <h4>Function Mallan(selector [,context])</h4>
+                            <div>
+                                <p>param：<strong>selector</strong>;[必须];类型：String;自定义类型的名称或者选择器表达式 </p>
+                                <p>param：<strong>context</strong>;[可选];类型：String;自定义类型的名称或者选择器表达式 </p>
+                                <p>returns:自定义对象或者element对象</p>
+                                <div>
+                                    <p>Mallan函数先尝试选择自定义对象(<a href="#">extendCustom</a>),如果没有对应的自定义对象，则使用选择器，返回<a href="#">element</a>对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //选择自定义对象，返回Mallan.util.cookie对象
+                                            $("cookie").get('username');
+                                            //选择器，返回element对象
+                                            $("#code").addClass("someclass");
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4>Function Mallan.extend(obj)</h4>
+                            <div>
+                                <p>param：<strong>obj</strong>;[必须];类型：Object; </p>
+                                <p>returns:null</p>
+                                <div>
+                                    <p>Mallan.extend函数扩展Mallan对象，为其添加属性</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //为Mallan添加require方法
+                                            $.extend({
+                                               "require":function(){
+                                                   //TODO
+                                               } 
+                                            });
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4>Function Mallan.nameSpace.pack(location,obj)</h4>
+                            <div>
+                                <p>param：<strong>location</strong>;[必须];类型：String; 必选以Mallan.开头,否则会抛出异常</p>
+                                <p>param：<strong>obj</strong>;[必须];类型：Object; </p>
+                                <p>returns:null</p>
+                                <div>
+                                    <p>Mallan.nameSpace.pack函数复制将obj挂载到指定的命名空间下</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //将cookie对象挂载到Mallan.util.cookie下，如果本地不存在util，则会先创建Mallan.util对象，再为Mallan.util.cookie赋值为cookie
+                                            $.nameSpace.pack("Mallan.util.cookie",cookie);
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4>Function Mallan.extendCustom(obj)</h4>
+                            <div>
+                                <p>param：<strong>init</strong>;[必须];类型：Obejct; Object必选有3个属性：name,cls,constructType</p>
+                                <p>returns:null</p>
+                                <div>
+                                    <p>Mallan.extendCustom扩展自定义对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //为Mallan扩展自定义对象cookie
+                                            $.extendCustom({
+                                                name: "cookie",
+                                                cls: Cookie,
+                                                constructType: "single"
+                                            });
+                                            //这样就可以方便的使用$()方法来使用cookie
+                                            $("cookie").get(key);
+                                            $("cookie").set(key,value);
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4>Function Mallan.singleton(init)</h4>
+                            <div>
+                                <p>param：<strong>init</strong>;[必须];类型：Function; 构建单例对象的初始化函数</p>
+                                <p>returns:Object</p>
+                                <div>
+                                    <p>Mallan.singleton函数创建一个singleton对象，该对象有一个getInstance方法,可结合Mallan.extendCustom一起使用</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //创建一个单例cookie对象
+                                            var cookie = $.singleton(function(){
+                                               //TODO
+                                               return {
+                                                   get:function(){},
+                                                   set:function(){}
+                                               } 
+                                            });
+                                            //使用cookie
+                                            var cookieInstance = cookie.getInstance();
+                                            cookieInstance.get(key);
+                                            //进一步将其扩展到自定义对象
+                                            $.extendCustom({
+                                                name:'cookie',
+                                                cls:cookie,
+                                                constructType:'single'
+                                            });
+                                            //可以这样使用cookie。Mallan函数将自动执行cookie.getInstance()
+                                            $('cookie').get(key);
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4>Function Mallan.getScript(url [,callback])</h4>
+                            <div>
+                                <p>param：<strong>url</strong>;[必须];类型：String; 脚本地址</p>
+                                <p>param：<strong>callback</strong>;[可选];类型：Function; 脚本加载后的回调函数</p>
+                                <p>returns:null</p>
+                                <div>
+                                    <p>Mallan.getScript函数动态异步加载一个js脚本</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //加载一个脚本
+                                            $.getScript('someurl',function(){
+                                                //TODO
+                                            });
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4>Function Mallan.require(modules [,callback])</h4>
+                            <div>
+                                <p>param：<strong>modules</strong>;[必须];类型：String;模块的名称，多个模块用逗号隔开</p>
+                                <p>param：<strong>callback</strong>;[可选];类型：Function;</p>
+                                <p>returns:null</p>
+                                <div>
+                                    <p>Mallan.require 核心模块，动态加载所需的模块及其依赖模块。如果该模块已经加载则直接callback，如果该模块未加载，则加载相应脚本后callback。
+                                    任意模块不会加载2次。同时只会有一个异步require正在请求。请求过程中的其他require请求会自动将callback函数push到回调队列或者合并过程中的所有require，等此次require完成后一起发出。
+                                    使用require可以使你不必关心模块之间的依赖关系，也不必关心模块是否加载过。    
+                                    </p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //使用photoSlide模块
+                                            $.require('plugin.photoSlide',function(){
+                                                //TODO
+                                                new $.plugin.photoSlide(dom,options);
+                                            });
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4>Object Mallan.tools</h4>
+                            <div>
+                                <div>
+                                    <p>提供的工具函数有trim(str),merge(o1,o2),toCamel(str),isArray(arr),contain(arrOrObj,item)
+                                    </p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code">
+                                            //使用merge函数
+                                            var newObject = $.tools.merge(o1,o2);
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        <footer>
+            <p>
+                &copy; Copyright  by allanma
+            </p>
+        </footer>
+        <script type="text/javascript" src="../Mallan.js"></script>
+        <script type="text/javascript">
+			$.require('plugin.treeview', function() {
+				var tree = new $.plugin.treeView("menu_list", {
+					data : [{
+						name : "Mallan.js"
+					}, {
+						name : "animation",
+						children : [{
+							name : "animate.js"
+						}, {
+							name : "fade.js"
+						}, {
+							name : "slide.js"
+						}]
+					}, {
+						name : "dom",
+						children : [{
+							name : 'element',
+							children : [{
+								name : "attribute.js"
+							}, {
+								name : "node.js"
+							}, {
+								name : "style.js"
+							}]
+						}, {
+							name : "element.js"
+						}, {
+							name : "selector.js"
+						}]
+					}, {
+						name : "events",
+						children : [{
+							name : "customevent.js"
+						}, {
+							name : "event.js"
+						}, {
+							name : "eventbind.js"
+						}, {
+							name : "keycode.js"
+						}]
+					}, {
+						name : "lang",
+						children : [{
+							name : "array.js"
+						}, {
+							name : "interface.js"
+						}]
+					}, {
+						name : "plugin",
+						children : [{
+							name : "inputs.js"
+						}, {
+							name : "photoslide.js"
+						}, {
+							name : "shortcut.js"
+						}]
+					}, {
+						name : "util",
+						children : [{
+							name : "browser.js"
+						}, {
+							name : "cookie.js"
+						}, {
+							name : "getcss.js"
+						}, {
+							name : "linklist.js"
+						}, {
+							name : "listitem.js"
+						}, {
+							name : "loader.js"
+						}, {
+							name : "page.js"
+						}, {
+							name : "querystring.js"
+						}]
+					}]
+				});
+			});
+
+        </script>
+    </body>
+</html>
