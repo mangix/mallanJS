@@ -6,6 +6,7 @@
 
 //@require dom.selector
 //@require dom.element
+//@require dom.element.style
 //@require events.eventbind
 //@require events.customevent
 //@require util.loader
@@ -43,6 +44,7 @@
 	}
 	node.prototype = {
 		addChild : function(child) {
+			$(this.dom).addClass("hasChild open");
 			if(this.hasChild()) {
 				this.childrenTree.appendChild(child.dom);
 			}
