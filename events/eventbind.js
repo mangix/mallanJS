@@ -17,7 +17,7 @@
 		}
 	};
 	if(document.addEventListener) {
-		//starnd mothod
+		//standard mothod
 		addEvent = function(el, type, fn) {
 			el.addEventListener(type, fn, false);
 		};
