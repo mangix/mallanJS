@@ -118,8 +118,10 @@
         },
         hide : function() {
             this.each(function() {
-                this._display_cache = getComputedStyle(this, 'display');
-                this.style.display = "none";
+            	if (getComputedStyle(this, 'display') !== 'none') {
+                	this._display_cache = getComputedStyle(this, 'display');
+                	this.style.display = "none";
+            	}
             });
             return this;
         }

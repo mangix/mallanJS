@@ -9,7 +9,7 @@
 //@require events.eventbind
 
 (function($,undefined){
-	var tabView = new function(tabs,contents,options){
+	var tabView = function(tabs,contents,options){
 		var _options = {
 			event:"mouseover",
 			highLightClass:"now",
@@ -21,16 +21,15 @@
 		this.tabs = $(tabs);
 		this.contents = $(contents);
 		this.onChanged = new $.events.customEvent("onChange");
-	}
+		var self = this;
+		this.tabs.bind(this.options.event,function(e,i){
+			e.stop();
+			self.changeTab(i);
+		});
+		this.changeTab(this.options.defaultTab);
+	};
 	tabView.prototype = {
 		constructor:tabView,
-		init:function(){
-			var self = this,option = self.options;
-			this.tabs.bind(this.options.event,function(e,i){
-				self.changePage(i);
-			});
-			this.changeTab(option.defaultTab);
-		},
 		changeTab:function(i){
 			var cls = this.options.highLightClass;
 			this.tabs.removeClass(cls);
