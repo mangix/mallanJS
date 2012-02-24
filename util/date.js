@@ -14,16 +14,27 @@
     date = $.single(function () {
         return {
             parse:function (param) {
+                //return a date object
+                //@param param:String or number or array
+                //example : parse('2011-02-23') or parse(2011,2,23) or parse([2011,2,23])
+                //month 1-12
                 var args;
-                if(typeof param ==="string"){
-                    args = param.split(/-|\/|\s|:/).join(',');
-                }else{
-                    args = [].join.call(arguments,',');
+                if (typeof param === "string") {
+                    args = param.split(/-|\/|\s|:/);
+                } else if ($.tools.isArray(param)) {
+                    args = param;
+                } else {
+                    args = [].slice.call(arguments, 0);
                 }
-                return eval("(new Date(" + args + "))");
+                if (args[1]) {
+                    args[1]--;
+                }
+                return eval("(new Date(" + args.join(',') + "))");
             },
             format:function (formatStr, date) {
                 //format the Date object to the formatStr
+                //@param formatStr:String
+                //@date date:Date
                 var year , month, day, hour, minute, second;
                 year = date.getFullYear();
                 month = date.getMonth() + 1;
@@ -51,6 +62,26 @@
                         return fix(second, s.length);
                     }
                 });
+            },
+            tomorrow:function (date) {
+                //if date ,return the next day of date ,else return tomorrow;
+                //@param [date]:Date or null
+                var tmr = date ? new Date(+date) : new Date();
+                tmr = tmr.setDate(tmr.getDate() + 1);
+                return new Date(tmr);
+            },
+            yesterday:function (date) {
+                //if date ,return the previous day of date ,else return yesterday;
+                //@param [date]:Date or null
+                var ystd = date ? new Date(+date) : new Date();
+                ystd = ystd.setDate(ystd.getDate() - 1);
+                return new Date(ystd);
+            },
+            lastDay:function (year, month) {
+                //return the last day of that month
+                //@param year:Number
+                //@param month:Number 1-12
+                return new Date(year, month, 0);
             }
         };
     });
