@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<style>
+			.contents {
+				width: 100px;
+				height: 100px;
+				background-color: red;;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="tabview">
+			<ul >
+				<li class="tabs">
+					1
+				</li>
+				<li class="tabs">
+					2
+				</li>
+				<li class="tabs">
+					3
+				</li>
+			</ul>
+			<div class="contents">
+				11
+			</div>
+			<div class="contents">
+				22
+			</div>
+			<div class="contents">
+				33
+			</div>
+		</div>
+		<script type="text/javascript" src="../Mallan.js"></script>
+		<script type="text/javascript">
+			$.require('plugin.tabview', function() {
+				new $.plugin.tabView($('.tabs'), $('.contents'), {
+					onChanged : function(i) {
+						console.log(i);
+					}
+				})
+			});
+
+		</script>
+	</body>
+</html>

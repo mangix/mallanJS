@@ -3,15 +3,17 @@
  * @mail maqh1988@gmail.com style.js dom.element.style.js
  */
 //@require dom.element
-(function($, undefined) {
+(function ($, undefined) {
     if (!$.dom.element) {
         return;
     }
-    var doc = document, styleExcept = {
-        'float' : $.dom.element.support.cssFloat ? 'cssFloat' : 'styleFloat'
-    }, getComputedStyle = (function() {
+    var doc = document, styleExcept, getComputedStyle, getOffset;
+    styleExcept = {
+        'float':$.dom.element.support.cssFloat ? 'cssFloat' : 'styleFloat'
+    };
+    getComputedStyle = (function () {
         if (doc.defaultView && doc.defaultView.getComputedStyle) {
-            return function(el, key) {
+            return function (el, key) {
                 var res = doc.defaultView.getComputedStyle(el, null)[$.tools.toCamel(key)];
                 if (key === 'opacity') {
                     return res * 100;
@@ -20,7 +22,7 @@
                 }
             };
         } else {
-            return function(el, key) {
+            return function (el, key) {
                 return el.currentStyle[$.tools.toCamel(key)];
             };
         }
@@ -31,16 +33,16 @@
     }
 
     var style = {
-        hasClass : function(clsName) {
+        hasClass:function (clsName) {
             //check if the first element has the class
             if (this.length > 0) {
                 return contain(this[0].className, clsName);
             }
             return false;
         },
-        addClass : function(clsName) {
+        addClass:function (clsName) {
             clsName = $.tools.trim(clsName);
-            this.each(function() {
+            this.each(function () {
                 var currentCls = $.tools.trim(this.className);
                 if (!contain(currentCls, clsName)) {
                     this.className = currentCls + " " + clsName;
@@ -48,13 +50,13 @@
             });
             return this;
         },
-        removeClass : function(clsName) {
-            this.each(function() {
+        removeClass:function (clsName) {
+            this.each(function () {
                 this.className = $.tools.trim((" " + this.className + " ").replace(" " + clsName + " ", " "));
             });
             return this;
         },
-        css : function(key, value) {
+        css:function (key, value) {
             if (arguments.length == 1) {
                 if ($.typeOf(key) === "string") {
                     //get style(first one)
@@ -64,8 +66,8 @@
                     return '';
                 } else if ($.typeOf(key) === 'object') {
                     //set
-                    this.each(function() {
-                        for ( var o in key) {
+                    this.each(function () {
+                        for (var o in key) {
                             if (o === 'opacity') {
                                 $.dom.element.support.opacity ? this.style[o] = key[o] / 100 : this.style.filter = ('alpha(opacity=' + key[o] + ')');
                             } else {
@@ -77,7 +79,7 @@
                 }
             } else if (arguments.length == 2) {
                 //set style
-                this.each(function() {
+                this.each(function () {
                     if (key === 'opacity') {
                         $.dom.element.support.opacity ? this.style[key] = value / 100 : this.style.filter = ('alpha(opacity=' + value + ')');
                     } else {
@@ -88,14 +90,8 @@
             }
             return this;
         },
-        offsetX : function() {
-
-        },
-        offsetY : function() {
-
-        },
-        center : function() {
-            this.each(function() {
+        center:function () {
+            this.each(function () {
                 var w, h;
                 this.style.position = "absolute";
                 this.style.top = "50%";
@@ -103,23 +99,32 @@
                 this.style.display = "block";
                 w = parseInt(getComputedStyle(this, 'width')) || 0;
                 h = parseInt(getComputedStyle(this, 'heigth')) || 0;
-                this.style["margin-left"] = (window.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft) - w / 2 + "px";
-                this.style["margin-top"] = (window.pageYOffset || doc.documentElement.scrollTop || doc.body.scrollTop) - h / 2 + "px";
+                this.style.marginLeft= (window.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft) - w / 2 + "px";
+                this.style.marginTop = (window.pageYOffset || doc.documentElement.scrollTop || doc.body.scrollTop) - h / 2 + "px";
             });
             return this;
         },
-        show : function() {
-            this.each(function() {
+        show:function () {
+            this.each(function () {
                 if (getComputedStyle(this, 'display') === 'none') {
                     this.style.display = this._display_cache || '';
                 }
             });
             return this;
         },
-        hide : function() {
-            this.each(function() {
+<<<<<<< HEAD
+        hide:function () {
+            this.each(function () {
                 this._display_cache = getComputedStyle(this, 'display');
                 this.style.display = "none";
+=======
+        hide : function() {
+            this.each(function() {
+            	if (getComputedStyle(this, 'display') !== 'none') {
+                	this._display_cache = getComputedStyle(this, 'display');
+                	this.style.display = "none";
+            	}
+>>>>>>> 58502b368068a835e84a8ede5fcf7c83894b3d7a
             });
             return this;
         }
