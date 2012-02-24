@@ -112,10 +112,19 @@
             });
             return this;
         },
+<<<<<<< HEAD
         hide:function () {
             this.each(function () {
                 this._display_cache = getComputedStyle(this, 'display');
                 this.style.display = "none";
+=======
+        hide : function() {
+            this.each(function() {
+            	if (getComputedStyle(this, 'display') !== 'none') {
+                	this._display_cache = getComputedStyle(this, 'display');
+                	this.style.display = "none";
+            	}
+>>>>>>> 58502b368068a835e84a8ede5fcf7c83894b3d7a
             });
             return this;
         }
