@@ -20,13 +20,13 @@
             dateFormat : "yyyy-MM-dd hh:mm:ss",
             maxDate : "2050-12-30",
             minDate : "1970-01-01",
-            onSelect : function (name, date) {
+            onSelect : function () {
             },
-            onShow : function (name, date) {
+            onShow : function () {
             },
-            onHide : function (name, date) {
+            onHide : function () {
             },
-            onChange : function (name, date) {
+            onChange : function () {
             },
             activeDate : null,
             pos : {},
@@ -49,9 +49,8 @@
         this.events = {
             onSelect : new $.events.customEvent("onselect"),
             onShow : new $.events.customEvent("onshow"),
-            onHide : new $.events.customEvent("onhide"),
-            onChange : new $.events.customEvent("onchange")
-        }
+            onHide : new $.events.customEvent("onhide")
+        };
 
         if (!calendarInited) {
             this.init();
@@ -88,14 +87,11 @@
             return false;
         },
         appendCalendar : function (year, month) {
-            var ths, days, table, rows, i, l, option, dom, fragment;
+            var table, i, l, option;
             option = this._options;
             yearBtn.html(year + "年");
             monthBtn.html(option.monthArr[month]);
-            days = this.createDays(year, month);
-            fragment = document.createDocumentFragment();
             table = document.createElement('table');
-            fragment.appendChild(table);
 
             var firstDay = dater.firstDay(year, month + 1),
                 lastDay = dater.lastDay(year, month + 1) ,
@@ -124,6 +120,7 @@
                     a.bind("click", function (e) {
                         e.stop();
                         self.selectDate(self._date.year, self._date.month + 1, parseInt(this.innerHTML), self._date.hour, self._date.minute, self._date.second);
+                        self.hide();
                     });
                 }
                 else {
@@ -231,9 +228,47 @@
                 var y = parseInt(e.target.innerHTML),
                     owner = Calendar.controler;
                 yearBtn.innerHTML = y;
-                self.set_date(y, owner._date.month, owner._date.day, owner._date.hour, owner._date.minute, owner._date.second);
+                owner.set_date(y, owner._date.month, owner._date.day, owner._date.hour, owner._date.minute, owner._date.second);
+                owner.appendCalendar(y, owner._date.month);
                 yearPicker.hide();
             });
+
+            monthPicker.bind('click', function (e) {
+                e.stop();
+                var m = e.target.innerHTML,
+                    owner = Calendar.controler;
+                monthBtn.innerHTML = m;
+                owner.set_date(owner._date.year, e.target._value, owner._date.day, owner._date.hour, owner._date.minute, owner._date.second);
+                owner.appendCalendar(owner._date.year, e.target._value);
+                monthPicker.hide();
+            });
+
+            hourPicker.bind('click', function (e) {
+                e.stop();
+                var h = e.target.innerHTML,
+                    owner = Calendar.controler;
+                hourBtn.innerHTML = h;
+                owner.selectDate(owner._date.year, owner._date.month + 1, owner._date.day, h, owner._date.minute, owner._date.second);
+                hourPicker.hide();
+            });
+
+            minutePicker.bind('click', function (e) {
+                e.stop();
+                var m = e.target.innerHTML,
+                    owner = Calendar.controler;
+                minuteBtn.innerHTML = m;
+                owner.selectDate(owner._date.year, owner._date.month + 1, owner._date.day, owner._date.hour, m, owner._date.second);
+                minutePicker.hide();
+            });
+            secondPicker.bind('click', function (e) {
+                e.stop();
+                var s = e.target.innerHTML,
+                    owner = Calendar.controler;
+                secondeBtn.innerHTML = s;
+                owner.selectDate(owner._date.year, owner._date.month + 1, owner._date.day, owner._date.hour, owner._date.minute, s);
+                secondPicker.hide();
+            });
+
 
             calendarInited = true;
         },
@@ -249,7 +284,7 @@
         },
         show : function () {
             Calendar.controler = this;
-            var option = this._options, field = $(option.dateField), df = this._options.dateFormat , end = this;
+            var option = this._options, field = $(option.dateField), df = this._options.dateFormat;
             df.indexOf('ss') == -1 ? (secondeBtn.hide()) : (secondeBtn.show());
             df.indexOf('mm') == -1 ? (minuteBtn.hide()) : (minuteBtn.show());
             df.indexOf('hh') == -1 ? (hourBtn.hide()) : (hourBtn.show());
@@ -286,16 +321,15 @@
             target.val(date);
             this.events.onSelect.fire(date);
             this.set_date(y, m - 1, d, h, mnt, s);
-            this.hide();
         },
         nextMonth : function () {
             var month = this._date.month, year = this._date.year;
             month = month == 11 ? 0 : (month + 1);
             year = month == 0 ? (year + 1) : year;
             if (this.isInRange(year, month, 1)) {
-                this.doms.year.html(year);
-                this.doms.month.html(this._options.monthArr[month]);
-                this.set_date(year, month, this._date.day, this._date.hour, this._date.minute, this._second);
+                yearBtn.html(year);
+                monthBtn.html(this._options.monthArr[month]);
+                this.set_date(year, month, this._date.day, this._date.hour, this._date.minute, this._date.second);
                 this.appendCalendar(year, month);
             }
         },
@@ -304,9 +338,9 @@
             month = month == 0 ? 11 : (month - 1);
             year = month == 11 ? (year - 1) : year;
             if (this.isInRange(year, month, (new Date(year, month + 1, 0)).getDate())) {
-                this.doms.year.html(year);
-                this.doms.month.html(this._options.monthArr[month]);
-                this.set_date(year, month, this._date.day, this._date.hour, this._date.minute, this._second);
+                yearBtn.html(year);
+                monthBtn.html(this._options.monthArr[month]);
+                this.set_date(year, month, this._date.day, this._date.hour, this._date.minute, this._date.second);
                 this.appendCalendar(year, month);
             }
         },
@@ -322,7 +356,7 @@
                 this._options[name] = this.strToDate(value);
             }
             else if (name.indexOf("on") == 0) {
-                this.events[name].subscribe(value);
+                this.events[name].on(value);
             }
         },
         formatDate : function (y, m, d, h, mnt, s) {
@@ -330,10 +364,9 @@
         },
         showYearPicker : function () {
             this.hidePickers();
-            var self = this,
-                maxYear = this._options.maxDate.getFullYear(),
+            var maxYear = this._options.maxDate.getFullYear(),
                 minYear = this._options.minDate.getFullYear(),
-                i, l, html = [];
+                i, html = [];
             for (i = minYear; i <= maxYear; i++) {
                 html.push('<a href="javascript:void(0);">' + i + '</a>');
             }
@@ -348,117 +381,65 @@
         },
         showMonthPicker : function () {
             this.hidePickers();
-            var self = this, year = parseInt(self.doms.year.html()), monthPicker = this.doms.monthPicker;
-            self.doms.monthPicker.html("");
-            for (var i = 0; i <= 11; i++) {
-                if (self.isInRange(year, i, 1)) {
-                    var a = document.createElement("a");
-                    a = $(a);
-                    a.html(self._options.monthArr[i]);
-                    monthPicker.appendChild(a);
-                    a.addEvent("click", (function (i) {
-                        return function (e) {
-                            e.stop();
-                            var m = parseInt(this.html());
-                            self.doms.month.html(this.html());
-                            self.set_date(self._date.year, i, self._date.day, self._date.hour, self._date.minute, self._date.second);
-                            monthPicker.css("display", "none");
-                            self.appendCalendar(self._date.year, i);
-                        }
-                    })(i));
+            var self = this, i, html = [];
+            monthPicker.html();
+            for (i = 0; i <= 11; i++) {
+                if (self.isInRange(self._date.year, i, 1)) {
+                    html.push('<a href="javascript:void(0); _value="' + i + '">' + self._options.monthArr[i] + '</a>');
                 }
             }
-            var pos = this.doms.month.position();
+            monthPicker.html(html);
             monthPicker.css({
                 position : "absolute",
                 display : "block",
-                left : pos.x,
-                top : pos.y + 18,
-                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
+                left : monthBtn.offsetLeft(),
+                top : monthBtn.offsetBottom() + 18,
+                "z-index" : parseInt(container.css("z-index")) + 1
             });
         },
         showHourPicker : function () {
             this.hidePickers();
-            var self = this, year = parseInt(self.doms.year.html()), hourPicker = this.doms.hourPicker;
-            self.doms.hourPicker.html("");
-            for (var i = 0; i <= 23; i++) {
-                var a = document.createElement("a");
-                a = $(a);
-                a.html(i);
-                hourPicker.appendChild(a);
-                a.addEvent("click", (function (i) {
-                    return function (e) {
-                        e.stop();
-                        var m = parseInt(this.html());
-                        self.doms.hour.html(this.html() + "时");
-                        self.set_date(self._date.year, self._date.month, self._date.day, m, self._date.minute, self._date.second);
-                        hourPicker.css("display", "none");
-                    }
-                })(i));
+            var html = [], i;
+            for (i = 0; i <= 23; i++) {
+                html.push('<a href="javascript:void(0);">' + (i + 1) + '</a>');
             }
-            var pos = this.doms.hour.position();
+            hourPicker.html(html);
             hourPicker.css({
                 position : "absolute",
                 display : "block",
-                left : pos.x,
-                top : pos.y + 18,
-                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
+                left : hourPicker.offsetLeft(),
+                top : hourPicker.offsetBottom(),
+                "z-index" : parseInt(container.css("z-index")) + 1
             });
         },
         showMinutePicker : function () {
             this.hidePickers();
-            var self = this, year = parseInt(self.doms.year.html()), minutePicker = this.doms.minutePicker;
-            self.doms.minutePicker.html("");
-            for (var i = 0; i <= 59; i++) {
-                var a = document.createElement("a");
-                a = $(a);
-                a.html(i);
-                minutePicker.appendChild(a);
-                a.addEvent("click", (function (i) {
-                    return function (e) {
-                        e.stop();
-                        var m = parseInt(this.html());
-                        self.set_date(self._date.year, self._date.month, self._date.day, self._date.hour, m, self._date.second);
-                        self.doms.minute.html(this.html() + "分");
-                        minutePicker.css("display", "none");
-                    }
-                })(i));
+            var html = [], i;
+            for (i = 0; i <= 59; i++) {
+                html.push('<a href="javascript:void(0);">' + (i + 1) + '</a>');
             }
-            var pos = this.doms.minute.position();
+            minutePicker.html(html);
             minutePicker.css({
                 position : "absolute",
                 display : "block",
-                left : pos.x,
-                top : pos.y + 18,
-                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
+                left : minuteBtn.offsetLeft(),
+                top : minuteBtn.offsetBottom(),
+                "z-index" : parseInt(container.css("z-index")) + 1
             });
         },
         showSecondPicker : function () {
             this.hidePickers();
-            var self = this, year = parseInt(self.doms.year.html()), secondPicker = this.doms.secondPicker;
-            self.doms.secondPicker.html("");
-            for (var i = 0; i <= 59; i++) {
-                var a = document.createElement("a");
-                a = $(a);
-                a.html(i);
-                secondPicker.appendChild(a);
-                a.addEvent("click", (function (i) {
-                    return function (e) {
-                        e.stop();
-                        var m = parseInt(this.html());
-                        self.set_date(self._date.year, self._date.month, self._date.day, self._date.hour, self._date.minute, m);
-                        self.doms.second.html(this.html() + "秒");
-                        secondPicker.css("display", "none");
-                    }
-                })(i));
+            var html = [], i;
+            for (i = 0; i <= 59; i++) {
+                html.push('<a href="javascript:void(0);">' + (i + 1) + '</a>');
             }
-            var pos = this.doms.second.position();
+            secondPicker.html(html);
             secondPicker.css({
                 position : "absolute",
                 display : "block",
-                left : pos.x,
-                top : pos.y + 18,
-                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
+                left : secondeBtn.offsetLeft(),
+                top : secondeBtn.offsetBottom(),
+                "z-index" : parseInt(container.css("z-index")) + 1
             });
         },
         getDate : function () {
