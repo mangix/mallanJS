@@ -4,19 +4,18 @@
  * event.js
  */
 //@require events.keycode
-(function($, undefined){
-    function Event(e){
+(function ($, undefined) {
+    function Event(e) {
         var e = this.originalEvent = e || {};
         this.target = e.target || e.srcElement;
         while (this.target && this.target.nodeType == 3) {
+            //text
             this.target = this.target.parentNode;
         }
         this.clientX = e.clientX;//to browser
         this.clientY = e.clientY;
         this.pageX = e.pageX || (e.clientX + (document.documentElement.scrollLeft || document.body.scrollLeft));//to document
         this.pageY = e.pageY || (e.clientY + document.documentElement.scrollTop || document.body.scrollLeft);
-        //this.offsetX = e.offsetX;// to src element
-        //this.offsetY = e.offsetY;
         this.type = e.type || "";
         this.button = e.button;
         this.altKey = e.altKey;
@@ -38,11 +37,14 @@
                 }
             }
         }
+        this.fromElement = e.fromElement ? e.fromElement : (e.type === "mouseover" ? e.relatedTarget : this.target );
+        this.toElement = e.toElement ? e.toElement : (e.type === "mouseout" ? e.relatedTarget : this.target );
     }
+
     Event.prototype = {
-        constructor: Event,
-        mallantype: "Event",
-        preventDefault: function(){
+        constructor:Event,
+        mallantype:"Event",
+        preventDefault:function () {
             var e = this.originalEvent;
             if (e.preventDefault) {
                 e.preventDefault();
@@ -52,7 +54,7 @@
             }
             return this;
         },
-        stopPropagation: function(){
+        stopPropagation:function () {
             var e = this.originalEvent;
             if (e.stopPropagation) {
                 e.stopPropagation();
@@ -62,7 +64,7 @@
             }
             return this;
         },
-        stop: function(){
+        stop:function () {
             var e = this.originalEvent;
             this.preventDefault();
             this.stopPropagation();
@@ -72,6 +74,6 @@
             return this;
         }
     };
-    
+
     $.nameSpace.pack("Mallan.events.event", Event);
 })(Mallan);
