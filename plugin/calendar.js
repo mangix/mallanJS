@@ -14,23 +14,23 @@
 
     var Calendar = function (options) {
         this._options = {
-            dateField:null,
-            monthArr:["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
-            weekArr:["日", "一", "二", "三", "四", "五", "六"],
-            dateFormat:"yyyy-MM-dd hh:mm:ss",
-            maxDate:"2050-12-30",
-            minDate:"1970-01-01",
-            onSelect:function (name, date) {
+            dateField : null,
+            monthArr : ["一月", "二月", "三月", "四月", "五月", "六月", "七月", "八月", "九月", "十月", "十一月", "十二月"],
+            weekArr : ["日", "一", "二", "三", "四", "五", "六"],
+            dateFormat : "yyyy-MM-dd hh:mm:ss",
+            maxDate : "2050-12-30",
+            minDate : "1970-01-01",
+            onSelect : function (name, date) {
             },
-            onShow:function (name, date) {
+            onShow : function (name, date) {
             },
-            onHide:function (name, date) {
+            onHide : function (name, date) {
             },
-            onChange:function (name, date) {
+            onChange : function (name, date) {
             },
-            activeDate:null,
-            pos:{},
-            activeButton:null
+            activeDate : null,
+            pos : {},
+            activeButton : null
         };
         $.tools.merge(this._options, options);
         this._options.maxDate = dater.parse(this._options.maxDate);
@@ -39,18 +39,18 @@
         //selected date
         var now = new Date(), self = this;
         this._date = {
-            year:now.getFullYear(),
-            month:now.getMonth(),
-            day:now.getDate(),
-            hour:now.getHours(),
-            minute:now.getMinutes(),
-            second:now.getSeconds()
+            year : now.getFullYear(),
+            month : now.getMonth(),
+            day : now.getDate(),
+            hour : now.getHours(),
+            minute : now.getMinutes(),
+            second : now.getSeconds()
         };
         this.events = {
-            onSelect:new $.events.customEvent("onselect"),
-            onShow:new $.events.customEvent("onshow"),
-            onHide:new $.events.customEvent("onhide"),
-            onChange:new $.events.customEvent("onchange")
+            onSelect : new $.events.customEvent("onselect"),
+            onShow : new $.events.customEvent("onshow"),
+            onHide : new $.events.customEvent("onhide"),
+            onChange : new $.events.customEvent("onchange")
         }
 
         if (!calendarInited) {
@@ -73,77 +73,64 @@
     };
 
     Calendar.prototype = {
-        isInRange:function (y, m, d) {
-            var date = +new Date(y, m, d);
-            var min = +(this._options.minDate);
-            var max = +(this._options.maxDate);
+        isInRange : function (y, m, d) {
+            var date = +new Date(y, m, d),
+                min = +(this._options.minDate),
+                max = +(this._options.maxDate);
             return (date >= min && date <= max);
         },
-        isInActiveDate:function (y, m, d) {
-            var m = "0" + (m + 1);
-            var d = "0" + d;
-            var date = "" + y + "-" + m.substr(m.length - 2) + "-" + d.substr(d.length - 2);
+        isInActiveDate : function (y, m, d) {
             for (var i = 0, l = this._options.activeDate.length; i < l; i++) {
-                if (this._options.activeDate[i] == date) {
+                if (+dater.parse(this._options.activeDate[i]) == +dater.parse(y, 1 + m, d)) {
                     return true;
                 }
             }
             return false;
         },
-        createDays:function (year, month) {
-            var firstDay = new Date(year, month, 1), lastDay = new Date(year, month + 1, 0), weekOfFirstDay = firstDay.getDay();
-            var arr = [];
-            for (var i = 0; i < weekOfFirstDay; i++) {
-                arr.push("");
-            }
-            for (var i = 1; i <= lastDay.getDate(); i++) {
-                arr.push(i);
-            }
-            return arr;
-        },
-        appendCalendar:function (year, month) {
+        appendCalendar : function (year, month) {
             var ths, days, table, rows, i, l, option, dom, fragment;
-            dom = this.doms;
             option = this._options;
-            dom.year.html(year + "年");
-            dom.month.html(option.monthArr[month]);
+            yearBtn.html(year + "年");
+            monthBtn.html(option.monthArr[month]);
             days = this.createDays(year, month);
             fragment = document.createDocumentFragment();
             table = document.createElement('table');
             fragment.appendChild(table);
 
-            var cuurentRow, self = this;
+            var firstDay = dater.firstDay(year, month + 1),
+                lastDay = dater.lastDay(year, month + 1) ,
+                weekOfFirstDay = firstDay.getDay(),
+                currentRow, self = this, th, td, a , realDate;
             currentRow = table.insertRow(table.rows.length);
+            //create days
             for (i = 0; i < 7; i++) {
-                var th = document.createElement('th');
+                th = document.createElement('th');
                 th.innerHTML = option.weekArr[i];
                 currentRow.appendChild(th);
             }
-            for (i = 0, l = days.length; i < l; i++) {
+            for (i = 0, l = weekOfFirstDay + lastDay.getDate(); i < l; i++) {
+                realDate = i - weekOfFirstDay + 1;
                 if (i % 7 == 0) {
                     currentRow = table.insertRow(table.rows.length);
                 }
-                var td = currentRow.insertCell(currentRow.cells.length);
-                if (days[i] === "") {
+                td = currentRow.insertCell(currentRow.cells.length);
+                if (i < weekOfFirstDay) {
                     td.innerHTML = "";
+                    continue;
+                }
+                a = element.create('<a href="javascript:void(0);">' + realDate + '</a>');
+                td.appendChild(a[0]);
+                if (this.isInRange(this._date.year, this._date.month, realDate) && (option.activeDate ? this.isInActiveDate(this._date.year, this._date.month, realDate) : true )) {
+                    a.bind("click", function (e) {
+                        e.stop();
+                        self.selectDate(self._date.year, self._date.month + 1, parseInt(this.innerHTML), self._date.hour, self._date.minute, self._date.second);
+                    });
                 }
                 else {
-                    var a = $(document.createElement('a'));
-                    a.href = "javascript:void(0);";
-                    a.innerHTML = days[i];
-                    td.appendChild(a);
-                    if (this.isInRange(this._date.year, this._date.month, days[i]) && (option.activeDate ? this.isInActiveDate(this._date.year, this._date.month, days[i]) : true )) {
-                        a.addEvent("click", function (e) {
-                            e.stop();
-                            self.selectDate(self._date.year, self._date.month + 1, parseInt(this.html()), self._date.hour, self._date.minute, self._date.second);
-                        });
-                    }
-                    else {
-                        a.addClass("calendar_disable");
-                    }
-                    if (days[i] == (this._date.day)) {
-                        a.addClass("calendar_selected");
-                    }
+                    a.addClass("calendar_disable");
+                }
+                if (realDate == (this._date.day)) {
+                    a.addClass("calendar_selected");
                 }
             }
             //补齐最后一行
@@ -151,10 +138,9 @@
                 currentRow.insertCell(i);
             }
 
-            dom.dateContainer.innerHTML = "";
-            dom.dateContainer.appendChild(table);
+            tableDiv.html("").append(table);
         },
-        init:function () {
+        init : function () {
             //页面中加载日历html代码
             //日历最外层容器
             container = element.create('<div class="calender_container" style="position:absolute;display:none;"></div>');
@@ -240,9 +226,18 @@
                 container.hide();
             });
 
+            yearPicker.bind('click', function (e) {
+                e.stop();
+                var y = parseInt(e.target.innerHTML),
+                    owner = Calendar.controler;
+                yearBtn.innerHTML = y;
+                self.set_date(y, owner._date.month, owner._date.day, owner._date.hour, owner._date.minute, owner._date.second);
+                yearPicker.hide();
+            });
+
             calendarInited = true;
         },
-        set_date:function (year, month, day, hour, minute, second) {
+        set_date : function (year, month, day, hour, minute, second) {
             //month 0-11
             var date = this._date;
             date.year = parseInt(year);
@@ -252,52 +247,48 @@
             minute && (date.minute = parseInt(minute));
             second && (date.second = parseInt(second));
         },
-        show:function () {
+        show : function () {
             Calendar.controler = this;
-            var option = this._options;
+            var option = this._options, field = $(option.dateField), df = this._options.dateFormat , end = this;
+            df.indexOf('ss') == -1 ? (secondeBtn.hide()) : (secondeBtn.show());
+            df.indexOf('mm') == -1 ? (minuteBtn.hide()) : (minuteBtn.show());
+            df.indexOf('hh') == -1 ? (hourBtn.hide()) : (hourBtn.show());
 
-            var df = this._options.dateFormat;
-            (df.indexOf('ss') == -1) ? secondeBtn.hide() : secondeBtn.show();
-            (df.indexOf('mm') == -1) ? minuteBtn.hide() : minuteBtn.show();
-            (df.indexOf('hh') == -1) ? hourBtn.hide() : hourBtn.show();
-
-            var field = option.dateField, self = this;
-            if (field) {
-                pos = field.position();
-                dom.container.css({
-                    left:pos.x,
-                    top:pos.y + field.offsetHeight,
-                    display:"block",
-                    "z-index":1000
+            if (field[0]) {
+                container.css({
+                    left : field.offsetLeft(),
+                    top : field.offsetBottom(),
+                    display : "block",
+                    "z-index" : 1000
                 });
             }
             else {
-                dom.container.css({
-                    left:option.pos.x,
-                    top:option.pos.y,
-                    display:"block",
-                    "z-index":1000
+                container.css({
+                    left : option.pos.x,
+                    top : option.pos.y,
+                    display : "block",
+                    "z-index" : 1000
                 });
             }
-
             this.appendCalendar(this._date.year, this._date.month);
             dom.hour.html(self._date.hour + "时");
             dom.minute.html(self._date.minute + "分");
             dom.second.html(self._date.second + "秒");
-
             this.events.onShow.fire();
         },
-        selectDate:function (y, m, d, h, mnt, s) {
-            var target = this._options.dateField;
-            var date = this.formatDate(y, m, d, h, mnt, s);
-            if (target) {
-                target.value = date;
-            }
+        hide : function () {
+            container.hide();
+            this.events.onHide.fire();
+        },
+        selectDate : function (y, m, d, h, mnt, s) {
+            var target = $(this._options.dateField),
+                date = this.formatDate(y, m, d, h, mnt, s);
+            target.val(date);
             this.events.onSelect.fire(date);
             this.set_date(y, m - 1, d, h, mnt, s);
             this.hide();
         },
-        nextMonth:function () {
+        nextMonth : function () {
             var month = this._date.month, year = this._date.year;
             month = month == 11 ? 0 : (month + 1);
             year = month == 0 ? (year + 1) : year;
@@ -308,7 +299,7 @@
                 this.appendCalendar(year, month);
             }
         },
-        prevMonth:function () {
+        prevMonth : function () {
             var month = this._date.month, year = this._date.year;
             month = month == 0 ? 11 : (month - 1);
             year = month == 11 ? (year - 1) : year;
@@ -319,13 +310,13 @@
                 this.appendCalendar(year, month);
             }
         },
-        strToDate:function (dateStr) {
+        strToDate : function (dateStr) {
             var d = dateStr.split(/-|\//);
             var a = parseInt(d[0]), b = parseInt(d[1], 10) - 1, c = parseInt(d[2], 10);
             return new Date(a, b, c);
         },
         //接口函数，在constructor之后设置option的值，赞不支持showMiniBtn，minBtnUrl
-        set:function (name, value) {
+        set : function (name, value) {
             this._options[name] = value;
             if (name == "minDate" || name == "maxDate") {
                 this._options[name] = this.strToDate(value);
@@ -334,49 +325,28 @@
                 this.events[name].subscribe(value);
             }
         },
-        formatDate:function (y, m, d, h, mnt, s) {
-            var res, formatStr = this._options.dateFormat;
-            m = ("0" + m);
-            d = ("0" + d);
-            h = ("0" + h);
-            mnt = ("0" + mnt);
-            s = ("0" + s);
-            res = formatStr.replace("yyyy", y);
-            res = res.replace("mm", m.substr(m.length - 2));
-            res = res.replace("dd", d.substr(d.length - 2));
-            res = res.replace("hh", h.substr(h.length - 2));
-            res = res.replace("MM", mnt.substr(mnt.length - 2));
-            res = res.replace("ss", s.substr(s.length - 2));
-            return res;
+        formatDate : function (y, m, d, h, mnt, s) {
+            return dater.format(this._options.dateFormat, new Date(y, m - 1, d, h, mnt, s));
         },
-        showYearPicker:function () {
+        showYearPicker : function () {
             this.hidePickers();
-            var self = this, maxYear = this._options.maxDate.getFullYear(), minYear = this._options.minDate.getFullYear(), yearPicker = this.doms.yearPicker;
-            yearPicker.html("");
-            for (var i = minYear; i <= maxYear; i++) {
-                var a = document.createElement("a");
-                a = $(a);
-                a.html(i);
-                yearPicker.appendChild(a);
-                a.addEvent("click", function (e) {
-                    e.stop();
-                    var y = parseInt(this.html());
-                    self.doms.year.html(y);
-                    self.set_date(y, self._date.month, self._date.day, self._date.hour, self._date.minute, self._date.second);
-                    yearPicker.css("display", "none");
-                    self.appendCalendar(y, self._date.month);
-                });
+            var self = this,
+                maxYear = this._options.maxDate.getFullYear(),
+                minYear = this._options.minDate.getFullYear(),
+                i, l, html = [];
+            for (i = minYear; i <= maxYear; i++) {
+                html.push('<a href="javascript:void(0);">' + i + '</a>');
             }
-            var pos = this.doms.year.position();
+            yearPicker.html(html);
             yearPicker.css({
-                "position":"absolute",
-                "display":"block",
-                "left":pos.x,
-                "top":pos.y + 18,
-                "z-index":(parseInt(this.doms.container.css("z-index")) + 1)
+                "position" : "absolute",
+                "display" : "block",
+                "left" : yearBtn.offsetLeft(),
+                "top" : yearBtn.offsetBottom(),
+                "z-index" : (parseInt(container.css("z-index")) + 1)
             });
         },
-        showMonthPicker:function () {
+        showMonthPicker : function () {
             this.hidePickers();
             var self = this, year = parseInt(self.doms.year.html()), monthPicker = this.doms.monthPicker;
             self.doms.monthPicker.html("");
@@ -400,14 +370,14 @@
             }
             var pos = this.doms.month.position();
             monthPicker.css({
-                position:"absolute",
-                display:"block",
-                left:pos.x,
-                top:pos.y + 18,
-                "z-index":parseInt(this.doms.container.css("z-index")) + 1
+                position : "absolute",
+                display : "block",
+                left : pos.x,
+                top : pos.y + 18,
+                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
             });
         },
-        showHourPicker:function () {
+        showHourPicker : function () {
             this.hidePickers();
             var self = this, year = parseInt(self.doms.year.html()), hourPicker = this.doms.hourPicker;
             self.doms.hourPicker.html("");
@@ -428,14 +398,14 @@
             }
             var pos = this.doms.hour.position();
             hourPicker.css({
-                position:"absolute",
-                display:"block",
-                left:pos.x,
-                top:pos.y + 18,
-                "z-index":parseInt(this.doms.container.css("z-index")) + 1
+                position : "absolute",
+                display : "block",
+                left : pos.x,
+                top : pos.y + 18,
+                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
             });
         },
-        showMinutePicker:function () {
+        showMinutePicker : function () {
             this.hidePickers();
             var self = this, year = parseInt(self.doms.year.html()), minutePicker = this.doms.minutePicker;
             self.doms.minutePicker.html("");
@@ -456,14 +426,14 @@
             }
             var pos = this.doms.minute.position();
             minutePicker.css({
-                position:"absolute",
-                display:"block",
-                left:pos.x,
-                top:pos.y + 18,
-                "z-index":parseInt(this.doms.container.css("z-index")) + 1
+                position : "absolute",
+                display : "block",
+                left : pos.x,
+                top : pos.y + 18,
+                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
             });
         },
-        showSecondPicker:function () {
+        showSecondPicker : function () {
             this.hidePickers();
             var self = this, year = parseInt(self.doms.year.html()), secondPicker = this.doms.secondPicker;
             self.doms.secondPicker.html("");
@@ -484,23 +454,22 @@
             }
             var pos = this.doms.second.position();
             secondPicker.css({
-                position:"absolute",
-                display:"block",
-                left:pos.x,
-                top:pos.y + 18,
-                "z-index":parseInt(this.doms.container.css("z-index")) + 1
+                position : "absolute",
+                display : "block",
+                left : pos.x,
+                top : pos.y + 18,
+                "z-index" : parseInt(this.doms.container.css("z-index")) + 1
             });
         },
-        getDate:function () {
-            return this._options.dateField.value;
+        getDate : function () {
+            return this.formatDate(this._date.year, this._date.month + 1, this._date.day, this._date.hour, this._date.minute, this._date.second);
         },
-        hidePickers:function () {
-            var dom = this.doms;
-            dom.yearPicker.css("display", "none");
-            dom.monthPicker.css("display", "none");
-            dom.hourPicker.css("display", "none");
-            dom.minutePicker.css("display", "none");
-            dom.secondPicker.css("display", "none");
+        hidePickers : function () {
+            yearPicker.hide();
+            monthPicker.hide();
+            hourPicker.hide();
+            minutePicker.hide();
+            secondPicker.hide();
         }
     };
 

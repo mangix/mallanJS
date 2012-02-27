@@ -1,6 +1,7 @@
 /**
  * @author allanma
- * @mail maqh1988@gmail.com style.js dom.element.style.js
+ * @mail maqh1988@gmail.com
+ * dom.element.style.js
  */
 //@require dom.element
 (function ($, undefined) {
@@ -17,11 +18,13 @@
                 var res = doc.defaultView.getComputedStyle(el, null)[$.tools.toCamel(key)];
                 if (key === 'opacity') {
                     return res * 100;
-                } else {
+                }
+                else {
                     return res;
                 }
             };
-        } else {
+        }
+        else {
             return function (el, key) {
                 return el.currentStyle[$.tools.toCamel(key)];
             };
@@ -70,7 +73,8 @@
                         for (var o in key) {
                             if (o === 'opacity') {
                                 $.dom.element.support.opacity ? this.style[o] = key[o] / 100 : this.style.filter = ('alpha(opacity=' + key[o] + ')');
-                            } else {
+                            }
+                            else {
                                 o = styleExcept[o] ? styleExcept[o] : o;
                                 this.style[$.tools.toCamel(o)] = key[o];
                             }
@@ -82,7 +86,8 @@
                 this.each(function () {
                     if (key === 'opacity') {
                         $.dom.element.support.opacity ? this.style[key] = value / 100 : this.style.filter = ('alpha(opacity=' + value + ')');
-                    } else {
+                    }
+                    else {
                         key = styleExcept[key] ? styleExcept[key] : key;
                         this.style[$.tools.toCamel(key)] = value;
                     }
@@ -99,7 +104,7 @@
                 this.style.display = "block";
                 w = parseInt(getComputedStyle(this, 'width')) || 0;
                 h = parseInt(getComputedStyle(this, 'heigth')) || 0;
-                this.style.marginLeft= (window.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft) - w / 2 + "px";
+                this.style.marginLeft = (window.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft) - w / 2 + "px";
                 this.style.marginTop = (window.pageYOffset || doc.documentElement.scrollTop || doc.body.scrollTop) - h / 2 + "px";
             });
             return this;
@@ -112,19 +117,12 @@
             });
             return this;
         },
-<<<<<<< HEAD
         hide:function () {
             this.each(function () {
-                this._display_cache = getComputedStyle(this, 'display');
-                this.style.display = "none";
-=======
-        hide : function() {
-            this.each(function() {
-            	if (getComputedStyle(this, 'display') !== 'none') {
-                	this._display_cache = getComputedStyle(this, 'display');
-                	this.style.display = "none";
-            	}
->>>>>>> 58502b368068a835e84a8ede5fcf7c83894b3d7a
+                if (getComputedStyle(this, 'display') !== 'none') {
+                    this._display_cache = getComputedStyle(this, 'display');
+                    this.style.display = "none";
+                }
             });
             return this;
         }
