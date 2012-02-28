@@ -8,6 +8,7 @@
 //@require util.page
 //@require events.customevent
 //@require dom.element
+//@require dom.element.attribute
 //@require dom.element.node
 //@require dom.element.style
 //@require dom.element.create
@@ -148,7 +149,7 @@
             container = element.create('<div class="calender_container" style="position:absolute;display:none;"></div>');
 
             //顶部控制条
-            controler = element.create('<div class="calendar_controler"><a href="javascript:void(0);" class="calendar_pre"><</a><a href="javascript:void(0));" class="calendar_year"></a><a href="javascript:void(0));" class="calendar_month"></a><a href="javascript:void(0));" class="calendar_hour" title="小时">0时</a><a href="javascript:void(0);" class="calendar_mnt" title="分钟">0分</a><a href="javascript:void(0);" class="calendar_scd" title="秒">0秒</a><a href="javascript:void(0);" class="calendar_next">></a><a href="javascript:void(0);" class="calendar_close">X</a></div>');
+            controler = element.create('<div class="calendar_controler"><a href="javascript:void(0);" class="calendar_pre"><</a><a href="javascript:void(0));" class="calendar_year"></a><a href="javascript:void(0));" class="calendar_month"></a><a href="javascript:void(0));" class="calendar_hour" title="小时">0时</a><a href="javascript:void(0);" class="calendar_minute" title="分钟">0分</a><a href="javascript:void(0);" class="calendar_second" title="秒">0秒</a><a href="javascript:void(0);" class="calendar_next">></a><a href="javascript:void(0);" class="calendar_close">X</a></div>');
             container.append(controler);
 
             //日历table
@@ -304,8 +305,8 @@
             }
             else {
                 container.css({
-                    left : option.pos.x,
-                    top : option.pos.y,
+                    left : option.pos.x +"px",
+                    top : option.pos.y +"px",
                     display : "block",
                     "z-index" : 1000
                 });

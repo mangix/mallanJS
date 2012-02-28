@@ -17,6 +17,14 @@
             dateField:$("input")[0]
         });
         console.log(calendar._date)
+
+        var calendar2 = new $.plugin.calendar({
+            activeButton:$("input")[1],
+            pos:{
+                x:$($("input")[1]).offsetLeft(),
+                y:$($("input")[1]).offsetBottom()
+            }
+        })
     });
 </script>
 </body>
