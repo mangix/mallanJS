@@ -5,6 +5,7 @@
  */
 
 //@require util.date
+//@require util.page
 //@require events.customevent
 //@require dom.element
 //@require dom.element.node

@@ -107,6 +107,6 @@
 	$.extendCustom({
 		name : 'page',
 		cls : page,
-		construtType : 'single'
+		constructType : 'single'
 	});
 })(Mallan);
