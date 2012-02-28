@@ -192,7 +192,7 @@
 
             controler.query('.calendar_pre').bind("click", function (e) {
                 e.stop();
-                self.prevMonth();
+                Calendar.controler.prevMonth();
             }, this, false);
             controler.query('.calendar_next').bind("click", function (e) {
                 e.stop();

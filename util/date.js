@@ -83,10 +83,11 @@
                 //@param [year]:Number
                 //@param [month]:Number 1-12
                 if (year && month) {
-                    return new Date(year, month - 1, 0);
+                    return new Date(year, month - 1, 1);
                 }
                 else {
-                    return new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+                    var now = new Date();
+                    return new Date(now.getFullYear(), now.getMonth(), 1);
                 }
 
             },
