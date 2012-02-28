@@ -4,7 +4,7 @@
  * offset.js
  */
 
-//@require dom.elmenet
+//@require dom.element
 //@require util.page
 
 (function ($, undefined) {

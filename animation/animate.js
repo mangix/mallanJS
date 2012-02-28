@@ -78,8 +78,8 @@
                         el.css(key, _cur + pos * per + px);
                     } else {
                         el.css(key, values[i]);
-                        keyComplete(i);
                         clearInterval(self.timer[i]);
+                        keyComplete(i);
                     }
                 }, speed);
             });
