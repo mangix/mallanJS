@@ -9,6 +9,7 @@
 //@require dom.element
 //@require dom.element.node
 //@require dom.element.create
+//@require events.eventbind
 (function ($, undefined) {
     var dater = $.util.date.getInstance(), element = $.dom.element;
     var container, controler, tableDiv, yearPicker, monthPicker, hourPicker, minutePicker, secondPicker, calendarInited, yearBtn, monthBtn, hourBtn, minuteBtn, secondeBtn;
@@ -50,7 +51,8 @@
         this.events = {
             onSelect : new $.events.customEvent("onselect"),
             onShow : new $.events.customEvent("onshow"),
-            onHide : new $.events.customEvent("onhide")
+            onHide : new $.events.customEvent("onhide"),
+            onChange : new $.events.customEvent("onchange")
         };
 
         if (!calendarInited) {

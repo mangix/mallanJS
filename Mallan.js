@@ -96,7 +96,7 @@
         'plugin.shortcut':{ rely:[ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ] },
         'plugin.tabview':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'events.keycode', 'events.event', 'events.eventbind' ] },
         'plugin.inputs':{ rely:[ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ] },
-        'plugin.calendar':{ rely:[ 'util.date', 'events.customevent', 'dom.selector', 'dom.element', 'dom.element.create' ] },
+        'plugin.calendar':{ rely:[ 'util.date', 'events.customevent', 'dom.selector', 'dom.element','dom.element.node', 'dom.element.create','events.eventbind' ] },
         'plugin.photoslide':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'dom.element.node', 'events.customevent', 'events.keycode', 'events.event', 'events.eventbind', 'lang.array', 'animation.animate' ] },
         'plugin.lazyload':{ rely:[ 'util.page', 'dom.selector', 'dom.element', 'dom.element.attribute', 'dom.element.offset', 'events.keycode', 'events.event', 'events.eventbind' ] },
         'plugin.treeview':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.keycode', 'events.event', 'events.eventbind', 'events.customevent', 'util.loader', 'lang.array' ] },
