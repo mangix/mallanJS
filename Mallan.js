@@ -74,98 +74,42 @@
     };
     //output by server side begin
     var _modules = {
-        Mallan:{
-            rely:[]
-        },
-        'animation.fade':{
-            rely:['dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array', 'animation.animate']
-        },
-        'animation.slide':{
-            rely:['dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array', 'animation.animate']
-        },
-        'animation.animate':{
-            rely:['dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array']
-        },
-        'util.getscript':{
-            rely:[]
-        },
-        'util.getcss':{
-            rely:[]
-        },
-        'util.cookie':{
-            rely:[]
-        },
-        'util.listitem':{
-            rely:[]
-        },
-        'util.linklist':{
-            rely:['util.listitem']
-        },
-        'util.loader':{
-            rely:[]
-        },
-        'util.page':{
-            rely:[]
-        },
-        'util.querystring':{
-            rely:[]
-        },
-        'util.browser':{
-            rely:[]
-        },
-        'util.date':{
-            rely:[]
-        },
-        'events.customevent':{
-            rely:[]
-        },
-        'events.event':{
-            rely:['events.keycode']
-        },
-        'events.keycode':{
-            rely:[]
-        },
-        'events.eventbind':{
-            rely:['dom.selector', 'dom.element', 'events.keycode', 'events.event']
-        },
-        'plugin.shortcut':{
-            rely:['dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind']
-        },
-        'plugin.inputs':{
-            rely:['dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind']
-        },
-        'plugin.photoslide':{
-            rely:['dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array', 'animation.animate']
-        },
-        'plugin.treeview':{
-            rely:['dom.selector', 'dom.element', 'dom.element.style', 'events.keycode', 'events.event', 'events.eventbind', 'events.customevent', 'util.loader', 'lang.array']
-        },
-        'plugin.tabview':{
-            rely:['dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'events.keycode', 'events.event', 'events.eventbind']
-        },
-
-        'lang.array':{
-            rely:[]
-        },
-        'lang.interface':{
-            rely:[]
-        },
-        'dom.selector':{
-            rely:[]
-        },
-        'dom.element':{
-            rely:['dom.selector']
-        },
-        'dom.element.style':{
-            rely:['dom.selector', 'dom.element']
-        },
-        'dom.element.node':{
-            rely:['dom.selector', 'dom.element']
-        },
-        'dom.element.attribute':{
-            rely:['dom.selector', 'dom.element']
-        }
-    }, requireUrl = "http://192.168.133.139:8000/require";
+        Mallan:{ rely:[] },
+        'animation.fade':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array', 'animation.animate' ] },
+        'animation.slide':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array', 'animation.animate' ] },
+        'animation.animate':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'lang.array' ] },
+        'util.getscript':{ rely:[] },
+        'util.getcss':{ rely:[] },
+        'util.cookie':{ rely:[] },
+        'util.listitem':{ rely:[] },
+        'util.linklist':{ rely:[ 'util.listitem' ] },
+        'util.loader':{ rely:[] },
+        'util.page':{ rely:[] },
+        'util.querystring':{ rely:[] },
+        'util.browser':{ rely:[] },
+        'util.date':{ rely:[] },
+        'events.customevent':{ rely:[] },
+        'events.event':{ rely:[ 'events.keycode' ] },
+        'events.keycode':{ rely:[] },
+        'events.hover':{ rely:[ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ] },
+        'events.eventbind':{ rely:[ 'dom.selector', 'dom.element', 'events.keycode', 'events.event' ] },
+        'plugin.shortcut':{ rely:[ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ] },
+        'plugin.tabview':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.customevent', 'events.keycode', 'events.event', 'events.eventbind' ] },
+        'plugin.inputs':{ rely:[ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ] },
+        'plugin.calendar':{ rely:[ 'util.date', 'events.customevent', 'dom.selector', 'dom.element', 'dom.element.create' ] },
+        'plugin.photoslide':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'dom.element.node', 'events.customevent', 'events.keycode', 'events.event', 'events.eventbind', 'lang.array', 'animation.animate' ] },
+        'plugin.lazyload':{ rely:[ 'util.page', 'dom.selector', 'dom.element', 'dom.element.attribute', 'dom.element.offset', 'events.keycode', 'events.event', 'events.eventbind' ] },
+        'plugin.treeview':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.keycode', 'events.event', 'events.eventbind', 'events.customevent', 'util.loader', 'lang.array' ] },
+        'lang.array':{ rely:[] },
+        'lang.interface':{ rely:[] },
+        'dom.selector':{ rely:[] },
+        'dom.element':{ rely:[ 'dom.selector' ] },
+        'dom.element.style':{ rely:[ 'dom.selector', 'dom.element' ] },
+        'dom.element.node':{ rely:[ 'dom.selector', 'dom.element' ] },
+        'dom.element.offset':{ rely:[ 'dom.selector', 'dom.element', 'util.page' ] },
+        'dom.element.create':{ rely:[ 'dom.selector', 'dom.element' ] },
+        'dom.element.attribute':{ rely:[ 'dom.selector', 'dom.element' ] } }
+        , requireUrl = "http://192.168.133.139:8000/require";
     //output end
 
     //basic properties of Mallan

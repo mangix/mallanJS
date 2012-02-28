@@ -11,7 +11,7 @@
         return number.substr(number.length - length);
     };
 
-    date = $.single(function () {
+    date = $.singleton(function () {
         return {
             parse : function (param) {
                 //return a date object
@@ -106,7 +106,7 @@
     });
 
 
-    $.nameSpace.pack("Mallan.urtil.date", date);
+    $.nameSpace.pack("Mallan.util.date", date);
     $.extendCustom({
         name : "date",
         cls : date,
