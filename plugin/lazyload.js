@@ -6,7 +6,7 @@
 
 //@require util.page
 //@require dom.element
-//@require dom.element.attr
+//@require dom.element.attribute
 //@require dom.element.offset
 //@require events.eventbind
 

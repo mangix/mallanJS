@@ -73,9 +73,10 @@
                 }
 
                 self.timer[i] = setInterval(function () {
-                    var _cur = parseFloat(el.css(key));
+                    //var _cur = parseFloat(el.css(key));
+                    cur += pos * per;
                     if (count-- >= 0) {
-                        el.css(key, _cur + pos * per + px);
+                        el.css(key, cur + px);
                     } else {
                         el.css(key, values[i]);
                         clearInterval(self.timer[i]);

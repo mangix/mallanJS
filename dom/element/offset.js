@@ -5,7 +5,7 @@
  */
 
 
-//@require dom.elemenet
+//@require dom.element
 //@require util.page
 
 (function ($, undefined) {
