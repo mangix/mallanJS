@@ -57,7 +57,7 @@
                 var key, value, speed, cur, pos, px, len, per = 1, count;
                 key = keys[i];
                 value = parseInt(values[i]);
-                cur = parseInt(el.css(key));
+                cur = parseInt(el.css(key)) || 0;
                 if (value === cur) {
                     keyComplete(i);
                     return;
