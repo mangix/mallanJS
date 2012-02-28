@@ -311,9 +311,9 @@
                 });
             }
             this.appendCalendar(this._date.year, this._date.month);
-            dom.hour.html(self._date.hour + "时");
-            dom.minute.html(self._date.minute + "分");
-            dom.second.html(self._date.second + "秒");
+            hour.html(self._date.hour + "时");
+            minute.html(self._date.minute + "分");
+            second.html(self._date.second + "秒");
             this.events.onShow.fire();
         },
         hide : function () {
@@ -375,7 +375,7 @@
             for (i = minYear; i <= maxYear; i++) {
                 html.push('<a href="javascript:void(0);">' + i + '</a>');
             }
-            yearPicker.html(html);
+            yearPicker.html(html.join(''));
             yearPicker.css({
                 "position" : "absolute",
                 "display" : "block",
@@ -390,10 +390,10 @@
             monthPicker.html();
             for (i = 0; i <= 11; i++) {
                 if (self.isInRange(self._date.year, i, 1)) {
-                    html.push('<a href="javascript:void(0); _value="' + i + '">' + self._options.monthArr[i] + '</a>');
+                    html.push('<a href="javascript:void(0);" _value="' + i + '">' + self._options.monthArr[i] + '</a>');
                 }
             }
-            monthPicker.html(html);
+            monthPicker.html(html.join(''));
             monthPicker.css({
                 position : "absolute",
                 display : "block",
@@ -408,7 +408,7 @@
             for (i = 0; i <= 23; i++) {
                 html.push('<a href="javascript:void(0);">' + (i + 1) + '</a>');
             }
-            hourPicker.html(html);
+            hourPicker.html(html.join(''));
             hourPicker.css({
                 position : "absolute",
                 display : "block",
@@ -423,7 +423,7 @@
             for (i = 0; i <= 59; i++) {
                 html.push('<a href="javascript:void(0);">' + (i + 1) + '</a>');
             }
-            minutePicker.html(html);
+            minutePicker.html(html.join(''));
             minutePicker.css({
                 position : "absolute",
                 display : "block",
@@ -438,7 +438,7 @@
             for (i = 0; i <= 59; i++) {
                 html.push('<a href="javascript:void(0);">' + (i + 1) + '</a>');
             }
-            secondPicker.html(html);
+            secondPicker.html(html.join(''));
             secondPicker.css({
                 position : "absolute",
                 display : "block",
