@@ -85,7 +85,7 @@
             });
         },
         stop:function () {
-            $('array').each(this.timer, function (i) {
+            $('array').each(this.timer, function () {
                 clearInterval(this);
             });
             this.events.onComplete.removeListener();
