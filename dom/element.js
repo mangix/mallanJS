@@ -70,7 +70,7 @@
         if (selector.mallantype === "element") {
             return selector;
         }
-        if (selector.nodeType) {
+        if (selector.nodeType || selector === window) {
             this.join(selector);
             return this;
         }
@@ -79,11 +79,7 @@
         }
         if (typeof selector === "string") {
             //use Selector
-            if (!$.dom.selector) {
-                return;
-            }
-            var selectorResult = $.select(selector, context);
-            this.join(selectorResult);
+            this.join($.select(selector, context));
         }
     };
     //the element object is the return object of '$' selecotr
