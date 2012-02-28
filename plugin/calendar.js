@@ -240,11 +240,11 @@
 
             monthPicker.bind('click', function (e) {
                 e.stop();
-                var m = e.target._value,
+                var m = e.target.getAttribute('_value'),
                     owner = Calendar.controler;
                 monthBtn.innerHTML = owner._options.weekArr[m];
                 owner.set_date(owner._date.year, m, owner._date.day, owner._date.hour, owner._date.minute, owner._date.second);
-                owner.appendCalendar(owner._date.year, e.target._value);
+                owner.appendCalendar(owner._date.year, m);
                 monthPicker.hide();
             });
 
@@ -311,9 +311,9 @@
                 });
             }
             this.appendCalendar(this._date.year, this._date.month);
-            hourBtn.html(self._date.hour + "时");
-            minuteBtn.html(self._date.minute + "分");
-            secondeBtn.html(self._date.second + "秒");
+            hourBtn.html(this._date.hour + "时");
+            minuteBtn.html(this._date.minute + "分");
+            secondeBtn.html(this._date.second + "秒");
             this.events.onShow.fire();
         },
         hide : function () {
