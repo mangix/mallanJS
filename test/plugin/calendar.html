@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<input type="text" />
+
+
+<input type="button" value="show calendar" />
+
+<script type="text/javascript" src="../../Mallan.js"></script>
+<script type="text/javascript">
+    $.require('plugin.calendar', function () {
+        var calendar = new $.plugin.calendar({
+            dateField:$("input")[0]
+        })
+    });
+</script>
+</body>
+</html>

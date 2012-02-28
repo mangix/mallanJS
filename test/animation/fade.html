@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background: #6495ED no-repeat;
+        }
+    </style>
+</head>
+<body>
+<div id="fade"></div>
+<br/>
+<div></div>
+<input type="button" value="fadeOut" />
+<input type="button" value="fadeIn" />
+<script type="text/javascript" src="../../Mallan.js"></script>
+<script type="text/javascript">
+    $.require('animation.fade,events.eventbind', function () {
+        var inputs, divs;
+        inputs = $('input');
+        divs = $('div');
+        $(inputs[0]).bind('click',function(){
+            divs.fadeOut()
+        });
+        $(inputs[1]).bind('click',function(){
+            divs.fadeIn()
+        });
+    });
+</script>
+</body>
+</html>
