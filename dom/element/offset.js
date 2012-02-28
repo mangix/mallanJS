@@ -12,7 +12,7 @@
     var getOffset, offset;
 
     getOffset = (function () {
-        if (doc.documentElement.getBoundingClientRect) {
+        if (document.documentElement.getBoundingClientRect) {
             return function (el) {
                 var offset = el.getBoundingClientRect();
                 return el.getBoundingClientRect();

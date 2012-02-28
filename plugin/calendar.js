@@ -8,6 +8,7 @@
 //@require events.customevent
 //@require dom.element
 //@require dom.element.node
+//@require dom.element.style
 //@require dom.element.create
 //@require events.eventbind
 (function ($, undefined) {
