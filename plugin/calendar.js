@@ -7,6 +7,7 @@
 //@require util.date
 //@require events.customevent
 //@require dom.element
+//@require dom.element.node
 //@require dom.element.create
 (function ($, undefined) {
     var dater = $.util.date.getInstance(), element = $.dom.element;
