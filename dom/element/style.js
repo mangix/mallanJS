@@ -8,7 +8,7 @@
     if (!$.dom.element) {
         return;
     }
-    var doc = document, styleExcept, getComputedStyle, getOffset;
+    var doc = document, styleExcept, getComputedStyle;
     styleExcept = {
         'float':$.dom.element.support.cssFloat ? 'cssFloat' : 'styleFloat'
     };
@@ -95,13 +95,14 @@
             }
             return this;
         },
-        center:function () {
+        center:function (zIndex) {
             this.each(function () {
                 var w, h;
                 this.style.position = "absolute";
                 this.style.top = "50%";
                 this.style.left = "50%";
                 this.style.display = "block";
+                this.style.zIndex = zIndex || 1000;
                 w = parseInt(getComputedStyle(this, 'width')) || 0;
                 h = parseInt(getComputedStyle(this, 'heigth')) || 0;
                 this.style.marginLeft = (window.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft) - w / 2 + "px";

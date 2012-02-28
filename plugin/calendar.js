@@ -454,6 +454,6 @@
         }
     };
 
-    $.nameSpace.pack("Mallan.plugin.calandar", Calendar);
+    $.nameSpace.pack("Mallan.plugin.calendar", Calendar);
 
 })(Mallan);
