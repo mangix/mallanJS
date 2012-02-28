@@ -297,8 +297,8 @@
 
             if (field[0]) {
                 container.css({
-                    left : field.offsetLeft(),
-                    top : field.offsetBottom(),
+                    left : field.offsetLeft()+"px",
+                    top : field.offsetBottom()+"px",
                     display : "block",
                     "z-index" : 1000
                 });
