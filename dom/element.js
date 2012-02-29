@@ -95,7 +95,7 @@
                     }
                 }
             }
-            else if (domElements.nodeType) {
+            else if (domElements.nodeType || domElements===window) {
                 this[this.length++] = domElements;
             }
         },

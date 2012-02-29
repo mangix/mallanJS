@@ -8,6 +8,7 @@
 //@require dom.element
 //@require dom.element.attribute
 //@require dom.element.offset
+//@require dom.element.style
 //@require events.eventbind
 
 (function ($, undefined) {
@@ -18,25 +19,34 @@
         //@param target:HTMLDomElement or window
         var isWin = (target === undefined || target === window);
         target = target || window;
-        var container, unLoad, i, l, img, realUrl, x, y, scrollX, scrollY, winWidth, winHeight, self = this;
+        var container, unLoad, i, l, img, realUrl, x, y, compareX1, compareX2, compareY1, compareY2, winWidth, winHeight, self = this;
         container = $(target);
-        unLoad = isWin ? document.images : target.getElementsByTagName('img');
+        unLoad = [].slice.call(isWin ? document.images : target.getElementsByTagName('img'));
         this.load = function () {
-            winWidth = isWin ? pager.windowWidth() : target.clientWidth;
-            winHeight = isWin ? pager.windowHeight() : target.clientHeight;
+            winWidth = pager.windowWidth();
+            winHeight = pager.windowHeight();
             for (i = 0, l = unLoad.length; i < l; i++) {
                 img = $(unLoad[i]);
                 realUrl = img.attr('data-lazyload');
-                if (!realUrl || img.src === realUrl) {
+                if (!realUrl || img.attr('src') === realUrl) {
                     unLoad.splice(i, 1);
                     i--;
-                    l--
+                    l--;
                 } else {
-                    x = isWin ? img.offsetLeft() : (img.offsetLeft() - container.offsetLeft());
-                    y = isWin ? img.offsetTop() : (img.offsetTop() - container.offsetTop());
-                    scrollY = isWin ? pager.scrollY() : target.scrollTop;
-                    scrollX = isWin ? pager.scrollX() : target.scrollLeft;
-                    if (y >= scrollY && x >= scrollX && y <= scrollY + winHeight && x <= scrollX + winWidth && img.css('display') !== 'none') {
+                    x = img.offsetLeft();
+                    y = img.offsetTop();
+                    if (isWin) {
+                        compareX1 = pager.scrollX();
+                        compareX2 = compareX1 + winWidth;
+                        compareY1 = pager.scrollY();
+                        compareY2 = compareY1 + winHeight;
+                    } else {
+                        compareX1 = container.offsetLeft();
+                        compareX2 = compareX1 + container[0].clientWidth;
+                        compareY1 = container.offsetTop();
+                        compareY2 = compareY1 + container[0].clientHeight;
+                    }
+                    if (y >= compareY1 && x >= compareX1 && y <= compareY2 && x <= compareX2 && img.css('display') !== 'none') {
                         img[0].src = realUrl;
                         unLoad.splice(i, 1);
                         i--;
