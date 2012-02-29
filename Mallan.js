@@ -98,7 +98,7 @@
         'plugin.inputs':{ rely:[ 'dom.selector', 'dom.element', 'events.keycode', 'events.event', 'events.eventbind' ] },
         'plugin.calendar':{ rely:[ 'util.date', 'events.customevent', 'dom.selector', 'dom.element','dom.element.style','dom.element.node','dom.element.offset','events.event', 'dom.element.create', 'dom.element.attribute','events.eventbind','util.page' ] },
         'plugin.photoslide':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'dom.element.node', 'events.customevent', 'events.keycode', 'events.event', 'events.eventbind', 'lang.array', 'animation.animate' ] },
-        'plugin.lazyload':{ rely:[ 'util.page', 'dom.selector', 'dom.element', 'dom.element.attribute', 'dom.element.offset', 'events.keycode', 'events.event', 'events.eventbind' ] },
+        'plugin.lazyload':{ rely:[ 'util.page', 'dom.selector', 'dom.element', 'dom.element.attribute', 'dom.element.style','dom.element.offset', 'events.keycode', 'events.event', 'events.eventbind' ] },
         'plugin.treeview':{ rely:[ 'dom.selector', 'dom.element', 'dom.element.style', 'events.keycode', 'events.event', 'events.eventbind', 'events.customevent', 'util.loader', 'lang.array' ] },
         'lang.array':{ rely:[] },
         'lang.interface':{ rely:[] },

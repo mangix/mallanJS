@@ -6,9 +6,9 @@
  
 (function($, undefined) {
 	var page = $.singleton(function() {
-		var doc = document, win = window;
-		function ___getPageSize() {
-			var xScroll, yScroll;
+        var doc = document, win = window;
+        function ___getPageSize() {
+            var xScroll, yScroll;
 			if(win.innerHeight && win.scrollMaxY) {
 				xScroll = win.innerWidth + win.scrollMaxX;
 				yScroll = win.innerHeight + win.scrollMaxY;
