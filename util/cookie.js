@@ -7,8 +7,8 @@
     var init = function(){
         return {
             get: function(key){
-                var reg = new RegExp("(?:^|;)\\s*" + key + "\\s*=([^;]*)(;|$)");
-                var match = document.cookie.match(reg);
+                var reg = new RegExp("(?:^|;)\\s*" + key + "\\s*=([^;]*)(;|$)"),
+                    match = document.cookie.match(reg);
                 if (match) {
                     return match[1];
                 }
@@ -19,7 +19,7 @@
                     path: false,
                     domain: false,
                     maxAge: false,
-                    secure: false,
+                    secure: false
                 };
                 $.tools.merge(options, opt);
                 value = encodeURIComponent(value);

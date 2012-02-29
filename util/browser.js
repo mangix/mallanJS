@@ -3,10 +3,10 @@
  * @mail maqh1988@gmail.com
  * browser.js
  */
-(function($, undefined){
-    var init = function(){
-        var userAgent = window.navigator.userAgent, result = {}, browsers = ["Opera", "Chrome", "Safari", "Firefox", "MSIE"], browser;
-        for (var i = 0, l = browsers.length; i < l; i++) {
+(function ($, undefined) {
+    var init = function () {
+        var i,l, userAgent = window.navigator.userAgent, result = {}, browsers = ["Opera", "Chrome", "Safari", "Firefox", "MSIE"], browser;
+        for (i = 0, l = browsers.length; i < l; i++) {
             browser = browsers[i];
             if (userAgent.indexOf(browser) > -1) {
                 result["is" + browser] = true;
@@ -30,8 +30,8 @@
     }, Browser = $.singleton(init);
     $.nameSpace.pack("Mallan.util.browser", Browser);
     $.extendCustom({
-        name: "browser",
-        cls: Browser,
-        constructType: "single"
+        name:"browser",
+        cls:Browser,
+        constructType:"single"
     })
 })(Mallan);

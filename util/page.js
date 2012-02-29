@@ -89,12 +89,12 @@
 					win.scrollTo(value, doc.pageYOffset || doc.documentElement.scrollTop || doc.body.scrollTop);
 				}
 				else {
-					return doc.pareXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft;
+					return doc.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft;
 				}
 			},
 			scrollY : function(value) {
 				if( typeof value === 'number') {
-					win.scrollTo(doc.pareXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft, value);
+					win.scrollTo(doc.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft, value);
 				}
 				else {
 					return doc.pageYOffset || doc.documentElement.scrollTop || doc.body.scrollTop;
