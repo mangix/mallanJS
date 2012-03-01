@@ -33,5 +33,5 @@
         name:"browser",
         cls:Browser,
         constructType:"single"
-    })
+    });
 })(Mallan);
