@@ -10,6 +10,7 @@
 //@require dom.element.node
 //@require dom.element.style
 //@require dom.element.create
+//@require dom.element.offset
 //@require events.eventbind
 (function ($, undefinded) {
     var dropDownList = function (container, opt) {
@@ -63,6 +64,11 @@
             container.bind('click', function (e) {
                 e.stop();
                 list.show();
+                list.css({
+                    'position':'absolute',
+                    'left': container.offsetLeft(),
+                    'top':container.offsetBottom()
+                });
             });
 
             list.query('li').bind('click', function (e, i) {
