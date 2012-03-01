@@ -19,36 +19,73 @@
         if (!container) {
             return;
         }
-        this._container = container;
+        this._container = $(container);
         this._options = {
-            onChange:function () {
+            onChange:function (index, text, value) {
+                //callback function when selectedIndex changed
+                //@param index:Number selectedIndex
+                //@param text:String selectedText
+                //@param value:String selectedValue
             },
-            selectedIndex:0,
+            defaultSelect:0,
             options:[] // content {text:'',value:''}
         };
         opt = opt || {};
+        this.selectedIndex = null;
+        this.selectedText = null;
+        this.selectedValue = null;
+        this.onChange = new $.events.customEvent('onchange');
         $.tools.merge(this._options, opt);
+        this.onChange.on(this._options.onChange);
         this.init();
     };
     dropDownList.prototype = {
         init:function () {
-            var container, list , i , l , options, item , html = [];
+            var self = this,
+                container, list , i , l , options, item , html = [];
             container = this._container;
             options = this._options.options;
             list = $.element.create('ul');
-            //init the options
+
+            //init list
             for (i = 0; i < options.length; i++) {
                 item = options[i];
                 html.push('<li>' + item.text + '</li>');
             }
             list.html(html.join(''));
-            //init default value
+            $('body').append(list);
+            list.hide();
 
-            //加入到container
-            this._container.append(select).append(ul);
-            //事件绑定
-            select.addEvent("click", function () {
+            //init default value
+            this.select(this._options.defaultSelect);
+
+            //bind events
+            container.bind('click', function (e) {
+                e.stop();
+                list.show();
             });
+
+            list.query('li').bind('click', function (e, i) {
+                e.stop();
+                self.select(i);
+                list.hide();
+            });
+
+            $(document).bind('click', function () {
+                list.hide();
+            });
+
+        },
+        select:function (i) {
+            if (this.selectedIndex === i) {
+                return;
+            }
+            var container = this._container , options = this._options.options , text , value;
+            this.selectedIndex = i;
+            this.selectedText = text = options[i].text;
+            this.selectedValue = value = options[i].value;
+            container.html(text);
+            this.onChange.fire(i, text, value);
         }
     }
 })(Mallan);
