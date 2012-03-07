@@ -149,6 +149,13 @@
             }
             return this;
         },
+        remove : function () {
+            //remove self
+            this.each(function () {
+                this.parentNode.removeChild(this);
+            });
+
+        },
         html : function (html) {
             if (html !== undefined) {
                 this.each(function () {
