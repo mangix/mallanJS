@@ -94,7 +94,13 @@
                     'top': targety +'px'
                 });
             });
-
-
+        };
+    $.dom.element.extend({
+        'drag':function(options){
+            this.each(function(){
+                this._drag_cache_ = this._drag_cache_ || new drag(this,options);
+            });
         }
+    })
+    $.nameSpace.pack("Mallan.plugin.drag",drag);
 })(Mallan);
