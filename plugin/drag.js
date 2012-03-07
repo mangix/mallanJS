@@ -19,20 +19,20 @@
             //@param dom:HTMLDOMElement
             //@param options:Object
             var _options = {
-                dragbar : dom, //HTMLDOMElement or $.dom.element ,default:dom, which can be draged
-                onActive : function () {
+                dragbar:dom, //HTMLDOMElement or $.dom.element ,default:dom, which can be draged
+                onActive:function () {
                     //called when dom can be draged
                 },
-                onDrag : function () {
+                onDrag:function () {
                     //called when dom is moving
                 },
-                onComplete : function () {
+                onComplete:function () {
                     //called when drag finished
                 }
             }, events = {
-                onActive : new $.events.customEvent('onActive'),
-                onDrag : new $.events.customEvent('onDrag'),
-                onComplete : new $.events.customEvent('onComplete')
+                onActive:new $.events.customEvent('onActive'),
+                onDrag:new $.events.customEvent('onDrag'),
+                onComplete:new $.events.customEvent('onComplete')
             }, el,
                 dragbar,
                 active = false,
@@ -40,7 +40,8 @@
                 offsety,
                 targetx,
                 targety,
-                previewBox;
+                previewBox,
+                doc;
 
             //merge the options
             _options = $.tools.merge(_options, options);
@@ -50,57 +51,64 @@
             events.onDrag.on(_options.onDrag);
             events.onComplete.on(_options.onComplete);
 
-            //bind events
+
             el = $(dom);
             dragbar = $(_options.dragbar);
-            dragbar.bind('keydown', function (e) {
-                active = true;
-                offsetx = e.pageX -  el.offsetLeft();
-                offsety = e.pageY - el.offsetTop();
-                //create a preview box
-                previewBox = $.dom.element.create("div");
-                previewBox.css({
-                    'border' : 'solid 1px gray',
-                    'position' : 'absolute',
-                    'z-index' : ++maxZIndex,
-                    'width' : dom.offsetWidth,
-                    'height' : dom.offsetHeight,
-                    'left' : el.offsetLeft(),
-                    'top' : el.offsetTop()
-                });
-                $('body').append(previewBox);
+            doc = $(document);
 
-                events.onActive.fire();
-            }).bind('keyup',function(e){
-                //finish draging
-                el.css({
-                    'left':targetx,
-                    'top':targety,
-                    'position':'absolute',
-                    'z-index':++maxZIndex
-                });
-                previewBox.remove();
-                active = false;
-
-                events.onComplete.fire();
-            }).bind('mousemove',function(e){
-                if(!active){
+            //bind events
+            function move(e) {
+                if (!active) {
                     return;
                 }
                 targetx = e.pageX - offsetx;
                 targety = e.pageY - offsety;
                 previewBox.css({
-                    'left': targetx +'px',
-                    'top': targety +'px'
+                    'left':targetx + 'px',
+                    'top':targety + 'px'
                 });
+            }
+
+            dragbar.bind('mousedown', function (e) {
+                active = true;
+                offsetx = e.pageX - el.offsetLeft();
+                offsety = e.pageY - el.offsetTop();
+                //create a preview box
+                previewBox = $.dom.element.create("div");
+                previewBox.css({
+                    'border':'solid 2px gray',
+                    'position':'absolute',
+                    'z-index':++maxZIndex,
+                    'width':dom.offsetWidth + "px",
+                    'height':dom.offsetHeight + "px",
+                    'left':el.offsetLeft() + "px",
+                    'top':el.offsetTop() + "px",
+                    'cursor':'move'
+                });
+                $('body').append(previewBox);
+                doc.bind('mousemove', move);
+                doc.bindOnce('mouseup', function () {
+                    //finish draging
+                    doc.unbind(move);
+                    el.css({
+                        'left':targetx + 'px',
+                        'top':targety + 'px',
+                        'position':'absolute',
+                        'z-index':++maxZIndex
+                    });
+                    active = false;
+                    previewBox.remove();
+                    events.onComplete.fire();
+                });
+                events.onActive.fire();
             });
         };
     $.dom.element.extend({
-        'drag':function(options){
-            this.each(function(){
-                this._drag_cache_ = this._drag_cache_ || new drag(this,options);
+        'drag':function (options) {
+            this.each(function () {
+                this._drag_cache_ = this._drag_cache_ || new drag(this, options);
             });
         }
-    })
-    $.nameSpace.pack("Mallan.plugin.drag",drag);
+    });
+    $.nameSpace.pack("Mallan.plugin.drag", drag);
 })(Mallan);
