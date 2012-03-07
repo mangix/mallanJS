@@ -12,8 +12,9 @@
     pager = $.util.page.getInstance();
     full = {
         'full':function (changeOnResize) {
-            //change the element to full screen
-            //@param changeOnResize:Bool whether change the element size when window size changes
+            //summary change the element to full screen
+            //summary usually used to make DIV cover the whole page
+            //@param changeOnResize:Bool whether change the element size when window size changes,defualt: true
             var self = this;
             this.css({
                 'width':pager.width(),

@@ -9,11 +9,13 @@
 //@require util.browser
 //@require util.page
 
+
 (function ($, undefined) {
     var browser = $.util.browser.getInstance(), pager = $.util.page.getInstance(),
         fix = {
             'fix':function (style) {
-                //fixed the element at some position
+                //@summary fixed the dom at some postion of the screen
+                //@summary when in IE6, set the dom 'absolute' and change the position when window scrolls
                 //@param style:Object this param define the top,right,bottom,left postion,use Number
                 var self = this;
                 self.css('position', 'fixed');
