@@ -10,7 +10,7 @@
 //@require events.eventbind
 
 (function ($, undefined) {
-    var maxZIndex = 1000,
+    var maxZIndex = 10000,
         drag = function (dom, options) {
             //@summary drag the element
             //@param dom:HTMLDOMElement
@@ -30,7 +30,11 @@
                 onActive:new $.events.customEvent('onActive'),
                 onDrag:new $.events.customEvent('onDrag'),
                 onComplete:new $.events.customEvent('onComplete')
-            }, el, dragbar;
+            }, el,
+               dragbar,
+               active = false,
+               offsetx,
+               offsety;
 
             //merge the options
             _options = $.tools.merge(_options, options);
@@ -43,7 +47,22 @@
             //bind events
             el = $(dom);
             dragbar = $(_options.dragbar);
-            
+            dragbar.bind('keydown', function (e) {
+                active = true;
+                events.onActive.fire();
+            }).bind('keyup',function(e){
+                //finish draging
+                //TODO
+                events.onComplete.fire();
+            }).bind('mousemove',function(e){
+                if(!active){
+                    return;
+                }
+                var x = e.clientX,
+                    y = e.clientY;
+
+            });
+
 
         }
 })(Mallan);
