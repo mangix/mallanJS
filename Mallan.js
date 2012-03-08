@@ -245,7 +245,7 @@
                 'dom.element',
                 'dom.element.style',
                 'util.page' ] } }
-        , requireUrl = "http://192.168.252.130:8000/require";
+        , requireUrl = "http://192.168.26.200:8000/require";
     //output end
 
     //basic properties of Mallan
