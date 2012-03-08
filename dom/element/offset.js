@@ -9,42 +9,41 @@
 //@require util.page
 
 (function ($, undefined) {
-    var getOffset, offset;
+    var getOffset, offset, pager = $.util.page.getInstance();
 
     getOffset = (function () {
         if (document.documentElement.getBoundingClientRect) {
             return function (el) {
-                var offset = el.getBoundingClientRect();
                 return el.getBoundingClientRect();
             };
         }
     })();
 
-    offset = {
+    var offset = {
         offsetLeft:function () {
-            //获取element中的第一个元素的 左 边框到页面 左 边界的距离
-            var scrollX = $("page").scrollX();
+            //get the distance of left border of first element  to page left border
+            var x = pager.scrollX();
             if (this[0]) {
-                return getOffset(this[0]).left + scrollX;
+                return getOffset(this[0]).left + x;
             }
         },
         offsetTop:function () {
-            //获取element中的第一个元素的 上 边框到页面 上 边界的距离
-            var scrollY = $("page").scrollY();
+            //get the distance of top border of first element  to page top border
+            var y = pager.scrollY();
             if (this[0]) {
-                return getOffset(this[0]).top + scrollY;
+                return getOffset(this[0]).top + y;
             }
         },
         offsetRight:function () {
-            //获取element中的第一个元素的 右 边框到页面 左 边界的距离
-            var scrollX = $("page").scrollX();
+            //get the distance of right border of first element  to page left border
+            var scrollX = pager.scrollX();
             if (this[0]) {
                 return getOffset(this[0]).right + scrollX;
             }
         },
         offsetBottom:function () {
-            //获取element中的第一个元素的 下 边框到页面 上 边界的距离
-            var scrollY = $("page").scrollY();
+            //get the distance of bottom border of first element  to page top border
+            var scrollY = pager.scrollY();
             if (this[0]) {
                 return getOffset(this[0]).bottom + scrollY;
             }

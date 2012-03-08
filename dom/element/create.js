@@ -1,7 +1,7 @@
 /**
  * @author allanma
  * @mail maqh1988@gmail.com
- * calendar.js
+ * create.js
  */
 
 //@require dom.element

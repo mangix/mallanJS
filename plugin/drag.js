@@ -61,6 +61,7 @@
                 if (!active) {
                     return;
                 }
+                e.stop();
                 targetx = e.pageX - offsetx;
                 targety = e.pageY - offsety;
                 previewBox.css({
@@ -70,6 +71,7 @@
             }
 
             dragbar.bind('mousedown', function (e) {
+                e.stop();
                 active = true;
                 offsetx = e.pageX - el.offsetLeft();
                 offsety = e.pageY - el.offsetTop();
@@ -87,8 +89,9 @@
                 });
                 $('body').append(previewBox);
                 doc.bind('mousemove', move);
-                doc.bindOnce('mouseup', function () {
+                doc.bindOnce('mouseup', function (e) {
                     //finish draging
+                    e.stop();
                     doc.unbind(move);
                     el.css({
                         'left':targetx + 'px',
