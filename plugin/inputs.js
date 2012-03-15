@@ -105,4 +105,49 @@
     });
 	
 	$.nameSpace.pack("Mallan.plugin.inputs",Inputs);
+    'placeHolder':function (value) {
+        var self = this;
+        if (this.placeholder === undefined) {
+            //不支持placeholder
+            this._cache_holder = value;
+            var isPassword = this.attr('type') === "password";
+            if (isPassword) {
+                //替换成增加一个text focus的时候换回原来的password
+                var mask = document.createElement('input');
+                mask.type = "text";
+                mask.className = this.className;
+                this.after(mask);
+                mask.value = value;
+                this.css('display', 'none');
+                //绑定事件
+                $(mask).addEvent('focus', function () {
+                    this.css('display', 'none');
+                    self.css('display', '');
+                    self.focus();
+                });
+                this.addEvent('blur', function () {
+                    if (this.value === '') {
+                        this.css('display', 'none');
+                        mask.css('display', '');
+                    }
+                });
+            } else {
+                this.value = value;
+                this.addEvent('focus',
+                    function () {
+                        if (this.value === value) {
+                            this.value = '';
+                        }
+                        if (isPassword) {
+                        }
+                    }).addEvent('blur', function () {
+                        if (this.value === '') {
+                            this.value = value;
+                        }
+                    });
+            }
+        } else {
+            this.placeholder = value;
+        }
+    }
 })(Mallan);
