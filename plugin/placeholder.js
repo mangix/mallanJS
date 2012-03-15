@@ -50,7 +50,7 @@
                     });
             }
         } else {
-            this.placeholder = value;
+            dom.placeholder = value;
         }
     }
     $.nameSpace.pack('Mallan.plugin.placeHoder', placeHolder);
