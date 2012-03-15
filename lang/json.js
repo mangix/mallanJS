@@ -1,3 +1,9 @@
+/**
+ * @author allanma
+ * @mail maqh1988@gmail.com
+ * json.js
+ */
+
 (function ($, undefined) {
     var JSON = (function () {
         if (window.JSON) {
@@ -7,7 +13,6 @@
         var stringify, parse, json;
         stringify = function (obj) {
             var type = Object.prototype.toString.call(obj).slice(8, -1) , rs, i, l, o;
-
             //如果是html节点(不完全判断,可伪造)
             if (obj.nodeType != null) {
                 return "HTMLDOMELEMENT"
