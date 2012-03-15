@@ -38,14 +38,14 @@
                 });
             } else {
                 dom.value = value;
-                dom.bind('focus',
+                domELement.bind('focus',
                     function () {
-                        if (this.value === value) {
-                            this.value = '';
+                        if (dom.value === value) {
+                            dom.value = '';
                         }
                     }).bind('blur', function () {
-                        if (this.value === '') {
-                            this.value = value;
+                        if (dom.value === '') {
+                            dom.value = value;
                         }
                     });
             }
