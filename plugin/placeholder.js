@@ -25,7 +25,7 @@
                 mask.insertAfter(dom);
                 domELement.hide();
                 //绑定事件
-                mask.bind('focus', function () {
+                mask.bind('click', function () {
                     mask.hide();
                     domELement.show();
                     dom.focus();
@@ -49,9 +49,9 @@
                         }
                     });
             }
-        } else {
+       } else {
             dom.placeholder = value;
-        }
+       }
     }
     $.nameSpace.pack('Mallan.plugin.placeHoder', placeHolder);
     $.dom.element.extend({
