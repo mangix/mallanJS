@@ -57,6 +57,6 @@
             "parse":parse
         };
         return json;
-    });
+    })();
     $.nameSpace.pack('Mallan.lang.json', JSON);
 })(Mallan);
