@@ -100,6 +100,7 @@
         'lang.interface': { rely: [] },
         'lang.array': { rely: [] },
         'lang.inheritance': { rely: [] },
+        'lang.json':{rely:[]},
         'plugin.calendar':
         { rely:
             [ 'util.date',

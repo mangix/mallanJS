@@ -12,14 +12,17 @@
 <script type="text/javascript">
     $.require('lang.json', function () {
         var json = $.lang.json;
-        console.log(json.stringify({
+        var obj = {
             "a":[1, 2, 3, 4],
             "b":{
-                "b1":[1, 2]
+                "b1":[1, 2],
+                "b2":function () {}
             },
             "c":1,
             "d":"123445"
-        }));
+        },str = json.stringify(obj);
+        document.write(str+"</br>");
+        alert(json.parse(str))
     });
 </script>
 </body>
