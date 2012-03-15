@@ -103,8 +103,8 @@
                 this.style.left = "50%";
                 this.style.display = "block";
                 this.style.zIndex = zIndex || 1000;
-                w = parseInt(getComputedStyle(this, 'width')) || 0;
-                h = parseInt(getComputedStyle(this, 'heigth')) || 0;
+                w = parseInt(getComputedStyle(this, 'width')) || this.offsetWidth;
+                h = parseInt(getComputedStyle(this, 'heigth')) || this.offsetHeight;
                 this.style.marginLeft = (window.pageXOffset || doc.documentElement.scrollLeft || doc.body.scrollLeft) - w / 2 + "px";
                 this.style.marginTop = (window.pageYOffset || doc.documentElement.scrollTop || doc.body.scrollTop) - h / 2 + "px";
             });
