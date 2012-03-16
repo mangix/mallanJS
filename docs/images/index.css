@@ -1,5 +1,6 @@
 @charset "utf-8";
-html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3, h6, form, input, p, th, td {
+/*reset*/
+html, body, div, dl, dt, dd, ul, ol, li, h1, h2, h3,h4,h5, h6, form, input, p, th, td, pre {
     margin: 0;
     padding: 0;
     border: 0;
@@ -67,7 +68,7 @@ a {
 a:hover {
     text-decoration: underline;
 }
-
+/*reset end*/
 .fl {
     float: left;
 }
@@ -87,6 +88,20 @@ a:hover {
 
 .cf {
     zoom: 1;
+}
+
+.green {
+    color: green;
+}
+
+.md_arrow{
+    width:0px;
+    height: 0px;
+    border: transparent solid 4px;
+    line-height: 0px;
+    font-size: 0px;
+    display: inline-block;
+    vertical-align: middle;
 }
 
 .linear_bg {
@@ -225,30 +240,48 @@ header, footer {
 }
 
 .container .content section .api {
-    padding-left: 5px;
+    padding: 5px;
     line-height: 20px;
 }
 
 .container .content section .api .child_api {
-    margin-left: 5px;
+    margin:0 0 10px 5px;
 }
 
 .container .content section .api .child_api h4 {
     cursor: pointer;
-}
-
-.container .content section .api .close h4:before {
-    content: "+";
+    vertical-align: middle;
 }
 
 .container .content section .api .close>div {
     display: none;
 }
 
-.container .content section .api .open h4:before {
-    content: "-";
-}
-
 .container .content section .api .open>div {
     display: block;
+}
+.container .content section .api .md_arrow{
+
+}
+.container .content section .api .open .md_arrow{
+    /*arrow down*/
+    border-top-color:#4183C4;
+    margin: 2px 4px 0 0 ;
+}
+.container .content section .api .close .md_arrow{
+    /*arrow right*/
+    border-left-color:#4183C4;
+    margin: -4px 2px 0 0 ;
+}
+
+.code pre {
+    font-family: Courier New;
+    font-size: 12px;
+    line-height: 1.5;
+    text-align: left;
+    border: gray dashed 1px;
+    background-color: #F8F8EE;
+    padding: 10px;
+    word-break: break-all;
+    word-wrap: break-word;
 }
