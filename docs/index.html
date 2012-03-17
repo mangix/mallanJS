@@ -16,20 +16,21 @@
             </div>
         </header>
         <div class="container cf">
-            <aside class="menu fl border">
+            <aside class="menu border">
                 <div class="menu_title linear_bg">
                     API
                 </div>
                 <div class="menu_list" id="menu_list">
                 </div>
             </aside>
-            <div class="content fl border">
-                <section>
+            <div class="content fr border">
+                <div>
+                <section id="holder_mallan">
                     <h3 class="linear_bg">Mallan.js</h3>
                     <div class="api">
                         <p>mallanJS核心库</p>
                         <p>在window下注册命名空间Mallan和$,两者等价,提供部分常用工具函数，以及mallanJS核心模块</p>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan(selector [,context])</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>selector</strong>;[必须];类型：String;自定义类型的名称或者选择器表达式 </p>
@@ -49,7 +50,7 @@ $("#code").addClass("someclass");</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.extend(obj)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>obj</strong>;[必须];类型：Object; </p>
@@ -70,7 +71,7 @@ $.extend({
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.nameSpace.pack(location,obj)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>location</strong>;[必须];类型：String; 必选以Mallan.开头,否则会抛出异常</p>
@@ -89,7 +90,7 @@ $.nameSpace.pack("Mallan.util.cookie",cookie);</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.extendCustom(obj)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>obj</strong>;[必须];类型：Obejct; Object必选有3个属性：name,cls,constructType</p>
@@ -113,7 +114,7 @@ $("cookie").set(key,value);</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.singleton(init)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>init</strong>;[必须];类型：Function; 构建单例对象的初始化函数</p>
@@ -147,7 +148,7 @@ $('cookie').get(key);</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.getScript(url [,callback])</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>url</strong>;[必须];类型：String; 脚本地址</p>
@@ -167,7 +168,7 @@ $.getScript('someurl',function(){
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.require(modules [,callback])</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>modules</strong>;[必须];类型：String;模块的名称，多个模块用逗号隔开</p>
@@ -191,8 +192,8 @@ $.require('plugin.photoSlide',function(){
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
-                            <h4>Object Mallan.tools</h4>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Object Mallan.tools</h4>
                             <div>
                                 <div>
                                     <p>提供的工具函数有trim(str),merge(o1,o2),toCamel(str),isArray(arr),contain(arrOrObj,item)
@@ -209,12 +210,140 @@ var newObject = $.tools.merge(o1,o2);</pre>
                         </div>
                     </div>
                 </section>
-                <section>
-                    
+                <section id="holder_animate">
+                    <h3 class="linear_bg">animate.js</h3>
+                    <div class="api">
+                        <p>mallanJS 动画库</p>
+                        <p>提供创建动画的类库，并扩展Mallan.dom.element对象，提供方便的调用方式</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Class Mallan.animation.animate(dom)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>dom</strong>;[必须];类型：HTMLDOMElement; </p>
+                                <div>
+                                    <p>使用new Mallan.animation.animate(dom)来实例化一个animate对象，然后可以调用对象的方法来实现动画效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//实例化对象</span>
+var ani = new Mallan.animation.animate(oneDiv);
+<span class="green">//添加动画完成的回调函数</span>
+ani.events.onComplete.bindOnce(function(){
+    console.log('完成');
+});</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.animation.animate.start(keys,values,time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>keys</strong>;[必须];类型：String or Array; css属性，可以是单个string,也可以是数组 </p>
+                                <p><span class="green">@param</span>：<strong>values</strong>;[必须];类型：String or Array; css属性，可以是单个string,也可以是数组;数量必须与keys保持一致 </p>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[必须];类型：Number 多少时间内完成动画，单位ms </p>
+                                <div>
+                                    <p>使用animate对象的start方法来实现动画效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//实例化对象</span>
+var ani = new Mallan.animation.animate(oneDiv);
+<span class="green">//添加动画完成的回调函数</span>
+ani.events.onComplete.bindOnce(function(){
+    console.log('完成');
+});
+<span class="green">//开始动画，使div的宽高在300ms内增长至300px</span>
+ani.start(['width','height'],['300px','300px'],300);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.animation.animate.stop()</h4>
+                            <div>
+                                <div>
+                                    <p>使用animate对象的stop方法来停止动画</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//实例化对象</span>
+var ani = new Mallan.animation.animate(oneDiv);
+<span class="green">//添加动画完成的回调函数</span>
+ani.events.onComplete.bindOnce(function(){
+    console.log('完成');
+});
+<span class="green">//开始动画，使div的宽高在300ms内增长至300px</span>
+ani.start(['width','height'],['300px','300px'],300);
+<span class="green">//停止动画</span>
+ani.stop();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.animate(keys,values,time,onComplete)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>keys</strong> 同animate.start方法</p>
+                                <p><span class="green">@param</span>：<strong>values</strong> 同animate.start方法</p>
+                                <p><span class="green">@param</span>：<strong>time</strong> 同animate.start方法</p>
+                                <p><span class="green">@param</span>：<strong>onComplete</strong> [可选];类型：Function,完成所有动画后的回调函数</p>
+                                <div>
+                                    <p>扩展Mallan.dom.element对象，为其提供animate方法以实现方便的调用</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//使所有div的宽高在300ms内增长至300px</span>
+$("div").animate(['width','height'],['300px','300px'],300,function(){
+    console.log('all complete');
+})</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
-            
+                <section id="holder_fade">
+                    <h3 class="linear_bg">fade.js</h3>
+                    <div class="api">
+                        <p>使用animate动画库扩展Mallan.dom.element对象，实现渐入渐出效果</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.fadeIn(time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[可选];类型：Number;效果时间,单位ms，默认200</p>
+                                <div>
+                                    <p>使用 Mallan.dom.element.fadeIn()实现元素透明度增至100的效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$('div').fadeIn();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.fadeOut(time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[可选];类型：Number;效果时间,单位ms，默认200</p>
+                                <div>
+                                    <p>使用 Mallan.dom.element.fadeOut()实现元素透明度减至0的效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$('div').fadeOut();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
         </div>
+     </div>
         <footer>
             <p>
                 &copy; Copyright  by allanma
@@ -222,7 +351,7 @@ var newObject = $.tools.merge(o1,o2);</pre>
         </footer>
         <script type="text/javascript" src="../Mallan.js"></script>
         <script type="text/javascript">
-            $.require('plugin.treeview', function() {
+            $.require('plugin.treeview,dom.element.offset,dom.element.node,animation.animate', function() {
                 var tree = new $.plugin.treeView("menu_list", {
                     data : [{
                         name : "Mallan.js"
@@ -298,10 +427,22 @@ var newObject = $.tools.merge(o1,o2);</pre>
                             name : "querystring.js"
                         }]
                     }]
-                });
+                }),
+                content  = $(".content"),
+                contentOffset = content.offsetTop(),
+                currentMargin;
                 tree.unexpandAll();
                 tree.onNodeClick.on(function(node) {
-                    node.toggleExpand()
+                    node.toggleExpand();
+                    if(!node.hasChild()){
+                        var id = node.content.replace('.js','').toLocaleLowerCase(),offset;
+                        $('#holder_'+id).exist(function(){
+                            window.scrollTo(0,0);
+                           offset = this.offsetTop() - contentOffset;
+                           currentMargin = parseInt(this.parent().css('margin-top')) || 0;
+                           this.parent().animate('margin-top',currentMargin-offset+'px',100);
+                        });
+                    }
                 });
             });
             $.require('animation.animate',function(){
@@ -311,6 +452,18 @@ var newObject = $.tools.merge(o1,o2);</pre>
                     $(this.parentNode).animate('width','160px')
                 });
             });
+
+            $.require('events.eventbind',function(){
+                $(".child_api h4").bind('click',function(){
+                    var parent = $(this.parentNode);
+                    if(parent.hasClass('open')){
+                        parent.removeClass('open').addClass('close');
+                    }else{
+                        parent.removeClass('close').addClass('open');
+                    }
+                });
+            });
+
         </script>
         
     </body>

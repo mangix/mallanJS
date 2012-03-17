@@ -16,7 +16,7 @@
         };
 
         this.element = $(element);
-        this.opt = opt;
+        this.opt = opt ||{};
         this.timer = null;
     };
     animate.prototype = {

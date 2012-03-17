@@ -91,7 +91,7 @@
 			a.innerHTML = this.content;
 			a.href = "javascript:void(0)";
 			li.appendChild(a);
-			$(a).click(function(e) {
+			$(a).bind('click',function(e) {
 				e.stop();
 				if(self.tree && self.tree.onNodeClick) {
 					self.tree.onNodeClick.fire(self);
