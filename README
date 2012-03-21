@@ -3,8 +3,10 @@ mallanJS
 Client Javascript + NodeJS开发的前端框架
 
 按功能拆分模块,划分命名空间,引入全局变量Mallan和$。$作为快捷方式,任何使用到$的地方都可以用标准方式取代。
+
 利用轻量级的注释命令管理模块依赖
 如://@require dom.element
+
 使用require方式加载所需模块,使用者无须关心模块的依赖关系,只需了解组件层面的模块使用方式
 如:
     Mallan.require("plugin.photoslide",function(){
