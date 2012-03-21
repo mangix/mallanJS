@@ -28,6 +28,7 @@ $(".someclass a").hover(function(){
 },function(){
     $(this).removeClass('hover');
 });
+$("cookie").read('mykey');
 
 丰富的插件,便捷的扩展
 $.dom.element.extend({
