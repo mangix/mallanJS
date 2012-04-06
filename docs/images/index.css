@@ -69,6 +69,8 @@ a:hover {
     text-decoration: underline;
 }
 /*reset end*/
+
+
 .fl {
     float: left;
 }
@@ -157,7 +159,7 @@ header, footer {
     width: 160px;
     border-left: 1px solid #FAFAFA;
     box-shadow: -1px 0 0 #e0e0e0;
-    margin-right: 20px;
+    text-align: right;
 }
 
 .head .search input {
@@ -165,7 +167,7 @@ header, footer {
     height: 24px;
     line-height: 20px;
     vertical-align: middle;
-    margin: 12px;
+    margin: 12px 2px 12px 12px;
     border: 1px solid #CACACA;
     background: #fff url(search.jpg) no-repeat right 5px;
     box-shadow: inset 2px 2px 2px #e0e0e0;
@@ -176,12 +178,14 @@ header, footer {
     border: 4px solid #EFEFEF;
 }
 
+
 .container .menu {
     width: 200px;
-    margin-top: 20px;
     overflow: auto;
     color: #4183C4;
     font-size: 14px;
+    position: fixed;
+    top: 70px;
 }
 
 .container .menu .menu_title, .container .menu .menu_list {
@@ -229,7 +233,8 @@ header, footer {
 .container .content {
     width: 750px;
     min-height: 500px;
-    margin: 20px 0 0 10px;
+    margin: 20px 0 0 250px;
+    overflow: hidden;
 }
 
 .container .content section h3 {
@@ -269,7 +274,7 @@ header, footer {
 .container .content section .api .open .md_arrow{
     /*arrow down*/
     border-top-color:#4183C4;
-    margin: 2px 4px 0 0 ;
+    margin: 2px 4px 0 -2px ;
 }
 .container .content section .api .close .md_arrow{
     /*arrow right*/

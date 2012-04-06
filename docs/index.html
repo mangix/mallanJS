@@ -16,18 +16,20 @@
             </div>
         </header>
         <div class="container cf">
-            <aside class="menu fl border">
+            <aside class="menu border">
                 <div class="menu_title linear_bg">
                     API
                 </div>
                 <div class="menu_list" id="menu_list">
                 </div>
             </aside>
-            <div class="content fl border">
-                <section>
+            <div class="content fr border">
+                <div>
+                <section id="holder_mallan">
                     <h3 class="linear_bg">Mallan.js</h3>
                     <div class="api">
                         <p>mallanJS核心库</p>
+<<<<<<< HEAD
                         <p>在window下注册命名空间Mallan和$,两者等价,提供部分常用工具函数，以及mallanJS核心模块<br/><span class="red">$只是一个快捷方式，任何用到$的地方都有其可取代的标准方式</span></p>
                         <div class="child_api open">
                             <h4><em class="md_arrow"></em>Function Mallan(selector [,context])</h4>
@@ -49,7 +51,7 @@ $("#code").addClass("someclass");</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.extend(obj)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>obj</strong>;[必须];类型：Object; </p>
@@ -70,7 +72,7 @@ $.extend({
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.nameSpace.pack(location,obj)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>location</strong>;[必须];类型：String; 必选以Mallan.开头,否则会抛出异常</p>
@@ -89,7 +91,7 @@ $.nameSpace.pack("Mallan.util.cookie",cookie);</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.extendCustom(obj)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>obj</strong>;[必须];类型：Obejct; Object必选有3个属性：name,cls,constructType</p>
@@ -113,7 +115,7 @@ $("cookie").set(key,value);</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.singleton(init)</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>init</strong>;[必须];类型：Function; 构建单例对象的初始化函数</p>
@@ -147,7 +149,7 @@ $('cookie').get(key);</pre>
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.getScript(url [,callback])</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>url</strong>;[必须];类型：String; 脚本地址</p>
@@ -167,7 +169,7 @@ $.getScript('someurl',function(){
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
+                        <div class="child_api close">
                             <h4><em class="md_arrow"></em>Function Mallan.require(modules [,callback])</h4>
                             <div>
                                 <p><span class="green">@param</span>：<strong>modules</strong>;[必须];类型：String;模块的名称，多个模块用逗号隔开</p>
@@ -191,8 +193,8 @@ $.require('plugin.photoSlide',function(){
                                 </div>
                             </div>
                         </div>
-                        <div class="child_api open">
-                            <h4>Object Mallan.tools</h4>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Object Mallan.tools</h4>
                             <div>
                                 <div>
                                     <p>提供的工具函数有trim(str),merge(o1,o2),toCamel(str),isArray(arr),contain(arrOrObj,item)
@@ -209,11 +211,831 @@ var newObject = $.tools.merge(o1,o2);</pre>
                         </div>
                     </div>
                 </section>
-                <section>
-                    
+                <section id="holder_animate">
+                    <h3 class="linear_bg">animate.js</h3>
+                    <div class="api">
+                        <p>mallanJS 动画库</p>
+                        <p>提供创建动画的类库，并扩展Mallan.dom.element对象，提供方便的调用方式</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Class Mallan.animation.animate(dom)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>dom</strong>;[必须];类型：HTMLDOMElement; </p>
+                                <div>
+                                    <p>使用new Mallan.animation.animate(dom)来实例化一个animate对象，然后可以调用对象的方法来实现动画效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//实例化对象</span>
+var ani = new Mallan.animation.animate(oneDiv);
+<span class="green">//添加动画完成的回调函数</span>
+ani.events.onComplete.bindOnce(function(){
+    console.log('完成');
+});</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.animation.animate.start(keys,values,time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>keys</strong>;[必须];类型：String or Array; css属性，可以是单个string,也可以是数组 </p>
+                                <p><span class="green">@param</span>：<strong>values</strong>;[必须];类型：String or Array; css属性，可以是单个string,也可以是数组;数量必须与keys保持一致 </p>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[必须];类型：Number 多少时间内完成动画，单位ms </p>
+                                <div>
+                                    <p>使用animate对象的start方法来实现动画效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//实例化对象</span>
+var ani = new Mallan.animation.animate(oneDiv);
+<span class="green">//添加动画完成的回调函数</span>
+ani.events.onComplete.bindOnce(function(){
+    console.log('完成');
+});
+<span class="green">//开始动画，使div的宽高在300ms内增长至300px</span>
+ani.start(['width','height'],['300px','300px'],300);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.animation.animate.stop()</h4>
+                            <div>
+                                <div>
+                                    <p>使用animate对象的stop方法来停止动画</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//实例化对象</span>
+var ani = new Mallan.animation.animate(oneDiv);
+<span class="green">//添加动画完成的回调函数</span>
+ani.events.onComplete.bindOnce(function(){
+    console.log('完成');
+});
+<span class="green">//开始动画，使div的宽高在300ms内增长至300px</span>
+ani.start(['width','height'],['300px','300px'],300);
+<span class="green">//停止动画</span>
+ani.stop();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.animate(keys,values,time,onComplete)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>keys</strong> 同animate.start方法</p>
+                                <p><span class="green">@param</span>：<strong>values</strong> 同animate.start方法</p>
+                                <p><span class="green">@param</span>：<strong>time</strong> 同animate.start方法</p>
+                                <p><span class="green">@param</span>：<strong>onComplete</strong> [可选];类型：Function,完成所有动画后的回调函数</p>
+                                <div>
+                                    <p>扩展Mallan.dom.element对象，为其提供animate方法以实现方便的调用</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//使所有div的宽高在300ms内增长至300px</span>
+$("div").animate(['width','height'],['300px','300px'],300,function(){
+    console.log('all complete');
+})</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </section>
-            
+                <section id="holder_fade">
+                    <h3 class="linear_bg">fade.js</h3>
+                    <div class="api">
+                        <p>使用animate动画库扩展Mallan.dom.element对象，实现渐入渐出效果</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.fadeIn(time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[可选];类型：Number;效果时间,单位ms，默认200</p>
+                                <div>
+                                    <p>使用 Mallan.dom.element.fadeIn()实现元素透明度增至100的效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$('div').fadeIn();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.fadeOut(time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[可选];类型：Number;效果时间,单位ms，默认200</p>
+                                <div>
+                                    <p>使用 Mallan.dom.element.fadeOut()实现元素透明度减至0的效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$('div').fadeOut();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_slide">
+                    <h3 class="linear_bg">slide.js</h3>
+                    <div class="api">
+                        <p>使用animate动画库扩展Mallan.dom.element对象，实现slidedown,slideup动画效果</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.slideup(time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[可选];类型：Number;效果时间,单位ms，默认20</p>
+                                <div>
+                                    <p>使用 Mallan.dom.element.slideup()实现元素收起的效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$('div').slideup();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.slidedown(time)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>time</strong>;[可选];类型：Number;效果时间,单位ms，默认20</p>
+                                <div>
+                                    <p>使用 Mallan.dom.element.slidedown()实现元素展开的效果</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$('div').slidedown();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_selector">
+                    <h3 class="linear_bg">selector.js</h3>
+                    <div class="api">
+                        <p>选择器类,提供选取DOM元素的方法</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.selector(selectStr,context)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>selectStr</strong>;[必须];类型：String;</p>
+                                <p><span class="green">@param</span>：<strong>context</strong>;[可选];类型：HTMLDOMElement;Dom上下文，默认为document</p>
+                                <p><span class="green">@returns</span>：<strong>Array</strong>;选中的Dom元素的数组</p>
+                                <div>
+                                    <p>使用选择器选取相应的dom对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//选择div下的someclass类下的a元素</span>
+Mallan.dom.selector('div .someclasee a')</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_element">
+                    <h3 class="linear_bg">element.js</h3>
+                    <div class="api">
+                        <p>element对象，封装HTMLDOMElement，并提供丰富的API和方便的扩展性</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Class Mallan.dom.element(selectStr,context)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>selectStr</strong>;[必须];类型：String or HTMLDOMElement or element or HTMLDOMElement Array or window;</p>
+                                <p><span class="green">@param</span>：<strong>context</strong>;[可选];类型：HTMLDOMElement;Dom上下文，默认为document,仅在第一个参数为string时有效</p>
+                                <div>
+                                    <p>创建element对象实例，对HTMLDOMElement进行封装</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//选择div下的someclass类下的a元素，并封装为element对象</span>
+var el = new Mallan.dom.element(Mallan.dom.selector('div .someclasee a'));
+<span class="green">//也可以用$快捷方式</span>
+var el = $("div .someclasee a");
+<span class="green">//使用el[index]可访问element对象中的HTMLDOMElement元素，el.length返回元素个数</span>
+var firstElement = el[0];
+var totalNumber = el.length</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.join(el)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>el</strong>;[必须];类型：HTMLDOMElement or NodeList or HTMLDOMElement Array or window;</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>为element对象添加dom元素</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//选择div下的someclass类下的a元素，并封装为element对象</span>
+var el = new Mallan.dom.element(Mallan.dom.selector('div .someclasee a'));
+<span class="green">//添加一个元素</span>
+el.join(someDom);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.each(fn)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>fn</strong>;[必须];类型：Function;函数引用</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>循环element对象中的元素，执行fn方法，fn方法中this指向当前元素，fn可接收参数i，在fn中return false可以终止循环</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//选择div下的someclass类下的a元素，并封装为element对象</span>
+var el = new Mallan.dom.element(Mallan.dom.selector('div .someclasee a'));
+<span class="green">//调用each方法</span>
+el.each(function(i){
+    console.log('这是第'+(i+1)+'个元素');
+    console.log(this.innerHTML);
+});</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.indexOf(el)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>el</strong>;[必须];类型：HTMLDOMElement;</p>
+                                <p><span class="green">@returns</span>：<strong>Number</strong>元素在element中的序号</p>
+                                <div>
+                                    <p>返回el在element对象中的序号，如果不存在则返回-1</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//选择div下的someclass类下的a元素，并封装为element对象</span>
+var el = new Mallan.dom.element(Mallan.dom.selector('div .someclasee a'));
+var index = el.indexOf(someDom);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.query(selectStr)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>selectStr</strong>;[必须];类型：String;选择器表达式</p>
+                                <p><span class="green">@returns</span>：<strong>Mallan.dom.element</strong>新的element对象</p>
+                                <div>
+                                    <p>在element对象的第一个元素中查找表达式中的元素，构成新的element对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//在id为parent的元素中查找所有a元素</span>
+var children = $("#parent").query('a');</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.exist(fn)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>fn</strong>;[必须];类型：Function;</p>
+                                <div>
+                                    <p>如果element对象中有元素，则执行fn，fn中的this指定当前element对象。此方法可以避免繁琐的判断dom是否存在的代码</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//选择id为test的元素，如果存在则进行一些操作</span>
+$("#test").exist(function(){
+    this.join(anotherDom);
+})</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.extend(obj)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>obj</strong>;[必须];类型：Object;</p>
+                                <div>
+                                    <p>此方法可以扩展element的prototype，Mallan.dom.element下的style,node都是使用此方法扩展的</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//为element对象扩展css方法</span>
+Mallan.dom.element.extend({
+    'css':function(){
+          <span class="green">//do something ;方法中的this为当前element对象</span>
+          }
+});
+<span class="green">//element对象就可以使用css方法了</span>
+$(".class").css();
+</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_attribute">
+                    <h3 class="linear_bg">attribute.js</h3>
+                    <div class="api">
+                        <p>扩展element对象，提供dom属性相关的api</p>
+                        <div class="child_api close">
+                        <h4><em class="md_arrow"></em>Function Mallan.dom.element.attr(key,value)</h4>
+                        <div>
+                            <p><span class="green">@param</span>：<strong>key</strong>;[必须];类型：String or Object;</p>
+                            <p><span class="green">@param</span>：<strong>value</strong>;[可选];类型：String;</p>
+                            <div>
+                                <p>提供Attribute的get和set 操作，若key是对象，则为element中的每一个元素设置key中的属性，若key为String且value不存在，则返回第一个元素的attribute，若key，value都为String，则设置每个元素的attribute</p>
+                                <div class="example">
+                                    示例：
+                                    <div class="code"><pre>
+<span class="green">//假设el为element对象，设置属性mykey为myvalue</span>
+el.attr('mykey','myvalue');
+<span class="green">//也可以这样设置多个属性</span>
+el.attr({
+    'key1':'value1',
+    'key2':'value2'
+});
+<span class="green">//获取第一个元素的mykey属性</span>
+var myvalue = el.attr('mykey');</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.val(value)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>value</strong>;[可选];类型：String;</p>
+                                <div>
+                                    <p>提供value的get和set 操作，若有参数则设置每个元素的value为value，若无参数，则返回第一个元素的value</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//假设el为element对象，设置value为myvalue</span>
+el.val('myvalue');
+<span class="green">//获取第一个元素的value</span>
+var myvalue = el.val();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_create">
+                    <h3 class="linear_bg">create.js</h3>
+                    <div class="api">
+                        <p>扩展element对象，提供用html代码或者tag创建元素</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.create(html)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>html</strong>;[必须];类型：String;</p>
+                                <p><span class="green">@returns</span>：<strong>Mallan.dom.element对象</strong></p>
+                                <div>
+                                    <p>创建元素的便捷api，若参数为html代码，则创建相应的html元素，返回的element对象中为html代码中的顶级元素，若参数为元素tag，则创建相应元素，封装成element对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//创建2个a元素，并未其绑定click事件</span>
+var el = Mallan.dom.element.create('&lta class="link1"&gt第一个链接&lt/a&gt&lta class="link2"&gt第二个链接&lt/a&gt');
+<span class="green">//插入到body中并绑定click事件</span>
+el.appendTo(document.body).bind('click',function(e){
+  alert(this.innerHTML);
+});</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_fix">
+                    <h3 class="linear_bg">fix.js</h3>
+                    <div class="api">
+                        <p>固定元素在页面某位置</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.fix(style)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>style</strong>;[可选];类型：Object;</p>
+                                <div>
+                                    <p>固定元素在页面某位置，例如广告浮窗，对于支持fixed属性的浏览器使用position:fixed，不支持的浏览器使用window.onscroll来模拟</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//固定el在左上角</span>
+el.fix({
+    "left":0,
+    "top":0
+});</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_full">
+                    <h3 class="linear_bg">full.js</h3>
+                    <div class="api">
+                        <p>使元素的大小撑满整个页面</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.full(changeOnResize)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>changeOnResize</strong>;[可选];类型：Boolean;默认为true</p>
+                                <div>
+                                    <p>通常用于遮罩，覆盖整个页面大小，changeOnResize为true则当窗口大小变化时自动调整元素大小</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//创建一个遮罩</span>
+var el = $.dom.element.create("div");
+el.appendTo(document.body).css('opacity',70).full();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_node">
+                    <h3 class="linear_bg">node.js</h3>
+                    <div class="api">
+                        <p>node.js扩展了element对象的API，提供HTMLDOMElement节点操作的API</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.parent()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>element对象中所有元素的父元素构成的新的element对象</strong></p>
+                                <div>
+                                    <p>获取el的parent节点</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//parents是el中元素的父节点组成的element对象</span>
+var el = $(".child");
+var parents = el.parent();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.children()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>element对象中所有元素的直接子元素构成的新的element对象</strong></p>
+                                <div>
+                                    <p>获取el的子节点</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//children是el中元素的直接子节点组成的element对象</span>
+var el = $(".parent");
+var children = el.children();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.clone(cloneChildren)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>cloneChildren</strong>;[可选];类型：Boolean;是否需要复制子节点，默认为false</p>
+                                <p><span class="green">@returns</span>：<strong>element对象中所有元素的clone元素构成的新的element对象</strong></p>
+                                <div>
+                                    <p>复制element对象中的元素，构成新的element对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $(".origin");
+var clone = el.clone(true);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.next()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>element对象中所有元素的nextSibling元素构成的新的element对象</strong></p>
+                                <div>
+                                    <p>获取所有nextSibling元素，构成新的element对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $(".current");
+var next = el.next();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.prev()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>element对象中所有元素的previousSibling元素构成的新的element对象</strong></p>
+                                <div>
+                                    <p>获取所有previousSibling元素，构成新的element对象</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $(".current");
+var previous = el.prev();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.append(content)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>content</strong>;[必须];类型：String or HTMLDOMElement or element</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>为当前element对象中的所有元素插入参数中所指的元素，如果参数为string，表示html代码；如果参数为HTMLDOMElement，则次元素插入到element的第一个元素中，复制元素插入到其余元素中；如果参数是element对象，将element对象中的所有元素插入到第一个元素中，复制元素插入到其他元素中</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $(".current");
+el.append("<div>新元素</div>");</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.insertBefore(target)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>target</strong>;[必须];类型：HTMLDOMElement or element</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>把当前element对象中的元素插入到target之前，如果target是element，则插入到target的第一个元素前</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $("#someDom");
+var target = $("#target");
+el.insertBefore(target);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.insertAfter(target)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>target</strong>;[必须];类型：HTMLDOMElement or element</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>把当前element对象中的元素插入到target之后，如果target是element，则插入到target的第一个元素后</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $("#someDom");
+var target = $("#target");
+el.insertAfter(target);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.appendTo(target)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>target</strong>;[必须];类型：HTMLDOMElement or element</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>把当前element对象中的元素插入到target中，如果target是element，则插入到target的第一个元素中</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $("#someDom");
+var target = $("#target");
+el.appendTo(target);</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.remove()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>null</strong></p>
+                                <div>
+                                    <p>从document中删除element对象中的所有元素</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $("#someDom");
+el.remove();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.html(html)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>html</strong>;[可选];类型：String</p>
+                                <div>
+                                    <p>如果有参数，则设置element中的所有元素的innerHTML为html，如果无参数，则返回第一个元素的innerHTML</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+var el = $("#someDom");
+el.html("这是新设置的html代码");</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </section>
+                <section id="holder_offset">
+                    <h3 class="linear_bg">offset.js</h3>
+                    <div class="api">
+                        <p>扩展element对象，提供获取元素在document中的位置的API</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.offsetLeft()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>Number</strong>;</p>
+                                <div>
+                                    <p>获取element中第一个元素左边界到document左边界的距离，忽略元素的边框</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.offsetTop()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>Number</strong>;</p>
+                                <div>
+                                    <p>获取element中第一个元素上边界到document上边界的距离，忽略元素的边框</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.offsetRight()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>Number</strong>;</p>
+                                <div>
+                                    <p>获取element中第一个元素右边界到document左边界的距离，忽略元素的边框</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.offsetBottom()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>Number</strong>;</p>
+                                <div>
+                                    <p>获取element中第一个元素下边界到document上边界的距离，忽略元素的边框</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <section id="holder_style">
+                    <h3 class="linear_bg">style.js</h3>
+                    <div class="api">
+                        <p>扩展element对象，提供操作元素样式的API</p>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.hasClass(className)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>className</strong>;[可选];类型：String;</p>
+                                <div>
+                                    <p>判断element中的第一个元素是否具有参数所指的class，返回true or false</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//判断元素是否有class red</span>
+var el = $('#someDom');
+var hasClassRed = el.hasClass('red');</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                        <h4><em class="md_arrow"></em>Function Mallan.dom.element.addClass(className)</h4>
+                        <div>
+                            <p><span class="green">@param</span>：<strong>className</strong>;[可选];类型：String;</p>
+                            <p><span class="green">@returns</span>：<strong>this</strong></p>
+                            <div>
+                                <p>为element中的每个元素增加参数所指class className会先被trim</p>
+                                <div class="example">
+                                    示例：
+                                    <div class="code"><pre>
+<span class="green">//增加class</span>
+var el = $('div');
+el.addClass('red');</pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.removeClass(className)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>className</strong>;[可选];类型：String;</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>为element中的每个元素删除参数所指class className会先被trim</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//删除class</span>
+var el = $('div');
+el.removeClass('red');</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.css(key,value)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>key</strong>;[必须];类型：String or Object</p>
+                                <p><span class="green">@param</span>：<strong>key</strong>;[可选];类型：String</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>设置或获取元素的样式,key是object，设置；key和value都是string，设置；key是string 无value，获取</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//为元素设置样式</span>
+$(".current").css({
+    'margin-left':'100px',
+    'opacity':70
+});</pre>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.center(zIndex)</h4>
+                            <div>
+                                <p><span class="green">@param</span>：<strong>zIndex</strong>;[可选];类型：Number;默认值1000</p>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>使元素显示在屏幕正中间,请确保该元素是body的直接子元素</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+<span class="green">//居中</span>
+$(".layer").center();</pre>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.show()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>显示元素，会记忆原来的显示模式（inline or block等）</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$(".layer").show();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="child_api close">
+                            <h4><em class="md_arrow"></em>Function Mallan.dom.element.hide()</h4>
+                            <div>
+                                <p><span class="green">@returns</span>：<strong>this</strong></p>
+                                <div>
+                                    <p>隐藏元素</p>
+                                    <div class="example">
+                                        示例：
+                                        <div class="code"><pre>
+$(".layer").hide();</pre>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
             </div>
+        </div>
         </div>
         <footer>
             <p>
@@ -222,7 +1044,7 @@ var newObject = $.tools.merge(o1,o2);</pre>
         </footer>
         <script type="text/javascript" src="../Mallan.js"></script>
         <script type="text/javascript">
-            $.require('plugin.treeview', function() {
+            $.require('plugin.treeview,dom.element.offset,dom.element.node,animation.animate', function() {
                 var tree = new $.plugin.treeView("menu_list", {
                     data : [{
                         name : "Mallan.js"
@@ -237,19 +1059,28 @@ var newObject = $.tools.merge(o1,o2);</pre>
                         }]
                     }, {
                         name : "dom",
-                        children : [{
+                        children : [
+                            {
+                                name : "selector.js"
+                            },{
+                                name : "element.js"
+                            },{
                             name : 'element',
                             children : [{
                                 name : "attribute.js"
                             }, {
+                                name : "create.js"
+                            },{
+                                name : "fix.js"
+                            },{
+                                name : "full.js"
+                            },{
                                 name : "node.js"
-                            }, {
+                            },{
+                                name : "offset.js"
+                            },{
                                 name : "style.js"
                             }]
-                        }, {
-                            name : "element.js"
-                        }, {
-                            name : "selector.js"
                         }]
                     }, {
                         name : "events",
@@ -298,10 +1129,22 @@ var newObject = $.tools.merge(o1,o2);</pre>
                             name : "querystring.js"
                         }]
                     }]
-                });
+                }),
+                content  = $(".content"),
+                contentOffset = content.offsetTop(),
+                currentMargin;
                 tree.unexpandAll();
                 tree.onNodeClick.on(function(node) {
-                    node.toggleExpand()
+                    node.toggleExpand();
+                    if(!node.hasChild()){
+                        var id = node.content.replace('.js','').toLocaleLowerCase(),offset;
+                        $('#holder_'+id).exist(function(){
+                            window.scrollTo(0,0);
+                           offset = this.offsetTop() - contentOffset;
+                           currentMargin = parseInt(this.parent().css('margin-top')) || 0;
+                           this.parent().animate('margin-top',currentMargin-offset+'px',100);
+                        });
+                    }
                 });
             });
             $.require('animation.animate',function(){
@@ -311,7 +1154,17 @@ var newObject = $.tools.merge(o1,o2);</pre>
                     $(this.parentNode).animate('width','160px')
                 });
             });
+            $.require('events.eventbind',function(){
+                $(".child_api h4").bind('click',function(){
+                    var parent = $(this.parentNode);
+                    if(parent.hasClass('open')){
+                        parent.removeClass('open').addClass('close');
+                    }else{
+                        parent.removeClass('close').addClass('open');
+                    }
+                });
+            });
+
         </script>
-        
     </body>
 </html>
