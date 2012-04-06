@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>继承</title>
+</head>
+<body>
+<script type="text/javascript" src="../../Mallan.js"></script>
+<script type="text/javascript" src="../../lang/inherit.js"></script>
+<script type="text/javascript">
+    var log = function () {
+        console.log(arguments)
+    }
+    var SuperClass = $.Class.inherit({
+        init:function () {
+            log('an instance of SuperClass created');
+        },
+        method1:function () {
+            log('SuperClass method1 called');
+        },
+        method2:function () {
+            log('SuperClass method2 called');
+        }
+    }, {
+        prop1:'SuperClass prop1',
+        prop2:'SuperClass prop2'
+    });
+
+    var SubClass = SuperClass.inherit({
+        init:function () {
+            log('an instance of SubClass created');
+        },
+        method1:function () {
+            log('SubClass method1 called');
+            this.super();
+        }
+    }, {
+        prop1:'SubClass prop1'
+    });
+
+    var SubSubClass = SubClass.inherit({
+        init:function () {
+            log('an instance of SubSubClass created');
+        },
+        method1:function () {
+            log('SubSubClass method1 called')
+        }
+    });
+
+    var aSuperClass = new SuperClass();
+    aSuperClass.method1();
+    var bSuperClass = new SuperClass();
+    bSuperClass.method1();
+    bSuperClass.method2();
+    var aSubClass = new SubClass();
+    aSubClass.method1();
+    var bSubClass = new SubClass();
+    bSubClass.method2();
+    log(aSubClass.prop1);
+    log(aSubClass.prop2);
+    log(aSuperClass.prop2);
+
+    var subsubClass = new SubSubClass();
+    subsubClass.method1();
+    subsubClass.method2();
+</script>
+</body>
+</html>
