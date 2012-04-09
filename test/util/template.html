@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script type="text/javascript" src="../../Mallan.js"></script>
+    <script type="text/javascript" src="../../util/templete.js"></script>
+    <script type="text/template" id="item_tmpl">
+        <div id="<%=id%>" class="<%=(i % 2 == 1 ? " even" : "")%>">
+        <div class="grid_1 alpha right">
+            <img class="righted" src="<%=profile_image_url%>"/>
+        </div>
+        <div class="grid_6 omega contents">
+            <p><b><a href="/<%=from_user%>"><%=from_user%></a>:</b> <%=text%></p>
+        </div>
+        <%for(var i=0,l=list.length;i<l;i++){ %>
+        <p>
+            <%=list[i]%>
+        </p>
+        <%}%>
+        </div>
+    </script>
+</head>
+<body>
+<div id="res"></div>
+<script type="text/javascript">
+    var results = document.getElementById("res");
+    results.innerHTML = $.util.template("item_tmpl", {
+        id:'myid',
+        i:'1',
+        profile_image_url:"http://baidu.com",
+        from_user:'me',
+        text:'daf',
+        list:['1','2','3']
+    });
+</script>
+</body>
+</html>
