@@ -1,5 +1,6 @@
 (function ($) {
-    var Class = function () {},
+    var Class = function () {
+    },
         initializing = false;
 
     Class.inherit = function (protoProp, nativeProp) {
@@ -50,5 +51,5 @@
 
     };
 
-    $.Class = Class;
+    $.nameSpace.pack('Mallan.lang.Class', Class);
 })(Mallan);

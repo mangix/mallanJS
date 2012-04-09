@@ -56,5 +56,5 @@
             throw "the second param must be an interface or an interface array";
         }
     };
-    $.nameSpace.pack("Mallan.lang.interface", Interface);
+    $.nameSpace.pack("Mallan.lang.Interface", Interface);
 })(Mallan);
