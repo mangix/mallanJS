@@ -77,12 +77,12 @@
 				checkbox.type = 'checkbox';
 				li.appendChild(checkbox);
 				$(checkbox).bind('click', function() {
-					if(self.tree && self.tree.onCheck) {
+					if(self.tree ) {
 						if(this.checked) {
-							self.tree.onCheck.fire(self);
+							self.tree.event.emit('oncheck',self);
 						}
 						else {
-							self.tree.onUnCheck.fire(self);
+                            self.tree.event.emit('onuncheck',self);
 						}
 					}
 				});
@@ -93,8 +93,8 @@
 			li.appendChild(a);
 			$(a).bind('click',function(e) {
 				e.stop();
-				if(self.tree && self.tree.onNodeClick) {
-					self.tree.onNodeClick.fire(self);
+				if(self.tree) {
+					self.tree.event.emit('onnodeclick',self);
 				}
 			});
 			return li;
@@ -147,10 +147,11 @@
 		};
 		this.options = $.tools.merge(_options, options);
 		this.init();
-		this.onReady = new $.events.customEvent('ready');
-		this.onCheck = new $.events.customEvent('check');
-		this.onUnCheck = new $.events.customEvent('uncheck');
-		this.onNodeClick = new $.events.customEvent('nodeclick');
+        this.event = new $.events.CustomEvent();
+//		this.onReady = new $.events.customEvent('ready');
+//		this.onCheck = new $.events.customEvent('check');
+//		this.onUnCheck = new $.events.customEvent('uncheck');
+//		this.onNodeClick = new $.events.customEvent('nodeclick');
 	};
 	treeView.prototype = {
 		constructor : treeView,

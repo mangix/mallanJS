@@ -28,8 +28,8 @@
             event : 'mouseover'
         }
         this._options = $.tools.merge(_options, options);
-        this.onChangePage = new $.events.customEvent('pageChange');
-        this.onChangePage.on(this._options.onChanged);
+        this.onChangePage = new $.events.CustomEvent();
+        this.onChangePage.on('change',this._options.onChanged);
         this.init();
     }
     photoSlide.prototype = {
@@ -80,7 +80,7 @@
             var self = this;
             i = i % this.pages;
             this.picsMove.animate(this.key, -(this.w * i * this._options.perTime) + "px", this._options.time, function() {
-                self.onChangePage.fire(i);
+                self.onChangePage.fire('change',i);
                 self.selectedPage = i;
             });
             this.btns.removeClass('now');

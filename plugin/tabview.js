@@ -20,7 +20,8 @@
         this.options = $.tools.merge(_options, options);
         this.tabs = $(tabs);
         this.contents = $(contents);
-        this.onChanged = new $.events.customEvent("onChange");
+        this.onChanged = new $.events.CustomEvent();
+        this.onChanged.on('change',this._options.onChanged);
     };
     tabView.prototype = {
         constructor:tabView,
@@ -37,7 +38,7 @@
             $(this.tabs[i]).addClass(cls);
             this.contents.hide();
             $(this.contents[i]).show();
-            this.onChanged.fire(i);
+            this.onChanged.fire('change',i);
         }
     };
     $.nameSpace.pack("Mallan.plugin.tabView", tabView);

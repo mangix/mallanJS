@@ -51,12 +51,13 @@
             minute : now.getMinutes(),
             second : now.getSeconds()
         };
-        this.events = {
-            onSelect : new $.events.customEvent("onselect"),
-            onShow : new $.events.customEvent("onshow"),
-            onHide : new $.events.customEvent("onhide"),
-            onChange : new $.events.customEvent("onchange")
-        };
+        this.event = new $.events.CustomEvent();
+//        this.events = {
+//            onSelect : new $.events.customEvent("onselect"),
+//            onShow : new $.events.customEvent("onshow"),
+//            onHide : new $.events.customEvent("onhide"),
+//            onChange : new $.events.customEvent("onchange")
+//        };
 
         if (!calendarInited) {
             this.init();
@@ -71,10 +72,10 @@
             self.show();
         });
 
-        this.events.onSelect.on(this._options.onSelect);
-        this.events.onShow.on(this._options.onShow);
-        this.events.onHide.on(this._options.onHide);
-        this.events.onChange.on(this._options.onChange);
+        this.event.on('onselect',this._options.onSelect);
+        this.event.on('onshow',this._options.onShow);
+        this.event.on('onhide',this._options.onHide);
+        this.event.on('onchange',this._options.onChange);
     };
 
     Calendar.prototype = {
@@ -315,17 +316,17 @@
             hourBtn.html(this._date.hour + "时");
             minuteBtn.html(this._date.minute + "分");
             secondeBtn.html(this._date.second + "秒");
-            this.events.onShow.fire();
+            this.event.emit('onshow');
         },
         hide : function () {
             container.hide();
-            this.events.onHide.fire();
+            this.event.emit('onhide');
         },
         selectDate : function (y, m, d, h, mnt, s) {
             var target = $(this._options.dateField),
                 date = this.formatDate(y, m, d, h, mnt, s);
             target.val(date);
-            this.events.onSelect.fire(date);
+            this.event.emit('onselect',date);
             this.set_date(y, m - 1, d, h, mnt, s);
         },
         nextMonth : function () {
