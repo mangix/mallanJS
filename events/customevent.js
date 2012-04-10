@@ -72,7 +72,7 @@
     CustomEvent.prototype.when = function () {
         //@param eventName1,eventName2....,callback
         //当所有event都fire之后回调callback，所有都触发过之后，任意event再触发，会触发callback
-        var i, l = arguments,
+        var i, l = arguments.length - 1,
             callback = arguments[l - 1],
             event,
             current = 0,
