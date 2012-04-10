@@ -63,7 +63,7 @@
         var self = this;
         bind(this, eventName, function () {
             callback.apply(eventName, slice.call(arguments, 0));
-            var i = 0, cb, callbacks = self[eventName].callbacks;
+            var i = 0, cb, callbacks = self.events[eventName].callbacks;
             while (cb = callbacks[i++]) {
                 if (cb === arguments.callee) {
                     callbacks.splice(i - 1, 1);
@@ -80,22 +80,22 @@
             callback = arguments[l - 1],
             event,
             current = 0,
-            all = Math.pow(2, l)-1,
+            all = Math.pow(2, l - 1) - 1,
             self = this;
         if (typeof callback !== "function") {
             return;
         }
-        for (i = 0; i < l; i++) {
+        for (i = 0; i < l - 1; i++) {
             event = arguments[i];
-            (function (k) {
+            (function (k, e) {
                 //闭包以避免i的值问题
                 bind(self, event, function () {
                     current |= Math.pow(2, k);
                     if (current === all) {
-                        callback.apply(event, slice.call(arguments, 0));
+                        callback.apply(e, slice.call(arguments, 0));
                     }
                 });
-            })(i);
+            })(i, event);
         }
     };
 
@@ -105,10 +105,11 @@
         var called = false,
             l = arguments.length,
             callback = arguments[l - 1];
-        var args = splice.call(arguments, l - 1, 1, function () {
+        var args = slice.call(arguments, 0);
+        args.splice(l - 1, 1, function () {
             if (!called) {
                 called = true;
-                callback.apply(this, slice.apply(arguments, 0));
+                callback.apply(this, slice.call(arguments, 0));
             }
         });
         this.when.apply(this, args);
