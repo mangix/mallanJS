@@ -1,3 +1,7 @@
+/**
+ *customevent.js
+ */
+
 (function ($, undefined) {
     var slice = Array.prototype.slice,
         splice = Array.prototype.splice;
