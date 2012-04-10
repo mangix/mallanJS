@@ -42,11 +42,10 @@
             //remove all eventName callbacks
             this.events[eventName] = {callbacks:[]};
         } else {
-            var cb, i = 0, cbs = createWhenNone(this, eventName).callbacks
+            var cb, i = 0, cbs = createWhenNone(this, eventName).callbacks;
             while (cb = cbs[i++]) {
                 if (cb === fn) {
-                    cbs.splice(i - 1, 1);
-                    break;
+                    cbs.splice(--i, 1);
                 }
             }
         }
@@ -63,13 +62,7 @@
         var self = this;
         bind(this, eventName, function () {
             callback.apply(eventName, slice.call(arguments, 0));
-            var i = 0, cb, callbacks = self.events[eventName].callbacks;
-            while (cb = callbacks[i++]) {
-                if (cb === arguments.callee) {
-                    callbacks.splice(i - 1, 1);
-                    break;
-                }
-            }
+            self.off(eventName, arguments.callee);
         });
     };
 
@@ -88,7 +81,7 @@
         for (i = 0; i < l - 1; i++) {
             event = arguments[i];
             (function (k, e) {
-                //闭包以避免i的值问题
+                //闭包以避免i,event的值问题
                 bind(self, event, function () {
                     current |= Math.pow(2, k);
                     if (current === all) {
