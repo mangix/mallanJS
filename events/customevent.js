@@ -130,7 +130,7 @@
             callback,
             i = 0;
         if (this.events[event] && this.events[event].callbacks) {
-            while (callback = callbacks[i++]) {
+            while (callback = this.events[event].callbacks[i++]) {
                 callback.apply(event, data);
             }
         }
