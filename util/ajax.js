@@ -21,7 +21,8 @@
                 throw "Ajax not surpported";
             }
         }
-    })();
+    })(),
+        slice = Array.prototype.slice;
 
     var Ajax = function (options) {
         var ajax = this,
@@ -118,7 +119,7 @@
         getHeaders:function (key) {
             //获取response的headers属性
             //如果有key就返回相应值 string，如果没有则返回完整的header object
-            if(key){
+            if (key) {
                 return this.xhr.getResponseHeader(key);
             }
             return this.xhr.getAllResponseHeaders();
@@ -138,7 +139,7 @@
             Ajax.prototype['on' + e] = function (fn) {
                 var ajax = this;
                 this.event.on(e.toLowerCase(), function () {
-                    fn.apply(ajax, Array.prototype.slice.call(arguments, 0));
+                    fn.apply(ajax, slice.call(arguments, 0));
                 });
                 return ajax;
             };
@@ -147,7 +148,7 @@
             Ajax.global['on' + e] = function (fn) {
                 Ajax.global.event.on(e.toLowerCase(), function () {
                     var ajax = arguments[0];
-                    fn.apply(ajax, Array.prototype.slice.call(arguments, 1));
+                    fn.apply(ajax, slice.call(arguments, 1));
                 });
                 return this;
             };
