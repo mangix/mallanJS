@@ -97,7 +97,7 @@
             for (var head in opt.headers) {
                 xhr.setRequestHeader(head, opt.headers[head]);
             }
-            xhr.send(opt.param);
+            xhr.send(ajax.parseParam(opt.param));
             if (opt.timeout) {
                 ajax.timer = setTimeout(function () {
                     ajax.abort();
