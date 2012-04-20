@@ -21,8 +21,9 @@
     });
     var ajax = new $.util.Ajax({
         url:'ajaxsvr.php',
-        method:'POST',
-        parseJSON:false
+        method:'GET',
+        parseJSON:false,
+        param:{test:1,hh:2}
     });
     ajax.onSuccess(
             function (res) {

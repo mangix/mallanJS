@@ -92,7 +92,8 @@
                         }
                         break;
                 }
-            }
+            };
+            opt.method === "GET" && (opt.url += ((opt.url.indexOf('?') === -1 ? '?' : '&') + ajax.parseParam(opt.param))) ;
             xhr.open(opt.method, opt.url, opt.async);
             for (var head in opt.headers) {
                 xhr.setRequestHeader(head, opt.headers[head]);
