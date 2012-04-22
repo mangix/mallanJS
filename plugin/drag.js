@@ -29,11 +29,7 @@
                 onComplete:function () {
                     //called when drag finished
                 }
-            }, events = {
-                onActive:new $.events.customEvent('onActive'),
-                onDrag:new $.events.customEvent('onDrag'),
-                onComplete:new $.events.customEvent('onComplete')
-            }, el,
+            }, event = new $.events.CustomEvent(), el,
                 dragbar,
                 active = false,
                 offsetx,
@@ -47,9 +43,9 @@
             _options = $.tools.merge(_options, options);
 
             //bind custom events
-            events.onActive.on(_options.onActive);
-            events.onDrag.on(_options.onDrag);
-            events.onComplete.on(_options.onComplete);
+            event.on('onactive',_options.onActive);
+            event.on('ondrag',_options.onDrag);
+            event.on('oncomplete',_options.onComplete);
 
 
             el = $(dom);
@@ -101,9 +97,9 @@
                     });
                     active = false;
                     previewBox.remove();
-                    events.onComplete.fire();
+                    event.emit('oncomplete')
                 });
-                events.onActive.fire();
+                event.emit('onactive');
             });
         };
     $.dom.element.extend({

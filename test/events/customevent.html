@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>CustomEvent</title>
+</head>
+<body>
+<script type="text/javascript" src="../../Mallan.js"></script>
+<script type="text/javascript" src="../../events/customevent.js"></script>
+<script type="text/javascript">
+    var event  = new $.events.CustomEvent();
+//    event.on('event1',function(){
+//        console.log('event1 fired');
+//    });
+//    event.on('event1',function(){
+//        console.log('event1 fired again');
+//    });
+//
+//    event.on('event2',function(){
+//        console.log('event2 fired');
+//    });
+//    event.any('event1','event2',function(){
+//        console.log(this+' fired');
+//    });
+//    event.when('event1','event2',function(){
+//        console.log('fired');
+//    });
+//    event.whenOnce('event1','event2',function(){
+//        console.log('fired2');
+//    });
+    var fn = function(){
+        console.log(Object.prototype.toString.call(arguments))
+    }
+    event.on('event1',fn)
+    event.on('event1',fn)
+
+
+    //fire
+    event.emit('event1');
+    event.off('event1',fn);
+    event.emit('event1')
+</script>
+</body>
+</html>

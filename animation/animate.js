@@ -8,15 +8,10 @@
 // @require events.customevent
 // @require lang.array
 (function ($, undefined) {
-    var ce = $.events.customEvent;
     var animate = function (element, opt) {
-        this.events = {
-            onStart:new ce("onstart"),
-            onComplete:new ce('oncomplete')
-        };
-
+        this.event = new $.events.CustomEvent();
         this.element = $(element);
-        this.opt = opt ||{};
+        this.opt = opt || {};
         this.timer = null;
     };
     animate.prototype = {
@@ -39,19 +34,15 @@
             }
             el = new $.dom.element(el[0]);
             self.timer = new Array(keys.length);
-            function keyComplete(i) {
-                var ok = true;
-                complete[i] = true;
-                $('array').each(complete, function () {
-                    if (!this) {
-                        ok = false;
-                        return false;
-                    }
-                });
-                if (ok) {
-                    self.events.onComplete.fire();
-                }
-            }
+            var _events = [];
+            $('array').each(keys, function (i) {
+                _events.push('c_' + this);
+            });
+            _events.push(function () {
+                self.event.emit('complete');
+            });
+
+            self.event.when.apply(self.event, _events);
 
             $('array').each(keys, function (i) {
                 var key, value, speed, cur, pos, px, len, per = 1, count;
@@ -59,7 +50,7 @@
                 value = parseInt(values[i]);
                 cur = parseInt(el.css(key)) || 0;
                 if (value === cur) {
-                    keyComplete(i);
+                    self.event.emit('c_' + key);
                     return;
                 }
                 px = values[i].indexOf('px') !== -1 ? 'px' : '';
@@ -80,7 +71,7 @@
                     } else {
                         el.css(key, values[i]);
                         clearInterval(self.timer[i]);
-                        keyComplete(i);
+                        self.event.emit('c_' + key);
                     }
                 }, speed);
             });
@@ -89,34 +80,28 @@
             $('array').each(this.timer, function () {
                 clearInterval(this);
             });
-            this.events.onComplete.removeListener();
+            this.event.clear();
         }
     };
 
     $.dom.element.extend({
         animate:function (keys, values, time, onComplete) {
-            var allComplete = new Array(this.length);
-
-            function complete(i) {
-                allComplete[i] = true;
-                var ok = true;
-                $("array").each(allComplete, function () {
-                    if (!this) {
-                        ok = false;
-                        return false;
-                    }
-                });
-                if (ok) {
-                    onComplete();
-                }
-            }
+            var event = new $.events.CustomEvent();
+            var events = [];
+            this.each(function (i) {
+                events.push('element_' + i);
+            });
+            events.push(function () {
+                onComplete();
+            });
+            event.whenOnce.apply(event, events);
 
             this.each(function (i) {
                 var ani = this._animate_cache = this._animate_cache || new animate(this, {});
                 ani.stop();
                 if (onComplete) {
-                    ani.events.onComplete.bindOnce(function () {
-                        complete(i);
+                    ani.event.once('complete', function () {
+                        event.emit('element_' + i);
                     });
                 }
                 ani.start(keys, values, time);

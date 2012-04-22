@@ -35,9 +35,9 @@
         this.selectedIndex = null;
         this.selectedText = null;
         this.selectedValue = null;
-        this.onChange = new $.events.customEvent('onchange');
+        this.onChange = new $.events.CustomEvent();
         $.tools.merge(this._options, opt);
-        this.onChange.on(this._options.onChange);
+        this.onChange.on('change',this._options.onChange);
         this.init();
     };
     dropDownList.prototype = {
@@ -91,7 +91,7 @@
             this.selectedText = text = options[i].text;
             this.selectedValue = value = options[i].value;
             container.html(text);
-            this.onChange.fire(i, text, value);
+            this.onChange.fire('change',i, text, value);
         }
     }
 })(Mallan);

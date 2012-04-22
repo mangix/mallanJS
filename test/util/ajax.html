@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>AJAX</title>
+</head>
+<body>
+<script type="text/javascript" src="../../Mallan.js"></script>
+<script type="text/javascript" src="../../lang/json.js"></script>
+<script type="text/javascript" src="../../events/customevent.js"></script>
+<script type="text/javascript" src="../../util/ajax.js"></script>
+<div id="state">
+
+</div>
+<div id="result">
+
+</div>
+<script type="text/javascript">
+    $.util.Ajax.global.onSuccess(function(res){
+        console.log('global success fired')
+    });
+    var ajax = new $.util.Ajax({
+        url:'ajaxsvr.php',
+        method:'GET',
+        parseJSON:false,
+        param:{test:1,hh:2}
+    });
+    ajax.onSuccess(
+            function (res) {
+                console.log(this.getHeaders('Server'))
+
+            }).onError(function(code,text){
+            }).load();
+</script>
+</body>
+</html>
